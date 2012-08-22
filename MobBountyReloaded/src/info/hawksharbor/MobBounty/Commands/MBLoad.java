@@ -5,10 +5,11 @@ import info.hawksharbor.MobBounty.Utils.MobBountyAPI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Player;
 
 public class MBLoad implements CommandExecutor
 {
-	@SuppressWarnings("unused")
 	private final info.hawksharbor.MobBounty.MobBountyReloaded _plugin;
 
 	public MBLoad(info.hawksharbor.MobBounty.MobBountyReloaded plugin)
@@ -19,8 +20,23 @@ public class MBLoad implements CommandExecutor
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args)
 	{
+		if (!(sender instanceof Player))
+		{
+			if (sender instanceof ConsoleCommandSender)
+			{
+				_plugin.getAPIManager().getConfigManager().saveConfig();
 
-		if (MobBountyAPI.instance.getPermissionsManager().hasPermission(sender,
+				String message = _plugin.getAPIManager().getLocaleManager()
+						.getString("MBLLoaded");
+				if (message != null)
+					sender.sendMessage(message);
+				return true;
+			}
+			sender.sendMessage("Commands are designed to be run by players only.");
+			return true;
+		}
+		Player player = ((Player) sender);
+		if (MobBountyAPI.instance.getPermissionsManager().hasPermission(player,
 				"mbr.command.mbl"))
 		{
 			MobBountyAPI.instance.getConfigManager().loadConfig();

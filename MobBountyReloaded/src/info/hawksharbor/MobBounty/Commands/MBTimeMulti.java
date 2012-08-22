@@ -6,6 +6,7 @@ import info.hawksharbor.MobBounty.Utils.MobBountyTime;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class MBTimeMulti implements CommandExecutor
 {
@@ -35,8 +36,14 @@ public class MBTimeMulti implements CommandExecutor
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args)
 	{
+		if (!(sender instanceof Player))
+		{
+			sender.sendMessage("Commands are designed to be run by players only.");
+			return true;
+		}
+		Player player = ((Player) sender);
 		if (_plugin.getAPIManager().getPermissionsManager()
-				.hasPermission(sender, "mbr.command.mbtm"))
+				.hasPermission(player, "mbr.command.mbtm"))
 		{
 			if (args.length == 2)
 			{

@@ -197,6 +197,11 @@ public class MobBountyConfigs
 			localeConf.set("en.DebugLacksPermission",
 					"&F%P &4lacks permission: &F%D");
 			localeConf.set("en.DebugGeneral", "%M");
+			localeConf.set("en.UpdateAvailable",
+					"&2A new version of MobBountyReloaded is available.");
+			localeConf.set("en.NewVersion",
+					"&2New Version: v%N | Your version: v%O");
+			localeConf.set("en.GetItAt", "&2Get it at http://mbr.inesgar.org/");
 			try
 			{
 				localeConf.save(file);

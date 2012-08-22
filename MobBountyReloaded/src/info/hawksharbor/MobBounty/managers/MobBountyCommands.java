@@ -18,10 +18,6 @@ import info.hawksharbor.MobBounty.Commands.MBWorldMulti;
 import info.hawksharbor.MobBounty.Commands.MBWorldReward;
 import info.hawksharbor.MobBounty.Commands.MobBounty;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
-
 public class MobBountyCommands
 {
 
@@ -78,79 +74,79 @@ public class MobBountyCommands
 		plugin.getCommand("mbworldexperience").setExecutor(_mbWXP);
 	}
 
-	public boolean onCommand(CommandSender sender, Command command,
-			String label, String[] args)
-	{
-		if (sender instanceof ConsoleCommandSender)
-		{
-			sender.sendMessage("Commands are designed for in-game only.");
-			return true;
-		}
-		if (command.getName().equalsIgnoreCase("mobbounty"))
-		{
-			return _mobBounty.onCommand(sender, command, label, args);
-		}
-		else if (command.getName().equalsIgnoreCase("mbenvmulti"))
-		{
-			return _mbEnvMulti.onCommand(sender, command, label, args);
-		}
-		else if (command.getName().equalsIgnoreCase("mbgeneral"))
-		{
-			return _mbGeneral.onCommand(sender, command, label, args);
-		}
-		else if (command.getName().equalsIgnoreCase("mbload"))
-		{
-			return _mbLoad.onCommand(sender, command, label, args);
-		}
-		else if (command.getName().equalsIgnoreCase("mbreward"))
-		{
-			return _mbReward.onCommand(sender, command, label, args);
-		}
-		else if (command.getName().equalsIgnoreCase("mbsave"))
-		{
-			return _mbSave.onCommand(sender, command, label, args);
-		}
-		else if (command.getName().equalsIgnoreCase("mbtimemulti"))
-		{
-			return _mbTimeMulti.onCommand(sender, command, label, args);
-		}
-		else if (command.getName().equalsIgnoreCase("mbworldreward"))
-		{
-			return _mbWorldReward.onCommand(sender, command, label, args);
-		}
-		else if (command.getName().equalsIgnoreCase("mbworldmulti"))
-		{
-			return _mbWorldMulti.onCommand(sender, command, label, args);
-		}
-		else if (command.getName().equalsIgnoreCase("mbgroupmulti"))
-		{
-			return _mbGroupMulti.onCommand(sender, command, label, args);
-		}
-		else if (command.getName().equalsIgnoreCase("mbcheckdrop"))
-		{
-			return _mbCheckDrop.onCommand(sender, command, label, args);
-		}
-		else if (command.getName().equalsIgnoreCase("mbworldmodifydrop"))
-		{
-			return _mbModifyWorldDrop.onCommand(sender, command, label, args);
-		}
-		else if (command.getName().equalsIgnoreCase("mbmodifydrop"))
-		{
-			return _mbModifyDrop.onCommand(sender, command, label, args);
-		}
-		else if (command.getName().equalsIgnoreCase("mbexperience"))
-		{
-			return _mbXP.onCommand(sender, command, label, args);
-		}
-		else if (command.getName().equalsIgnoreCase("mbworldexperience"))
-		{
-			return _mbWXP.onCommand(sender, command, label, args);
-		}
-		else if (command.getName().equalsIgnoreCase("mbcheckexperience"))
-		{
-			return _mbCheckXP.onCommand(sender, command, label, args);
-		}
-
-		return false;
-	}
+	// public boolean onCommand(CommandSender sender, Command command,
+	// String label, String[] args)
+	// {
+	// if (sender instanceof ConsoleCommandSender)
+	// {
+	// sender.sendMessage("Commands are designed for in-game only.");
+	// return true;
+	// }
+	// if (command.getName().equalsIgnoreCase("mobbounty"))
+	// {
+	// return _mobBounty.onCommand(sender, command, label, args);
+	// }
+	// else if (command.getName().equalsIgnoreCase("mbenvmulti"))
+	// {
+	// return _mbEnvMulti.onCommand(sender, command, label, args);
+	// }
+	// else if (command.getName().equalsIgnoreCase("mbgeneral"))
+	// {
+	// return _mbGeneral.onCommand(sender, command, label, args);
+	// }
+	// else if (command.getName().equalsIgnoreCase("mbload"))
+	// {
+	// return _mbLoad.onCommand(sender, command, label, args);
+	// }
+	// else if (command.getName().equalsIgnoreCase("mbreward"))
+	// {
+	// return _mbReward.onCommand(sender, command, label, args);
+	// }
+	// else if (command.getName().equalsIgnoreCase("mbsave"))
+	// {
+	// return _mbSave.onCommand(sender, command, label, args);
+	// }
+	// else if (command.getName().equalsIgnoreCase("mbtimemulti"))
+	// {
+	// return _mbTimeMulti.onCommand(sender, command, label, args);
+	// }
+	// else if (command.getName().equalsIgnoreCase("mbworldreward"))
+	// {
+	// return _mbWorldReward.onCommand(sender, command, label, args);
+	// }
+	// else if (command.getName().equalsIgnoreCase("mbworldmulti"))
+	// {
+	// return _mbWorldMulti.onCommand(sender, command, label, args);
+	// }
+	// else if (command.getName().equalsIgnoreCase("mbgroupmulti"))
+	// {
+	// return _mbGroupMulti.onCommand(sender, command, label, args);
+	// }
+	// else if (command.getName().equalsIgnoreCase("mbcheckdrop"))
+	// {
+	// return _mbCheckDrop.onCommand(sender, command, label, args);
+	// }
+	// else if (command.getName().equalsIgnoreCase("mbworldmodifydrop"))
+	// {
+	// return _mbModifyWorldDrop.onCommand(sender, command, label, args);
+	// }
+	// else if (command.getName().equalsIgnoreCase("mbmodifydrop"))
+	// {
+	// return _mbModifyDrop.onCommand(sender, command, label, args);
+	// }
+	// else if (command.getName().equalsIgnoreCase("mbexperience"))
+	// {
+	// return _mbXP.onCommand(sender, command, label, args);
+	// }
+	// else if (command.getName().equalsIgnoreCase("mbworldexperience"))
+	// {
+	// return _mbWXP.onCommand(sender, command, label, args);
+	// }
+	// else if (command.getName().equalsIgnoreCase("mbcheckexperience"))
+	// {
+	// return _mbCheckXP.onCommand(sender, command, label, args);
+	// }
+	//
+	// return false;
+	// }
 }

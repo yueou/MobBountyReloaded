@@ -1,10 +1,9 @@
 package info.hawksharbor.MobBounty.Listeners;
 
 import info.hawksharbor.MobBounty.MobBountyReloaded;
+import info.hawksharbor.MobBounty.Utils.MobBountyMessage;
 import info.hawksharbor.MobBounty.Utils.MobBountyPlayerKillData;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -23,13 +22,13 @@ public class MobBountyPlayerListener implements Listener
 		_plugin = plugin;
 	}
 
-	@EventHandler
-	public boolean onCommand(CommandSender sender, Command command,
-			String label, String[] args)
-	{
-		return _plugin.getAPIManager().getCommandManager()
-				.onCommand(sender, command, label, args);
-	}
+	// @EventHandler
+	// public boolean onCommand(CommandSender sender, Command command,
+	// String label, String[] args)
+	// {
+	// return _plugin.getAPIManager().getCommandManager()
+	// .onCommand(sender, command, label, args);
+	// }
 
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerDeath(PlayerDeathEvent event)
@@ -61,6 +60,42 @@ public class MobBountyPlayerListener implements Listener
 		playerData.killStreak = 0;
 		_plugin.getAPIManager().getListenerManager().getPlayerData()
 				.put(name, playerData);
+		if (_plugin.getAPIManager().getPermissionsManager()
+				.hasPermission(event.getPlayer(), "mbr.admin.update"))
+		{
+			try
+			{
+				if (_plugin.getAPIManager().getNewVersion() > _plugin
+						.getAPIManager().getCurrentVersion())
+				{
+					String available = _plugin.getAPIManager()
+							.getLocaleManager().getString("UpdateAvailable");
+					String newNumber = _plugin.getAPIManager()
+							.getLocaleManager().getString("NewVersion");
+					String getItAt = _plugin.getAPIManager().getLocaleManager()
+							.getString("GetItAt");
+					if (available != null)
+						MobBountyMessage.sendMessage(event.getPlayer(),
+								available);
+					if (newNumber != null)
+						MobBountyMessage.sendMessage(
+								event.getPlayer(),
+								newNumber.replace(
+										"%N",
+										String.valueOf(_plugin.getAPIManager()
+												.getNewVersion())).replace(
+										"%O",
+										String.valueOf(_plugin.getAPIManager()
+												.getCurrentVersion())));
+					if (getItAt != null)
+						MobBountyMessage
+								.sendMessage(event.getPlayer(), getItAt);
+				}
+			}
+			catch (Exception e)
+			{
+			}
+		}
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR)

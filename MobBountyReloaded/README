@@ -68,7 +68,7 @@ Commands:
         aliases: [mbwe]
         usage: /<command> [world] [mob] <experience>
 
-permissions:
+Permissions:
     mbr.user.collect.normal:
         description: Allows player to collect MBR money.
         default: false
@@ -183,7 +183,6 @@ permissions:
             mbr.user.collect.simpleclans.neutral: true
     mbr.user.collect.*:
         description: Allows player to collect in all locations.
-        default: false
         children:
             mbr.user.collect.towny.normal: true
             mbr.user.collect.towny.wild: true
@@ -349,7 +348,6 @@ permissions:
         default: false
     mbr.user.multiplier.*:
         description: Allows player to use multipliers in all locations.
-        default: false
         children:
             mbr.user.multiplier.towny.normal: true
             mbr.user.multiplier.towny.wild: true
@@ -396,7 +394,6 @@ permissions:
         default: false
     mbr.user.*:
         description: Gives user ability to earn everywhere and use all multipliers.
-        default: false
         children:
             mbr.user.collect.towny.normal: true
             mbr.user.collect.towny.wild: true
@@ -516,7 +513,6 @@ permissions:
         default: false
     mbr.command.*:
         description: Allows user to use all commands.
-        default: false
         children:
             mbr.command.mb: true
             mbr.command.mbr: true
@@ -540,9 +536,102 @@ permissions:
     mbr.admin.debug.general:
         description: Allows user to receive general debug messages.
         default: false
+    mbr.admin.update:
+        description: Allows user to receive update messages.
+        default: false
     mbr.admin.*:
         description: Gives user all admin permissions.
-        default: false
         children:
             mbr.admin.debug.permissions: true
             mbr.admin.debug.general: true
+            mbr.admin.update: true
+    mbr.*:
+        description: Gives user all MobBountyReloaded permissions.
+        children:
+            mbr.user.collect.towny.normal: true
+            mbr.user.collect.towny.wild: true
+            mbr.user.collect.towny.own: true
+            mbr.user.collect.towny.neutral: true
+            mbr.user.collect.towny.enemy: true
+            mbr.user.collect.towny.ally: true
+            mbr.user.collect.factions.wild: true
+            mbr.user.collect.factions.own: true
+            mbr.user.collect.factions.peaceful: true
+            mbr.user.collect.factions.neutral: true
+            mbr.user.collect.factions.enemy: true
+            mbr.user.collect.factions.ally: true
+            mbr.user.collect.factions.safe: true
+            mbr.user.collect.factions.war: true
+            mbr.user.collect.worldguard: true
+            mbr.user.collect.regios: true
+            mbr.user.collect.mobarena: true
+            mbr.user.collect.griefprevention: true
+            mbr.user.collect.deityprotect: true
+            mbr.user.collect.chunkown: true
+            mbr.user.collect.preciousstones: true
+            mbr.user.collect.roadprotector: true
+            mbr.user.collect.mazemania: true
+            mbr.user.collect.ultimatearena: true
+            mbr.user.collect.herostronghold: true
+            mbr.user.collect.residence: true
+            mbr.user.collect.simpleclans.ally: true
+            mbr.user.collect.simpleclans.rival: true
+            mbr.user.collect.simpleclans.neutral: true
+            mbr.user.multiplier.towny.normal: true
+            mbr.user.multiplier.towny.wild: true
+            mbr.user.multiplier.towny.own: true
+            mbr.user.multiplier.towny.neutral: true
+            mbr.user.multiplier.towny.enemy: true
+            mbr.user.multiplier.towny.ally: true
+            mbr.user.multiplier.factions.wild: true
+            mbr.user.multiplier.factions.own: true
+            mbr.user.multiplier.factions.peaceful: true
+            mbr.user.multiplier.factions.neutral: true
+            mbr.user.multiplier.factions.enemy: true
+            mbr.user.multiplier.factions.ally: true
+            mbr.user.multiplier.factions.safe: true
+            mbr.user.multiplier.factions.war: true
+            mbr.user.multiplier.worldguard: true
+            mbr.user.multiplier.regios: true
+            mbr.user.multiplier.mobarena: true
+            mbr.user.multiplier.griefprevention: true
+            mbr.user.multiplier.deityprotect: true
+            mbr.user.multiplier.chunkown: true
+            mbr.user.multiplier.preciousstones: true
+            mbr.user.multiplier.roadprotector: true
+            mbr.user.multiplier.mazemania: true
+            mbr.user.multiplier.ultimatearena: true
+            mbr.user.multiplier.herostronghold: true
+            mbr.user.multiplier.residence: true
+            mbr.user.multiplier.simpleclans.ally: true
+            mbr.user.multiplier.simpleclans.rival: true
+            mbr.user.multiplier.simpleclans.neutral: true
+            mbr.user.multiplier.likeaboss: true
+            mbr.user.multiplier.heroes: true
+            mbr.user.multiplier.mcmmo: true
+            mbr.user.multiplier.environment: true
+            mbr.user.multiplier.time: true
+            mbr.user.multiplier.group: true
+            mbr.user.multiplier.world: true
+            mbr.user.multiplier.fortune: true
+            mbr.user.killstreak: true
+            mbr.user.spout: true
+            mbr.command.mb: true
+            mbr.command.mbr: true
+            mbr.command.mbl: true
+            mbr.command.mbs: true
+            mbr.command.mbg: true
+            mbr.command.mbwr: true
+            mbr.command.mbwm: true
+            mbr.command.mbtm: true
+            mbr.command.mbem: true
+            mbr.command.mbgm: true
+            mbr.command.mbcd: true
+            mbr.command.mbwd: true
+            mbr.command.mbd: true
+            mbr.command.mbe: true
+            mbr.command.mbce: true
+            mbr.command.mbwe: true
+            mbr.admin.debug.permissions: true
+            mbr.admin.debug.general: true
+            mbr.admin.update: true

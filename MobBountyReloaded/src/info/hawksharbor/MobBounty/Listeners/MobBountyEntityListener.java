@@ -28,11 +28,13 @@ public class MobBountyEntityListener implements Listener
 	{
 		LivingEntity entity = event.getEntity();
 		Player killer = entity.getKiller();
-		if (killer != null)
+		if (killer != null
+				&& _plugin.getAPIManager().getPermissionsManager()
+						.hasPermission(killer, "mbr.user.collect.normal"))
 		{
 			if (_plugin.getAPIManager().getExternalsManager()
 					.checkEarnPermission(killer, entity.getLocation(), entity)
-					&& MobBountyAPI.instance.getListenerManager()
+					&& !MobBountyAPI.instance.getListenerManager()
 							.getSpawnReason().containsKey(entity.getUniqueId()))
 			{
 				MobBountyCreature creature = MobBountyCreature.valueOf(entity,

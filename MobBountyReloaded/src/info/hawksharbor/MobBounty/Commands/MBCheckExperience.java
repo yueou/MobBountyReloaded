@@ -21,10 +21,16 @@ public class MBCheckExperience implements CommandExecutor
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args)
 	{
-		if (_plugin.getAPIManager().getPermissionsManager()
-				.hasPermission(sender, "mbr.command.mbce"))
+		if (!(sender instanceof Player))
 		{
-			Player player = (Player) sender;
+			sender.sendMessage("Commands are designed to be run by players only.");
+			return true;
+		}
+		Player player = ((Player) sender);
+
+		if (_plugin.getAPIManager().getPermissionsManager()
+				.hasPermission(player, "mbr.command.mbce"))
+		{
 			World world = player.getWorld();
 
 			for (MobBountyCreature creature : MobBountyCreature.values())

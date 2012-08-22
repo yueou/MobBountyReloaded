@@ -216,20 +216,14 @@ public class MobBountyExternals
 		double likeabossMult = 1.0;
 		if (likeaboss != null && useLikeaboss())
 			likeabossMult = checkLikeabossMult(player, location, entity);
-		return (townMult * factionMult17 * worldGuardMult * regiosMult
-				* mobArenaMult * griefPreventionMult * deityProtectMult
-				* chunkOwnMult * preciousStonesMult * roadProtectorMult
-				* mazeManiaMult * ultimateArenaMult * heroStrongholdMult
-				* residenceMult * heroesMult * mcMMOMult * simpleClansMult
-				* likeabossMult * MobBountyMultipliers.loginTimer(player)
-				* MobBountyMultipliers.getTimeMult(player)
-				* MobBountyMultipliers.getEnvironmentMult(player)
-				* MobBountyMultipliers.getWorldMult(player)
-				* MobBountyMultipliers.getPermMult(player)
-				* MobBountyMultipliers.mobCap(player)
-				* MobBountyMultipliers.getFortuneMult(player)
-				* MobBountyMultipliers.mobSpawner(player) * MobBountyMultipliers
-					.getCreative(player));
+		double externalMult = townMult *= factionMult17 *= worldGuardMult *= regiosMult *= mobArenaMult *= griefPreventionMult *= deityProtectMult *= chunkOwnMult *= preciousStonesMult *= roadProtectorMult *= mazeManiaMult *= ultimateArenaMult *= heroStrongholdMult *= residenceMult *= heroesMult *= mcMMOMult *= simpleClansMult *= likeabossMult;
+		MobBountyMessage.debugMessage("External Multiplier: "
+				+ String.valueOf(externalMult));
+		double totalMult = externalMult *= MobBountyMultipliers
+				.getInternalMultipliers(player);
+		MobBountyMessage.debugMessage("Total Multiplier: "
+				+ String.valueOf(totalMult));
+		return totalMult;
 	}
 
 	public boolean checkEarnPermission(Player player, Location location,

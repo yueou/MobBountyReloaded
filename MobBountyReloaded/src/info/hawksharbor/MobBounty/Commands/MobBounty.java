@@ -23,11 +23,15 @@ public class MobBounty implements CommandExecutor
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args)
 	{
-
-		if (_plugin.getAPIManager().getPermissionsManager()
-				.hasPermission(sender, "mbr.command.mb"))
+		if (!(sender instanceof Player))
 		{
-			Player player = (Player) sender;
+			sender.sendMessage("Commands are designed to be run by players only.");
+			return true;
+		}
+		Player player = ((Player) sender);
+		if (_plugin.getAPIManager().getPermissionsManager()
+				.hasPermission(player, "mbr.command.mb"))
+		{
 			World world = player.getWorld();
 
 			for (MobBountyCreature creature : MobBountyCreature.values())

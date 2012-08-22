@@ -9,12 +9,6 @@ PERMISSIONS SETUP:
   within MobBountyReloaded. Just make sure that "debugMode" is set to true and that you have
   "mbr.admin.debug.permissions" as a permission.
   
-CONFIGURATION SETUP:
-  Since v235, the configuration has been significantly changed. There is no more "use____Multiplier"
-  anywhere in the configuration. Just set the multiplier rate to 1.0 if you don't want to use it.
-  Towny, Factions, and SimpleClan configurations feature different varieties for their setups.
-  If you don't want to use the multiplier, just set it to 1.0 in the respective file.
-  
 #======MobBountyReloaded Commands======#
 mobbounty:
     description: View rewards and fines.
@@ -197,7 +191,6 @@ Here's a complete list of permissions for you.
             mbr.user.collect.simpleclans.neutral: true
     mbr.user.collect.*:
         description: Allows player to collect in all locations.
-        default: false
         children:
             mbr.user.collect.towny.normal: true
             mbr.user.collect.towny.wild: true
@@ -363,7 +356,6 @@ Here's a complete list of permissions for you.
         default: false
     mbr.user.multiplier.*:
         description: Allows player to use multipliers in all locations.
-        default: false
         children:
             mbr.user.multiplier.towny.normal: true
             mbr.user.multiplier.towny.wild: true
@@ -410,7 +402,6 @@ Here's a complete list of permissions for you.
         default: false
     mbr.user.*:
         description: Gives user ability to earn everywhere and use all multipliers.
-        default: false
         children:
             mbr.user.collect.towny.normal: true
             mbr.user.collect.towny.wild: true
@@ -530,7 +521,6 @@ Here's a complete list of permissions for you.
         default: false
     mbr.command.*:
         description: Allows user to use all commands.
-        default: false
         children:
             mbr.command.mb: true
             mbr.command.mbr: true
@@ -554,16 +544,20 @@ Here's a complete list of permissions for you.
     mbr.admin.debug.general:
         description: Allows user to receive general debug messages.
         default: false
+    mbr.admin.update:
+        description: Allows user to receive update messages.
+        default: false
     mbr.admin.*:
         description: Gives user all admin permissions.
-        default: false
         children:
             mbr.admin.debug.permissions: true
             mbr.admin.debug.general: true
+            mbr.admin.update: true
     mbr.*:
         description: Gives user all MobBountyReloaded permissions.
-        default: false
+        default: op
         children:
+            mbr.user.collect.normal: true
             mbr.user.collect.towny.normal: true
             mbr.user.collect.towny.wild: true
             mbr.user.collect.towny.own: true
@@ -650,3 +644,4 @@ Here's a complete list of permissions for you.
             mbr.command.mbwe: true
             mbr.admin.debug.permissions: true
             mbr.admin.debug.general: true
+            mbr.admin.update: true

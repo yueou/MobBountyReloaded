@@ -10,6 +10,7 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class MBWorldReward implements CommandExecutor
 {
@@ -60,9 +61,14 @@ public class MBWorldReward implements CommandExecutor
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args)
 	{
-
+		if (!(sender instanceof Player))
+		{
+			sender.sendMessage("Commands are designed to be run by players only.");
+			return true;
+		}
+		Player player = ((Player) sender);
 		if (_plugin.getAPIManager().getPermissionsManager()
-				.hasPermission(sender, "mbr.command.mbwr"))
+				.hasPermission(player, "mbr.command.mbwr"))
 		{
 			if (args.length == 3)
 			{

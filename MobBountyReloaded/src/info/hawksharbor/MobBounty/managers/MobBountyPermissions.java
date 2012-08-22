@@ -2,9 +2,9 @@ package info.hawksharbor.MobBounty.managers;
 
 import info.hawksharbor.MobBounty.MobBountyReloaded;
 import info.hawksharbor.MobBounty.Utils.MobBountyConfFile;
+import info.hawksharbor.MobBounty.Utils.MobBountyMessage;
 import net.milkbowl.vault.permission.Permission;
 
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
@@ -31,9 +31,9 @@ public class MobBountyPermissions
 		return permission;
 	}
 
-	public boolean hasPermission(CommandSender sender, String node)
+	public boolean hasPermission(Player player, String node)
 	{
-		if (((Player) sender).hasPermission(node))
+		if (player.hasPermission(node))
 		{
 			if (_plugin.getAPIManager().getConfigManager()
 					.getProperty(MobBountyConfFile.GENERAL, "debugMode") != null
@@ -47,11 +47,11 @@ public class MobBountyPermissions
 				String message = _plugin.getAPIManager().getLocaleManager()
 						.getString("DebugHasPermission");
 				if (message != null
-						&& sender.hasPermission("mbr.admin.debug.permissions"))
+						&& player.hasPermission("mbr.admin.debug.permissions"))
 				{
-					message = message.replace("%P", sender.getName()).replace(
+					message = message.replace("%P", player.getName()).replace(
 							"%D", node);
-					sender.sendMessage(message);
+					MobBountyMessage.sendMessage(player, message);
 				}
 			}
 			return true;
@@ -65,11 +65,11 @@ public class MobBountyPermissions
 			String message = _plugin.getAPIManager().getLocaleManager()
 					.getString("DebugLacksPermission");
 			if (message != null
-					&& sender.hasPermission("mbr.admin.debug.permissions"))
+					&& player.hasPermission("mbr.admin.debug.permissions"))
 			{
-				message = message.replace("%P", sender.getName()).replace("%D",
+				message = message.replace("%P", player.getName()).replace("%D",
 						node);
-				sender.sendMessage(message);
+				MobBountyMessage.sendMessage(player, message);
 			}
 		}
 		return false;

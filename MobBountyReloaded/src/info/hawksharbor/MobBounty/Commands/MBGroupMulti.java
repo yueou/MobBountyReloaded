@@ -5,6 +5,7 @@ import info.hawksharbor.MobBounty.Utils.MobBountyConfFile;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class MBGroupMulti implements CommandExecutor
 {
@@ -29,9 +30,14 @@ public class MBGroupMulti implements CommandExecutor
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args)
 	{
-
+		if (!(sender instanceof Player))
+		{
+			sender.sendMessage("Commands are designed to be run by players only.");
+			return true;
+		}
+		Player player = ((Player) sender);
 		if (_plugin.getAPIManager().getPermissionsManager()
-				.hasPermission(sender, "mbr.command.mbgm"))
+				.hasPermission(player, "mbr.command.mbgm"))
 		{
 			if (args.length == 2)
 			{

@@ -3,6 +3,8 @@ package info.hawksharbor.MobBounty.Commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Player;
 
 public class MBSave implements CommandExecutor
 {
@@ -16,8 +18,24 @@ public class MBSave implements CommandExecutor
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args)
 	{
+		if (!(sender instanceof Player))
+		{
+			if (sender instanceof ConsoleCommandSender)
+			{
+				_plugin.getAPIManager().getConfigManager().saveConfig();
+
+				String message = _plugin.getAPIManager().getLocaleManager()
+						.getString("MBSSaved");
+				if (message != null)
+					sender.sendMessage(message);
+				return true;
+			}
+			sender.sendMessage("Commands are designed to be run by players only.");
+			return true;
+		}
+		Player player = ((Player) sender);
 		if (_plugin.getAPIManager().getPermissionsManager()
-				.hasPermission(sender, "mbr.command.mbs"))
+				.hasPermission(player, "mbr.command.mbs"))
 		{
 			_plugin.getAPIManager().getConfigManager().saveConfig();
 
