@@ -1,6 +1,7 @@
 package info.hawksharbor.MobBounty.managers;
 
 import info.hawksharbor.MobBounty.MobBountyReloaded;
+import info.hawksharbor.MobBounty.Utils.MobBountyAPI;
 import info.hawksharbor.MobBounty.Utils.MobBountyConfFile;
 import info.hawksharbor.MobBounty.Utils.MobBountyCreature;
 import info.hawksharbor.MobBounty.Utils.MobBountyItemInfo;
@@ -64,6 +65,8 @@ public class MobBountyConfigs
 			generalConf.set("killCache.timeLimit", new Integer(30000));
 			generalConf.set("preventCreativeEarning", false);
 			generalConf.set("debugMode", false);
+			generalConf.set("configsVersion",
+					MobBountyAPI.instance.getConfigVersion());
 			try
 			{
 				generalConf.save(file);

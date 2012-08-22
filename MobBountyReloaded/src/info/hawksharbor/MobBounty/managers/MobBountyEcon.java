@@ -237,9 +237,13 @@ public class MobBountyEcon
 				{
 					result = 0.0;
 				}
+				MobBountyMessage.logToConsole("New lastRewardPercentage: "
+						+ String.valueOf(playerData.lastRewardPercentage));
 			}
 			else
 			{
+				MobBountyMessage
+						.logToConsole("Setting lastRewardPercentage to 1");
 				playerData.lastRewardPercentage = 1;
 			}
 

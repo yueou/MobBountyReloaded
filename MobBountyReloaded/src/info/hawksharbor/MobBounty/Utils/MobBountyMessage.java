@@ -36,6 +36,11 @@ public class MobBountyMessage
 		}
 	}
 
+	public static void logWarningToConsole(String message)
+	{
+		MobBountyReloaded._logger.warning("[MobBountyReloaded] " + message);
+	}
+
 	public static void logSevereToConsole(String message)
 	{
 		MobBountyReloaded._logger.severe("[MobBountyReloaded] " + message);

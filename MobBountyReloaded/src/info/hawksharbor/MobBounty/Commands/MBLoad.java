@@ -24,7 +24,7 @@ public class MBLoad implements CommandExecutor
 		{
 			if (sender instanceof ConsoleCommandSender)
 			{
-				_plugin.getAPIManager().getConfigManager().saveConfig();
+				_plugin.getAPIManager().getConfigManager().loadConfig();
 
 				String message = _plugin.getAPIManager().getLocaleManager()
 						.getString("MBLLoaded");

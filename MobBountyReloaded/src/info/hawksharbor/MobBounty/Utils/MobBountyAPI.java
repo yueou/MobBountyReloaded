@@ -37,8 +37,9 @@ public class MobBountyAPI
 	private MobBountyEcon _econManager;
 	private MobBountyPermissions _permsManager;
 	private MobBountyListeners _listenerManager;
-	private double newVersion;
-	private double currentVersion;
+	private int newVersion;
+	private int currentVersion;
+	private double configVersion;
 
 	private String v;
 
@@ -49,11 +50,13 @@ public class MobBountyAPI
 	public MobBountyAPI(MobBountyReloaded plugin)
 	{
 		_plugin = plugin;
-		currentVersion = Double.valueOf(_plugin.getDescription().getVersion()
-				.split("-")[0].replaceFirst("\\.", ""));
+		currentVersion = (int) Math.round(Double.valueOf(_plugin
+				.getDescription().getVersion().split("-")[0].replaceFirst(
+				"\\.", "")));
 		instance = this;
 		v = _plugin.getDescription().getVersion();
 		_econManager = new MobBountyEcon(_plugin);
+		configVersion = new Double(2.0);
 		_configManager = new MobBountyConfigs(_plugin);
 		_commandManager = new MobBountyCommands(_plugin);
 		_localeManager = new MobBountyLocale(_plugin);
@@ -90,6 +93,15 @@ public class MobBountyAPI
 					}
 
 				}, 0, 432000);
+		String confs = _configManager.getProperty(MobBountyConfFile.GENERAL,
+				"configsVersion");
+		if (confs != null
+				&& (configVersion > MobBountyUtils.getDouble(confs,
+						configVersion)))
+		{
+			MobBountyMessage
+					.logWarningToConsole("Update your configuration files!");
+		}
 	}
 
 	public MobBountyCommands getCommandManager()
@@ -156,7 +168,7 @@ public class MobBountyAPI
 		}
 	}
 
-	public double updateCheck(double currentVersion) throws Exception
+	public int updateCheck(int currentVersion) throws Exception
 	{
 		String pluginUrlString = "http://dev.bukkit.org/server-mods/mobbountyreloaded/files.rss";
 		try
@@ -176,9 +188,9 @@ public class MobBountyAPI
 				Element firstNameElement = (Element) firstElementTagName
 						.item(0);
 				NodeList firstNodes = firstNameElement.getChildNodes();
-				return Double.valueOf(firstNodes.item(0).getNodeValue()
-						.replace("MobBountyReloaded", "").replaceFirst(".", "")
-						.trim());
+				return (int) Math.round(Double.valueOf(firstNodes.item(0)
+						.getNodeValue().replace("MobBountyReloaded", "")
+						.replaceFirst(".", "").trim()));
 			}
 		}
 		catch (Exception localException)
@@ -195,5 +207,10 @@ public class MobBountyAPI
 	public double getNewVersion()
 	{
 		return newVersion;
+	}
+
+	public double getConfigVersion()
+	{
+		return configVersion;
 	}
 }
