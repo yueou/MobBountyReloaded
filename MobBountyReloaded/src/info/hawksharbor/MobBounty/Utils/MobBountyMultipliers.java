@@ -1,6 +1,5 @@
 package info.hawksharbor.MobBounty.Utils;
 
-import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.World.Environment;
 import org.bukkit.enchantments.Enchantment;
@@ -11,7 +10,6 @@ public class MobBountyMultipliers
 
 	public static double getInternalMultipliers(Player player)
 	{
-		double creative = getCreative(player);
 		double environment = getEnvironmentMult(player);
 		double fortune = getFortuneMult(player);
 		double perm = getPermMult(player);
@@ -20,22 +18,10 @@ public class MobBountyMultipliers
 		double timer = loginTimer(player);
 		double cap = mobCap(player);
 		double spawner = mobSpawner(player);
-		double intMult = creative *= environment *= fortune *= perm *= time *= world *= timer *= cap *= spawner;
+		double intMult = environment *= fortune *= perm *= time *= world *= timer *= cap *= spawner;
 		MobBountyMessage.debugMessage("Internal Multipliers: "
 				+ String.valueOf(intMult));
 		return intMult;
-	}
-
-	public static double getCreative(Player player)
-	{
-		String mC = MobBountyAPI.instance.getConfigManager().getProperty(
-				MobBountyConfFile.GENERAL, "preventCreativeEarning");
-		boolean prevent = Boolean.parseBoolean(mC);
-		if (prevent && player.getGameMode().equals(GameMode.CREATIVE))
-		{
-			return 0.0;
-		}
-		return 1.0;
 	}
 
 	public static double getEnvironmentMult(Player player)

@@ -4,6 +4,7 @@ import info.hawksharbor.MobBounty.MobBountyReloaded;
 import info.hawksharbor.MobBounty.Utils.MobBountyMessage;
 import info.hawksharbor.MobBounty.Utils.MobBountyPlayerKillData;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -68,28 +69,11 @@ public class MobBountyPlayerListener implements Listener
 				if (_plugin.getAPIManager().getNewVersion() > _plugin
 						.getAPIManager().getCurrentVersion())
 				{
-					String available = _plugin.getAPIManager()
-							.getLocaleManager().getString("UpdateAvailable");
-					String newNumber = _plugin.getAPIManager()
-							.getLocaleManager().getString("NewVersion");
-					String getItAt = _plugin.getAPIManager().getLocaleManager()
-							.getString("GetItAt");
-					if (available != null)
-						MobBountyMessage.sendMessage(event.getPlayer(),
-								available);
-					if (newNumber != null)
-						MobBountyMessage.sendMessage(
-								event.getPlayer(),
-								newNumber.replace(
-										"%N",
-										String.valueOf(_plugin.getAPIManager()
-												.getNewVersion())).replace(
-										"%O",
-										String.valueOf(_plugin.getAPIManager()
-												.getCurrentVersion())));
-					if (getItAt != null)
-						MobBountyMessage
-								.sendMessage(event.getPlayer(), getItAt);
+					MobBountyMessage
+							.sendMessage(
+									event.getPlayer(),
+									ChatColor.DARK_GREEN
+											+ "A new version of MobBountyReloaded is available.");
 				}
 			}
 			catch (Exception e)

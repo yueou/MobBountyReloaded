@@ -83,7 +83,7 @@ public class MobBountyAPI
 												+ " is out! You are running: MobBountyReloaded v"
 												+ currentVersion);
 								MobBountyMessage
-										.logToConsole("Update MobBountyReloaded at: http://dev.bukkit.org/server-mods/mobbountyreloaded");
+										.logToConsole("Update MobBountyReloaded at: http://mbr.inesgar.org/");
 							}
 						}
 						catch (Exception e)
