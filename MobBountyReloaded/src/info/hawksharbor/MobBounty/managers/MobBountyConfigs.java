@@ -1264,7 +1264,13 @@ public class MobBountyConfigs
 				.get(worldName);
 
 		if (dropTable == null)
-			dropTable = loadWorld(worldName, entity);
+		{
+			if (propertyExists(MobBountyConfFile.DROPS, worldName + "."
+					+ creature.getName()))
+				dropTable = loadWorld(worldName, entity);
+			else
+				dropTable = loadWorld("Default", entity);
+		}
 
 		ArrayList<MobBountyItemInfo> drop = dropTable.get(creature);
 
