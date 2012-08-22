@@ -1,0 +1,56 @@
+<project name="MobBountyReloaded" default="package">
+	<!-- Use a default build number of zero unless a real value is passed in by Jenkins -->
+	<property environment="env" />
+	<property name="env.BUILD_NUMBER" value="0" />
+
+	<target name="init" description="Initialize directories, etc.">
+		<mkdir dir="bin" />
+		<mkdir dir="dist" />
+	</target>
+
+	<target name="clean" depends="init" description="Clean up all the temp stuff and previous builds">
+		<delete>
+			<fileset dir="bin" />
+			<fileset dir="dist" />
+		</delete>
+	</target>
+
+	<target name="compile" depends="clean, init" description="Compile all the code">
+		<javac debug="true" debuglevel="lines,vars,source" deprecation="true" srcdir="src" destdir="bin">
+			<classpath>
+				<fileset dir="lib" includes="*.jar" />
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="package" depends="compile" description="Make the distributable jar file">
+		<copy todir="bin" overwrite="true">
+			<fileset dir="." includes="plugin.yml" />
+			<!-- 
+            This filterset tells Ant to replace @VERSION@ in the yml file with whatever is in the property env.BUILD_NUMBER, which Jenkins passes in 
+            -->
+			<filterset>
+				<filter token="VERSION" value="${env.BUILD_NUMBER}" />
+			</filterset>
+		</copy>
+        <copy todir="." overwrite="true">
+            <fileset dir="docs" includes="SETUP.txt" />
+            <!-- 
+            This filterset tells Ant to replace @VERSION@ in the txt file with whatever is in the property env.BUILD_NUMBER, which Jenkins passes in 
+            -->
+            <filterset>
+                <filter token="VERSION" value="${env.BUILD_NUMBER}" />
+            </filterset>
+        </copy>
+		<jar basedir="bin" jarfile="${ant.project.name}_v${env.BUILD_NUMBER}.jar" defaultexcludes="true" />
+		<zip basedir="." destfile="dist/${ant.project.name}_v${env.BUILD_NUMBER}.zip" defaultexcludes="true" includes="jar/${ant.project.name}_v${env.BUILD_NUMBER}.jar">
+			<fileset dir="." includes="${ant.project.name}_v${env.BUILD_NUMBER}.jar" defaultexcludes="true"/>
+			<fileset dir="." includes="SETUP.txt" defaultexcludes="true"/>
+		</zip>
+		<copy file="${ant.project.name}_v${env.BUILD_NUMBER}.jar" todir="dist"/>
+		<delete file="${ant.project.name}_v${env.BUILD_NUMBER}.jar" />
+		<delete file="SETUP.txt" />
+	</target>
+
+
+</project>
