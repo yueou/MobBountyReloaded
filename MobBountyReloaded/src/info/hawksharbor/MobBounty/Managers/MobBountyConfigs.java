@@ -45,7 +45,6 @@ public class MobBountyConfigs
 			YamlConfiguration generalConf = YamlConfiguration
 					.loadConfiguration(file);
 			generalConf.set("locale", "en");
-			generalConf.set("modifyExperienceDrops", false);
 			generalConf.set("useMobSpawnerProtection", false);
 			generalConf.set("mobSpawnerProtectionRadius", new Integer(5));
 			generalConf.set("mobSpawnerProtectionRate", new Double(0.0));
@@ -662,39 +661,11 @@ public class MobBountyConfigs
 		case EXPERIENCE:
 			YamlConfiguration expConf = YamlConfiguration
 					.loadConfiguration(file);
-			expConf.set("Default.Blaze", new Integer(10));
-			expConf.set("Default.CaveSpider", new Integer(5));
-			expConf.set("Default.Chicken", new Integer(2));
-			expConf.set("Default.Cow", new Integer(2));
-			expConf.set("Default.Creeper", new Integer(5));
-			expConf.set("Default.ElectrifiedCreeper", new Integer(5));
-			expConf.set("Default.Enderdragon", new Integer(20000));
-			expConf.set("Default.Enderman", new Integer(5));
-			expConf.set("Default.Ghast", new Integer(5));
-			expConf.set("Default.Giant", new Integer(0));
-			expConf.set("Default.IronGolem", new Integer(0));
-			expConf.set("Default.MagmaCube", new Integer(2));
-			expConf.set("Default.Monster", new Integer(0));
-			expConf.set("Default.Mooshroom", new Integer(2));
-			expConf.set("Default.Ocelot", new Integer(2));
-			expConf.set("Default.Pig", new Integer(2));
-			expConf.set("Default.PigZombie", new Integer(5));
-			expConf.set("Default.Player", new Integer(0));
-			expConf.set("Default.SelfTamedCat", new Integer(0));
-			expConf.set("Default.SelfTamedWolf", new Integer(0));
-			expConf.set("Default.Sheep", new Integer(2));
-			expConf.set("Default.Silverfish", new Integer(5));
-			expConf.set("Default.Skeleton", new Integer(5));
-			expConf.set("Default.Slime", new Integer(2));
-			expConf.set("Default.SnowGolem", new Integer(0));
-			expConf.set("Default.Spider", new Integer(5));
-			expConf.set("Default.Squid", new Integer(2));
-			expConf.set("Default.TamedCat", new Integer(0));
-			expConf.set("Default.TamedWolf", new Integer(0));
-			expConf.set("Default.Unknown", new Integer(0));
-			expConf.set("Default.Villager", new Integer(0));
-			expConf.set("Default.Wolf", new Integer(2));
-			expConf.set("Default.Zombie", new Integer(5));
+			for (MobBountyCreature creature : MobBountyCreature.values())
+			{
+				expConf.set(creature.getName() + ".Default.modifyExp", false);
+				expConf.set(creature.getName() + ".Default.exp", new Integer(0));
+			}
 			try
 			{
 				expConf.save(file);
@@ -715,78 +686,12 @@ public class MobBountyConfigs
 			};
 			for (MobBountyCreature creature : MobBountyCreature.values())
 			{
-				if (creature.equals(MobBountyCreature.PLAYER))
-					continue;
 				dropConf.set(creature.getName() + ".Default.modifyDrops", false);
 				dropConf.set(creature.getName() + ".Default.cancelNormalDrops",
 						false);
 				dropConf.set(creature.getName() + ".Default.drops",
 						Arrays.asList(drop));
 			}
-			// dropConf.set("Default.Blaze",
-			// Arrays.asList(defaultDrops.get("Blaze")));
-			// dropConf.set("Default.CaveSpider",
-			// Arrays.asList(defaultDrops.get("CaveSpider")));
-			// dropConf.set("Default.Chicken",
-			// Arrays.asList(defaultDrops.get("Chicken")));
-			// dropConf.set("Default.Cow",
-			// Arrays.asList(defaultDrops.get("Cow")));
-			// dropConf.set("Default.Creeper",
-			// Arrays.asList(defaultDrops.get("Creeper")));
-			// dropConf.set("Default.ElectrifiedCreeper",
-			// Arrays.asList(defaultDrops.get("ElectrifiedCreeper")));
-			// dropConf.set("Default.Enderdragon",
-			// Arrays.asList(defaultDrops.get("Enderdragon")));
-			// dropConf.set("Default.Enderman",
-			// Arrays.asList(defaultDrops.get("Enderman")));
-			// dropConf.set("Default.Ghast",
-			// Arrays.asList(defaultDrops.get("Ghast")));
-			// dropConf.set("Default.Giant",
-			// Arrays.asList(defaultDrops.get("Giant")));
-			// dropConf.set("Default.IronGolem",
-			// Arrays.asList(defaultDrops.get("IronGolem")));
-			// dropConf.set("Default.MagmaCube",
-			// Arrays.asList(defaultDrops.get("MagmaCube")));
-			// dropConf.set("Default.Monster",
-			// Arrays.asList(defaultDrops.get("Monster")));
-			// dropConf.set("Default.Mooshroom",
-			// Arrays.asList(defaultDrops.get("Mooshroom")));
-			// dropConf.set("Default.Ocelot",
-			// Arrays.asList(defaultDrops.get("Ocelot")));
-			// dropConf.set("Default.Pig",
-			// Arrays.asList(defaultDrops.get("Pig")));
-			// dropConf.set("Default.PigZombie",
-			// Arrays.asList(defaultDrops.get("PigZombie")));
-			// dropConf.set("Default.SelfTamedCat",
-			// Arrays.asList(defaultDrops.get("SelfTamedCat")));
-			// dropConf.set("Default.SelfTamedWolf",
-			// Arrays.asList(defaultDrops.get("SelfTamedWolf")));
-			// dropConf.set("Default.Sheep",
-			// Arrays.asList(defaultDrops.get("Sheep")));
-			// dropConf.set("Default.Silverfish",
-			// Arrays.asList(defaultDrops.get("Silverfish")));
-			// dropConf.set("Default.Skeleton",
-			// Arrays.asList(defaultDrops.get("Skeleton")));
-			// dropConf.set("Default.Slime",
-			// Arrays.asList(defaultDrops.get("Slime")));
-			// dropConf.set("Default.SnowGolem",
-			// Arrays.asList(defaultDrops.get("SnowGolem")));
-			// dropConf.set("Default.Spider",
-			// Arrays.asList(defaultDrops.get("Spider")));
-			// dropConf.set("Default.Squid",
-			// Arrays.asList(defaultDrops.get("Squid")));
-			// dropConf.set("Default.TamedCat",
-			// Arrays.asList(defaultDrops.get("TamedCat")));
-			// dropConf.set("Default.TamedWolf",
-			// Arrays.asList(defaultDrops.get("TamedWolf")));
-			// dropConf.set("Default.Unknown",
-			// Arrays.asList(defaultDrops.get("Unknown")));
-			// dropConf.set("Default.Villager",
-			// Arrays.asList(defaultDrops.get("Villager")));
-			// dropConf.set("Default.Wolf",
-			// Arrays.asList(defaultDrops.get("Wolf")));
-			// dropConf.set("Default.Zombie",
-			// Arrays.asList(defaultDrops.get("Zombie")));
 			try
 			{
 				dropConf.save(file);

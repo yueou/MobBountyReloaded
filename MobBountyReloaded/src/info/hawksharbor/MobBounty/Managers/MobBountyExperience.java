@@ -19,13 +19,13 @@ public class MobBountyExperience
 		String resultTest = MobBountyAPI.instance.getConfigManager()
 				.getProperty(
 						MobBountyConfFile.EXPERIENCE,
-						"Worlds." + entity.getWorld().getName() + "."
-								+ creature.getName());
+						creature.getName() + "." + entity.getWorld().getName()
+								+ ".exp");
 		if (resultTest == null)
 		{
 			resultTest = MobBountyAPI.instance.getConfigManager().getProperty(
 					MobBountyConfFile.EXPERIENCE,
-					"Default." + creature.getName());
+					creature.getName() + ".Default.exp");
 		}
 		return resultTest;
 	}
@@ -45,13 +45,26 @@ public class MobBountyExperience
 	public static void handleExperience(Player killer, LivingEntity entity,
 			MobBountyCreature creature, EntityDeathEvent event)
 	{
-		if (MobBountyAPI.instance.getConfigManager().getProperty(
-				MobBountyConfFile.GENERAL, "modifyExperienceDrops") != null
-				&& MobBountyAPI.instance
-						.getConfigManager()
-						.getProperty(MobBountyConfFile.GENERAL,
-								"modifyExperienceDrops")
-						.equalsIgnoreCase("true"))
+		String modifyExpString = MobBountyAPI.instance.getConfigManager()
+				.getProperty(
+						MobBountyConfFile.EXPERIENCE,
+						creature.getName() + "." + entity.getWorld().getName()
+								+ ".modifyExp");
+		if (modifyExpString == null)
+		{
+			modifyExpString = MobBountyAPI.instance.getConfigManager()
+					.getProperty(MobBountyConfFile.DROPS,
+							creature.getName() + ".Default.modifyExp");
+			if (modifyExpString == null)
+			{
+				modifyExpString = "false";
+				MobBountyAPI.instance.getConfigManager().setProperty(
+						MobBountyConfFile.EXPERIENCE,
+						creature.getName() + ".Default.modifyExp", false);
+			}
+		}
+		boolean modifyExp = Boolean.parseBoolean(modifyExpString);
+		if (modifyExp)
 		{
 			MobBountyMessage.debugMessage("Starting experience handling");
 			String expDropS = getExperienceDrops(entity, creature);

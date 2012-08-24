@@ -30,10 +30,12 @@ public class MobBountyAPI
 	public static MobBountyAPI instance;
 
 	private static HashMap<String, Long> loginTimer = new HashMap<String, Long>();
+
 	public static MobBountyAPI getInstance()
 	{
 		return instance;
 	}
+
 	private MobBountyCommands _commandManager;
 	private MobBountyConfigs _configManager;
 	private MobBountyEcon _econManager;
@@ -61,7 +63,7 @@ public class MobBountyAPI
 		instance = this;
 		v = _plugin.getDescription().getVersion();
 		_econManager = new MobBountyEcon(_plugin);
-		configVersion = new Double(2.0);
+		configVersion = new Double(2.2);
 		_configManager = new MobBountyConfigs(_plugin);
 		_commandManager = new MobBountyCommands(_plugin);
 		_localeManager = new MobBountyLocale(_plugin);
