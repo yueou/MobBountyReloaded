@@ -25,7 +25,6 @@ public class MobBountyConfigs
 	private final MobBountyReloaded _plugin;
 
 	private final HashMap<MobBountyConfFile, YamlConfiguration> _configurations;
-	private final HashMap<String, String[]> defaultDrops;
 	private final HashMap<String, HashMap<MobBountyCreature, ArrayList<MobBountyItemInfo>>> _worldDropTable;
 
 	public MobBountyConfigs(MobBountyReloaded plugin)
@@ -33,7 +32,6 @@ public class MobBountyConfigs
 		_plugin = plugin;
 
 		_configurations = new HashMap<MobBountyConfFile, YamlConfiguration>();
-		defaultDrops = new HashMap<String, String[]>();
 		_worldDropTable = new HashMap<String, HashMap<MobBountyCreature, ArrayList<MobBountyItemInfo>>>();
 
 		this.loadConfig();
@@ -48,13 +46,10 @@ public class MobBountyConfigs
 					.loadConfiguration(file);
 			generalConf.set("locale", "en");
 			generalConf.set("modifyExperienceDrops", false);
-			generalConf.set("modifyItemDrops", false);
 			generalConf.set("useMobSpawnerProtection", false);
 			generalConf.set("mobSpawnerProtectionRadius", new Integer(5));
 			generalConf.set("mobSpawnerProtectionRate", new Double(0.0));
 			generalConf.set("spawnedMobProtection", false);
-			generalConf.set("spawnedMobExperience", true);
-			generalConf.set("spawnedMobDrops", true);
 			generalConf.set("useDepreciativeReturn", false);
 			generalConf.set("depreciativeReturnRate", new Double(0.1));
 			generalConf.set("timeAfterLogin", new Long(10));
@@ -714,69 +709,84 @@ public class MobBountyConfigs
 		case DROPS:
 			YamlConfiguration dropConf = YamlConfiguration
 					.loadConfiguration(file);
-			loadDefaultDrops();
-			dropConf.set("Default.Blaze",
-					Arrays.asList(defaultDrops.get("Blaze")));
-			dropConf.set("Default.CaveSpider",
-					Arrays.asList(defaultDrops.get("CaveSpider")));
-			dropConf.set("Default.Chicken",
-					Arrays.asList(defaultDrops.get("Chicken")));
-			dropConf.set("Default.Cow", Arrays.asList(defaultDrops.get("Cow")));
-			dropConf.set("Default.Creeper",
-					Arrays.asList(defaultDrops.get("Creeper")));
-			dropConf.set("Default.ElectrifiedCreeper",
-					Arrays.asList(defaultDrops.get("ElectrifiedCreeper")));
-			dropConf.set("Default.Enderdragon",
-					Arrays.asList(defaultDrops.get("Enderdragon")));
-			dropConf.set("Default.Enderman",
-					Arrays.asList(defaultDrops.get("Enderman")));
-			dropConf.set("Default.Ghast",
-					Arrays.asList(defaultDrops.get("Ghast")));
-			dropConf.set("Default.Giant",
-					Arrays.asList(defaultDrops.get("Giant")));
-			dropConf.set("Default.IronGolem",
-					Arrays.asList(defaultDrops.get("IronGolem")));
-			dropConf.set("Default.MagmaCube",
-					Arrays.asList(defaultDrops.get("MagmaCube")));
-			dropConf.set("Default.Monster",
-					Arrays.asList(defaultDrops.get("Monster")));
-			dropConf.set("Default.Mooshroom",
-					Arrays.asList(defaultDrops.get("Mooshroom")));
-			dropConf.set("Default.Ocelot",
-					Arrays.asList(defaultDrops.get("Ocelot")));
-			dropConf.set("Default.Pig", Arrays.asList(defaultDrops.get("Pig")));
-			dropConf.set("Default.PigZombie",
-					Arrays.asList(defaultDrops.get("PigZombie")));
-			dropConf.set("Default.SelfTamedCat",
-					Arrays.asList(defaultDrops.get("SelfTamedCat")));
-			dropConf.set("Default.SelfTamedWolf",
-					Arrays.asList(defaultDrops.get("SelfTamedWolf")));
-			dropConf.set("Default.Sheep",
-					Arrays.asList(defaultDrops.get("Sheep")));
-			dropConf.set("Default.Silverfish",
-					Arrays.asList(defaultDrops.get("Silverfish")));
-			dropConf.set("Default.Skeleton",
-					Arrays.asList(defaultDrops.get("Skeleton")));
-			dropConf.set("Default.Slime",
-					Arrays.asList(defaultDrops.get("Slime")));
-			dropConf.set("Default.SnowGolem",
-					Arrays.asList(defaultDrops.get("SnowGolem")));
-			dropConf.set("Default.Spider",
-					Arrays.asList(defaultDrops.get("Spider")));
-			dropConf.set("Default.Squid",
-					Arrays.asList(defaultDrops.get("Squid")));
-			dropConf.set("Default.TamedCat",
-					Arrays.asList(defaultDrops.get("TamedCat")));
-			dropConf.set("Default.TamedWolf",
-					Arrays.asList(defaultDrops.get("TamedWolf")));
-			dropConf.set("Default.Unknown",
-					Arrays.asList(defaultDrops.get("Unknown")));
-			dropConf.set("Default.Villager",
-					Arrays.asList(defaultDrops.get("Villager")));
-			dropConf.set("Default.Wolf",
-					Arrays.asList(defaultDrops.get("Wolf")));
-			dropConf.set("Default.Zombie",
-					Arrays.asList(defaultDrops.get("Zombie")));
+			String[] drop =
+			{
+				"i:0;d:0;a:0;p:0"
+			};
+			for (MobBountyCreature creature : MobBountyCreature.values())
+			{
+				if (creature.equals(MobBountyCreature.PLAYER))
+					continue;
+				dropConf.set(creature.getName() + ".Default.modifyDrops", false);
+				dropConf.set(creature.getName() + ".Default.cancelNormalDrops",
+						false);
+				dropConf.set(creature.getName() + ".Default.drops",
+						Arrays.asList(drop));
+			}
+			// dropConf.set("Default.Blaze",
+			// Arrays.asList(defaultDrops.get("Blaze")));
+			// dropConf.set("Default.CaveSpider",
+			// Arrays.asList(defaultDrops.get("CaveSpider")));
+			// dropConf.set("Default.Chicken",
+			// Arrays.asList(defaultDrops.get("Chicken")));
+			// dropConf.set("Default.Cow",
+			// Arrays.asList(defaultDrops.get("Cow")));
+			// dropConf.set("Default.Creeper",
+			// Arrays.asList(defaultDrops.get("Creeper")));
+			// dropConf.set("Default.ElectrifiedCreeper",
+			// Arrays.asList(defaultDrops.get("ElectrifiedCreeper")));
+			// dropConf.set("Default.Enderdragon",
+			// Arrays.asList(defaultDrops.get("Enderdragon")));
+			// dropConf.set("Default.Enderman",
+			// Arrays.asList(defaultDrops.get("Enderman")));
+			// dropConf.set("Default.Ghast",
+			// Arrays.asList(defaultDrops.get("Ghast")));
+			// dropConf.set("Default.Giant",
+			// Arrays.asList(defaultDrops.get("Giant")));
+			// dropConf.set("Default.IronGolem",
+			// Arrays.asList(defaultDrops.get("IronGolem")));
+			// dropConf.set("Default.MagmaCube",
+			// Arrays.asList(defaultDrops.get("MagmaCube")));
+			// dropConf.set("Default.Monster",
+			// Arrays.asList(defaultDrops.get("Monster")));
+			// dropConf.set("Default.Mooshroom",
+			// Arrays.asList(defaultDrops.get("Mooshroom")));
+			// dropConf.set("Default.Ocelot",
+			// Arrays.asList(defaultDrops.get("Ocelot")));
+			// dropConf.set("Default.Pig",
+			// Arrays.asList(defaultDrops.get("Pig")));
+			// dropConf.set("Default.PigZombie",
+			// Arrays.asList(defaultDrops.get("PigZombie")));
+			// dropConf.set("Default.SelfTamedCat",
+			// Arrays.asList(defaultDrops.get("SelfTamedCat")));
+			// dropConf.set("Default.SelfTamedWolf",
+			// Arrays.asList(defaultDrops.get("SelfTamedWolf")));
+			// dropConf.set("Default.Sheep",
+			// Arrays.asList(defaultDrops.get("Sheep")));
+			// dropConf.set("Default.Silverfish",
+			// Arrays.asList(defaultDrops.get("Silverfish")));
+			// dropConf.set("Default.Skeleton",
+			// Arrays.asList(defaultDrops.get("Skeleton")));
+			// dropConf.set("Default.Slime",
+			// Arrays.asList(defaultDrops.get("Slime")));
+			// dropConf.set("Default.SnowGolem",
+			// Arrays.asList(defaultDrops.get("SnowGolem")));
+			// dropConf.set("Default.Spider",
+			// Arrays.asList(defaultDrops.get("Spider")));
+			// dropConf.set("Default.Squid",
+			// Arrays.asList(defaultDrops.get("Squid")));
+			// dropConf.set("Default.TamedCat",
+			// Arrays.asList(defaultDrops.get("TamedCat")));
+			// dropConf.set("Default.TamedWolf",
+			// Arrays.asList(defaultDrops.get("TamedWolf")));
+			// dropConf.set("Default.Unknown",
+			// Arrays.asList(defaultDrops.get("Unknown")));
+			// dropConf.set("Default.Villager",
+			// Arrays.asList(defaultDrops.get("Villager")));
+			// dropConf.set("Default.Wolf",
+			// Arrays.asList(defaultDrops.get("Wolf")));
+			// dropConf.set("Default.Zombie",
+			// Arrays.asList(defaultDrops.get("Zombie")));
 			try
 			{
 				dropConf.save(file);
@@ -869,173 +879,6 @@ public class MobBountyConfigs
 			}
 		}
 
-	}
-
-	private void loadDefaultDrops()
-	{
-		String[] blazeDrops =
-		{
-			"i:369;d:0;a:1;p:5.0"
-		};
-		defaultDrops.put("Blaze", blazeDrops);
-		String[] cavespiderDrops =
-		{
-				"i:287;d:0;a:1;p:100.0", "i:375;d:0;a:1;p:100.0"
-		};
-		defaultDrops.put("CaveSpider", cavespiderDrops);
-		String[] chickenDrops =
-		{
-				"i:288;d:0;a:1;p:100.0", "i:365;d:0;a:1;p:100.0"
-		};
-		defaultDrops.put("Chicken", chickenDrops);
-		String[] cowDrops =
-		{
-				"i:334;d:0;a:1;p:50.0", "i:363;d:0;a:1;p:100.0"
-		};
-		defaultDrops.put("Cow", cowDrops);
-		String[] creeperDrops =
-		{
-			"i:289;d:0;a:2;p:75.0"
-		};
-		defaultDrops.put("Creeper", creeperDrops);
-		String[] electricDrops =
-		{
-			"i:289;d:0;a:5;p:100.0"
-		};
-		defaultDrops.put("ElectrifiedCreeper", electricDrops);
-		String[] enderdragonDrops =
-		{
-			"i:0;d:0;a:0;p:0.0"
-		};
-		defaultDrops.put("Enderdragon", enderdragonDrops);
-		String[] endermanDrops =
-		{
-			"i:368;d:0;a:0-1;p:50.0"
-		};
-		defaultDrops.put("Enderman", endermanDrops);
-		String[] ghastDrops =
-		{
-				"i:289;d:0;a:0-2;p:100.0", "i:370;d:0;a:0-1;p:50.0"
-		};
-		defaultDrops.put("Ghast", ghastDrops);
-		String[] giantDrops =
-		{
-			"i:0;d:0;a:0;p:0.0"
-		};
-		defaultDrops.put("Giant", giantDrops);
-		String[] irongolemDrops =
-		{
-				"i:265;d:0;a:3-5;p:100.0", "i:38;d:0;a:0-2;p:75.0"
-		};
-		defaultDrops.put("IronGolem", irongolemDrops);
-		String[] magmaDrops =
-		{
-			"i:378;d:0;a:0-1;p:100.0"
-		};
-		defaultDrops.put("MagmaCube", magmaDrops);
-		String[] monsterDrops =
-		{
-			"i:0;d:0;a:0;p:0.0"
-		};
-		defaultDrops.put("Monster", monsterDrops);
-		String[] mooshroomDrops =
-		{
-				"i:334;d:0;a:1;p:50.0", "i:363;d:0;a:1;p:100.0"
-		};
-		defaultDrops.put("Mooshroom", mooshroomDrops);
-		String[] ocelotDrops =
-		{
-			"i:0;d:0;a:0;p:0.0"
-		};
-		defaultDrops.put("Ocelot", ocelotDrops);
-		String[] pigDrops =
-		{
-			"i:319;d:0;a:1-3;p:100.0"
-		};
-		defaultDrops.put("Pig", pigDrops);
-		String[] pigzombieDrops =
-		{
-				"i:367;d:0;a:0-1;p:100.0", "i:371;d:0;a:0-1;p:75.0",
-				"i:266;d:0;a:1;p:10.0", "i:283;d:0;a:1;p:5.0"
-		};
-		defaultDrops.put("PigZombie", pigzombieDrops);
-		String[] selftamedcatDrops =
-		{
-			"i:0;d:0;a:0;p:0.0"
-		};
-		defaultDrops.put("SelfTamedCat", selftamedcatDrops);
-		String[] selftamedwolfDrops =
-		{
-			"i:0;d:0;a:0;p:0.0"
-		};
-		defaultDrops.put("SelfTamedWolf", selftamedwolfDrops);
-		String[] sheepDrops =
-		{
-			"i:35;d:C;a:1;p:100.0"
-		};
-		defaultDrops.put("Sheep", sheepDrops);
-		String[] silverfishDrops =
-		{
-			"i:0;d:0;a:0;p:0.0"
-		};
-		defaultDrops.put("Silverfish", silverfishDrops);
-		String[] skeletonDrops =
-		{
-				"i:352;d:0;a:0-2;p:100.0", "i:262;d:0;a:0-2;p:100.0"
-		};
-		defaultDrops.put("Skeleton", skeletonDrops);
-		String[] slimeDrops =
-		{
-			"i:341;d:0;a:0-1;p:100.0"
-		};
-		defaultDrops.put("Slime", slimeDrops);
-		String[] snowgolemDrops =
-		{
-			"i:332;d:0;a:1-15;p:100.0"
-		};
-		defaultDrops.put("SnowGolem", snowgolemDrops);
-		String[] spiderDrops =
-		{
-				"i:287;d:0;a:1;p:100.0", "i:375;d:0;a:1;p:100.0"
-		};
-		defaultDrops.put("Spider", spiderDrops);
-		String[] squidDrops =
-		{
-			"i:351;d:0;a:1-3;p:100.0"
-		};
-		defaultDrops.put("Squid", squidDrops);
-		String[] tamedcatDrops =
-		{
-			"i:0;d:0;a:0;p:0.0"
-		};
-		defaultDrops.put("TamedCat", tamedcatDrops);
-		String[] tamedwolfDrops =
-		{
-			"i:0;d:0;a:0;p:0.0"
-		};
-		defaultDrops.put("TamedWolf", tamedwolfDrops);
-		String[] unknownDrops =
-		{
-			"i:289;d:0;a:5;p:100.0"
-		};
-		defaultDrops.put("Unknown", unknownDrops);
-		String[] villagerDrops =
-		{
-			"i:0;d:0;a:0;p:0.0"
-		};
-		defaultDrops.put("Villager", villagerDrops);
-		String[] wolfDrops =
-		{
-			"i:0;d:0;a:0;p:0.0"
-		};
-		defaultDrops.put("Wolf", wolfDrops);
-		String[] zombieDrops =
-		{
-				"i:367;d:0;a:0-2;p:100.0", "i:256;d:0;a:1;p:2.5",
-				"i:267;d:0;a:1;p:2.5", "i:265;d:0;a:1;p:10.0",
-				"i:306;d:0;a:1;p:2.5"
-		};
-		defaultDrops.put("Zombie", zombieDrops);
 	}
 
 	/**
@@ -1319,8 +1162,8 @@ public class MobBountyConfigs
 
 		dropTable.put(creature, itemDrops);
 
-		setPropertyList(MobBountyConfFile.DROPS,
-				worldName + "." + creature.getName(), itemDropsData);
+		setPropertyList(MobBountyConfFile.DROPS, creature.getName() + "."
+				+ worldName + ".drops", itemDropsData);
 		_worldDropTable.put(worldName, dropTable);
 	}
 
@@ -1332,8 +1175,8 @@ public class MobBountyConfigs
 		for (MobBountyCreature creature : MobBountyCreature.values())
 		{
 			ArrayList<String> creatureDropData = (ArrayList<String>) getPropertyList(
-					MobBountyConfFile.DROPS,
-					worldName + "." + creature.getName());
+					MobBountyConfFile.DROPS, creature.getName() + "."
+							+ worldName + ".drops");
 			ArrayList<MobBountyItemInfo> creatureDrop = new ArrayList<MobBountyItemInfo>();
 			Iterator<String> creatureDropDataIterator = creatureDropData
 					.iterator();
@@ -1371,8 +1214,8 @@ public class MobBountyConfigs
 
 		if (dropTable == null)
 		{
-			if (propertyExists(MobBountyConfFile.DROPS, worldName + "."
-					+ creature.getName()))
+			if (propertyExists(MobBountyConfFile.DROPS, creature.getName()
+					+ "." + worldName + ".drops"))
 				dropTable = loadWorld(worldName, entity);
 			else
 				dropTable = loadWorld("Default", entity);

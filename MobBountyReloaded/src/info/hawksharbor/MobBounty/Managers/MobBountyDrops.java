@@ -35,12 +35,46 @@ public class MobBountyDrops
 	public static void handleDrops(Player killer, LivingEntity entity,
 			MobBountyCreature creature, EntityDeathEvent event)
 	{
-		if (MobBountyAPI.instance.getConfigManager().getProperty(
-				MobBountyConfFile.GENERAL, "modifyItemDrops") != null
-				&& MobBountyAPI.instance
-						.getConfigManager()
-						.getProperty(MobBountyConfFile.GENERAL,
-								"modifyItemDrops").equalsIgnoreCase("true"))
+		String modifyDropString = MobBountyAPI.instance.getConfigManager()
+				.getProperty(
+						MobBountyConfFile.DROPS,
+						creature.getName() + "." + entity.getWorld().getName()
+								+ ".modifyDrops");
+		if (modifyDropString == null)
+		{
+			modifyDropString = MobBountyAPI.instance.getConfigManager()
+					.getProperty(MobBountyConfFile.DROPS,
+							creature.getName() + ".Default.modifyDrops");
+			if (modifyDropString == null)
+			{
+				modifyDropString = "false";
+				MobBountyAPI.instance.getConfigManager().setProperty(
+						MobBountyConfFile.DROPS,
+						creature.getName() + ".Default.modifyDrops", false);
+			}
+		}
+		boolean modifyDrops = Boolean.parseBoolean(modifyDropString);
+		String clearDropString = MobBountyAPI.instance.getConfigManager()
+				.getProperty(
+						MobBountyConfFile.DROPS,
+						creature.getName() + "." + entity.getWorld().getName()
+								+ ".cancelNormalDrops");
+		if (clearDropString == null)
+		{
+			clearDropString = MobBountyAPI.instance.getConfigManager()
+					.getProperty(MobBountyConfFile.DROPS,
+							creature.getName() + ".Default.cancelNormalDrops");
+			if (clearDropString == null)
+			{
+				clearDropString = "false";
+				MobBountyAPI.instance.getConfigManager().setProperty(
+						MobBountyConfFile.DROPS,
+						creature.getName() + ".Default.cancelNormalDrops",
+						false);
+			}
+		}
+		boolean cancelDrops = Boolean.parseBoolean(clearDropString);
+		if (modifyDrops)
 		{
 			if (creature != null)
 			{
@@ -52,7 +86,10 @@ public class MobBountyDrops
 					List<ItemStack> drops = event.getDrops();
 					if (drops != null)
 					{
-						drops.clear();
+						if (cancelDrops)
+						{
+							drops.clear();
+						}
 						Iterator<MobBountyItemInfo> creatureDropIterator = creatureDrops
 								.iterator();
 						while (creatureDropIterator.hasNext())
@@ -64,7 +101,6 @@ public class MobBountyDrops
 							{
 								if (dropInfo.itemID == 0)
 								{
-									drops.clear();
 									break;
 								}
 

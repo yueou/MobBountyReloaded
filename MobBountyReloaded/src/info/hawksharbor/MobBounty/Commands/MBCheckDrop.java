@@ -37,6 +37,8 @@ public class MBCheckDrop implements CommandExecutor
 
 			for (MobBountyCreature creature : MobBountyCreature.values())
 			{
+				if (creature.equals(MobBountyCreature.PLAYER))
+					continue;
 				List<String> rewards = _plugin
 						.getAPIManager()
 						.getConfigManager()
