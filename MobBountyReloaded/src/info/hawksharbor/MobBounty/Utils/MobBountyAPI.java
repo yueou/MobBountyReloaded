@@ -18,6 +18,9 @@ import java.util.UUID;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -92,6 +95,26 @@ public class MobBountyAPI
 												+ currentVersion);
 								MobBountyMessage
 										.logToConsole("Update MobBountyReloaded at: http://mbr.inesgar.org/");
+								for (OfflinePlayer op : _plugin.getServer()
+										.getOperators())
+								{
+									if (op.isOnline())
+									{
+										MobBountyMessage
+												.sendMessage(
+														((Player) op),
+														ChatColor.DARK_GREEN
+																+ "MobBountyReloaded v"
+																+ String.valueOf(newVersion)
+																+ " is out! You are running: MobBountyReloaded v"
+																+ String.valueOf(currentVersion));
+										MobBountyMessage
+												.sendMessage(
+														((Player) op),
+														ChatColor.DARK_GREEN
+																+ "Update MobBountyReloaded at: http://mbr.inesgar.org/");
+									}
+								}
 							}
 						}
 						catch (Exception e)
