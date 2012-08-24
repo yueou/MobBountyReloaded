@@ -13,6 +13,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDeathEvent;
 
 public class MobBountyEntityListener implements Listener
@@ -23,6 +25,31 @@ public class MobBountyEntityListener implements Listener
 	{
 		_plugin = plugin;
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
+	}
+
+	@EventHandler
+	public void onCreatureSpawn(CreatureSpawnEvent event)
+	{
+		String spawnMobProtectionString = MobBountyAPI.instance
+				.getConfigManager().getProperty(MobBountyConfFile.GENERAL,
+						"spawnedMobProtection");
+		if (spawnMobProtectionString == null)
+		{
+			spawnMobProtectionString = "false";
+			MobBountyAPI.instance.getConfigManager().setProperty(
+					MobBountyConfFile.GENERAL, "spawnedMobProtection", false);
+		}
+		boolean spawnedMobProtection = Boolean
+				.parseBoolean(spawnMobProtectionString);
+		if (!spawnedMobProtection)
+		{
+			return;
+		}
+		if (event.getSpawnReason().equals(SpawnReason.SPAWNER)
+				|| event.getSpawnReason().equals(SpawnReason.SPAWNER_EGG)
+				|| event.getSpawnReason().equals(SpawnReason.CUSTOM))
+			_plugin.getAPIManager()._spawnReason.put(event.getEntity()
+					.getUniqueId(), event.getSpawnReason());
 	}
 
 	@EventHandler
