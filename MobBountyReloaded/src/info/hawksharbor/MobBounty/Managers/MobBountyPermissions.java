@@ -11,9 +11,9 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 public class MobBountyPermissions
 {
 
-	private MobBountyReloaded _plugin;
-
 	private static Permission permission = null;
+
+	private MobBountyReloaded _plugin;
 	public boolean permissionsHooked;
 
 	public MobBountyPermissions(MobBountyReloaded plugin)

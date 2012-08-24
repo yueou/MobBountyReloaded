@@ -10,22 +10,6 @@ import org.bukkit.entity.Player;
 public class MobBountyMultipliers
 {
 
-	public static double getInternalMultipliers(Player player)
-	{
-		double environment = getEnvironmentMult(player);
-		double fortune = getFortuneMult(player);
-		double perm = getPermMult(player);
-		double time = getTimeMult(player);
-		double world = getWorldMult(player);
-		double timer = loginTimer(player);
-		double cap = mobCap(player);
-		double spawner = mobSpawner(player);
-		double intMult = environment *= fortune *= perm *= time *= world *= timer *= cap *= spawner;
-		MobBountyMessage.debugMessage("Internal Multipliers: "
-				+ String.valueOf(intMult));
-		return intMult;
-	}
-
 	public static double getEnvironmentMult(Player player)
 	{
 		double result = 1.0;
@@ -84,6 +68,22 @@ public class MobBountyMultipliers
 			}
 		}
 		return result;
+	}
+
+	public static double getInternalMultipliers(Player player)
+	{
+		double environment = getEnvironmentMult(player);
+		double fortune = getFortuneMult(player);
+		double perm = getPermMult(player);
+		double time = getTimeMult(player);
+		double world = getWorldMult(player);
+		double timer = loginTimer(player);
+		double cap = mobCap(player);
+		double spawner = mobSpawner(player);
+		double intMult = environment *= fortune *= perm *= time *= world *= timer *= cap *= spawner;
+		MobBountyMessage.debugMessage("Internal Multipliers: "
+				+ String.valueOf(intMult));
+		return intMult;
 	}
 
 	public static double getPermMult(Player player)

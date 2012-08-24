@@ -27,30 +27,30 @@ import org.w3c.dom.NodeList;
 public class MobBountyAPI
 {
 
+	public static MobBountyAPI instance;
+
+	private static HashMap<String, Long> loginTimer = new HashMap<String, Long>();
 	public static MobBountyAPI getInstance()
 	{
 		return instance;
 	}
-
-	private MobBountyReloaded _plugin;
-	private MobBountyConfigs _configManager;
 	private MobBountyCommands _commandManager;
-	private MobBountyLocale _localeManager;
-	private MobBountyExternals _externalsManager;
+	private MobBountyConfigs _configManager;
 	private MobBountyEcon _econManager;
-	private MobBountyPermissions _permsManager;
+	private MobBountyExternals _externalsManager;
 	private MobBountyListeners _listenerManager;
-	private int newVersion;
-	private int currentVersion;
-	private double configVersion;
-
-	private String v;
-
-	private static HashMap<String, Long> loginTimer = new HashMap<String, Long>();
-
+	private MobBountyLocale _localeManager;
+	private MobBountyPermissions _permsManager;
+	private MobBountyReloaded _plugin;
 	public Map<UUID, SpawnReason> _spawnReason;
 
-	public static MobBountyAPI instance;
+	private double configVersion;
+
+	private int currentVersion;
+
+	private int newVersion;
+
+	private String v;
 
 	public MobBountyAPI(MobBountyReloaded plugin)
 	{
@@ -120,6 +120,16 @@ public class MobBountyAPI
 		return _configManager;
 	}
 
+	public double getConfigVersion()
+	{
+		return configVersion;
+	}
+
+	public double getCurrentVersion()
+	{
+		return currentVersion;
+	}
+
 	public MobBountyEcon getEconManager()
 	{
 		return _econManager;
@@ -143,6 +153,11 @@ public class MobBountyAPI
 	public HashMap<String, Long> getLoginTimer()
 	{
 		return loginTimer;
+	}
+
+	public double getNewVersion()
+	{
+		return newVersion;
 	}
 
 	public MobBountyPermissions getPermissionsManager()
@@ -203,20 +218,5 @@ public class MobBountyAPI
 		{
 		}
 		return currentVersion;
-	}
-
-	public double getCurrentVersion()
-	{
-		return currentVersion;
-	}
-
-	public double getNewVersion()
-	{
-		return newVersion;
-	}
-
-	public double getConfigVersion()
-	{
-		return configVersion;
 	}
 }

@@ -2,32 +2,32 @@ package info.hawksharbor.MobBounty.Utils;
 
 public enum MobBountyConfFile
 {
-	GENERAL("plugins/MobBountyReloaded/General.yml"), LOCALE(
-			"plugins/MobBountyReloaded/Locale.yml"), MULTIPLIERS(
-			"plugins/MobBountyReloaded/Multiplier.yml"), REWARDS(
-			"plugins/MobBountyReloaded/Reward.yml"), KILLSTREAK(
-			"plugins/MobBountyReloaded/Killstreak.yml"), DROPS(
+	CHUNKOWN(
+	"plugins/MobBountyReloaded/External/ChunkOwn.yml"), DEITYPROTECT(
+	"plugins/MobBountyReloaded/External/DeityProtect.yml"), DROPS(
 			"plugins/MobBountyReloaded/Drops.yml"), EXPERIENCE(
-			"plugins/MobBountyReloaded/Experience.yml"), LIKEABOSS(
-			"plugins/MobBountyReloaded/External/Likeaboss.yml"), MOBARENA(
-			"plugins/MobBountyReloaded/External/MobArena.yml"), SPOUT(
-			"plugins/MobBountyReloaded/External/Spout.yml"), WORLDGUARD(
-			"plugins/MobBountyReloaded/External/WorldGuard.yml"), TOWNY(
-			"plugins/MobBountyReloaded/External/Towny.yml"), FACTIONS(
-			"plugins/MobBountyReloaded/External/Factions.yml"), MCMMO(
-			"plugins/MobBountyReloaded/External/mcMMO.yml"), HEROES(
-			"plugins/MobBountyReloaded/External/Heroes.yml"), REGIOS(
-			"plugins/MobBountyReloaded/External/Regios.yml"), GRIEFPREVENTION(
-			"plugins/MobBountyReloaded/External/GriefPrevention.yml"), DEITYPROTECT(
-			"plugins/MobBountyReloaded/External/DeityProtect.yml"), CHUNKOWN(
-			"plugins/MobBountyReloaded/External/ChunkOwn.yml"), PRECIOUSSTONES(
-			"plugins/MobBountyReloaded/External/PreciousStones.yml"), HEROSTRONGHOLD(
-			"plugins/MobBountyReloaded/External/HeroStronghold.yml"), MAZEMANIA(
-			"plugins/MobBountyReloaded/External/MazeMania.yml"), RESIDENCE(
-			"plugins/MobBountyReloaded/External/Residence.yml"), ROADPROTECTOR(
-			"plugins/MobBountyReloaded/External/RoadProtector.yml"), ULTIMATEARENA(
-			"plugins/MobBountyReloaded/External/UltimateArena.yml"), SIMPLECLANS(
-			"plugins/MobBountyReloaded/External/SimpleClans.yml");
+			"plugins/MobBountyReloaded/Experience.yml"), FACTIONS(
+			"plugins/MobBountyReloaded/External/Factions.yml"), GENERAL("plugins/MobBountyReloaded/General.yml"), GRIEFPREVENTION(
+			"plugins/MobBountyReloaded/External/GriefPrevention.yml"), HEROES(
+			"plugins/MobBountyReloaded/External/Heroes.yml"), HEROSTRONGHOLD(
+			"plugins/MobBountyReloaded/External/HeroStronghold.yml"), KILLSTREAK(
+			"plugins/MobBountyReloaded/Killstreak.yml"), LIKEABOSS(
+			"plugins/MobBountyReloaded/External/Likeaboss.yml"), LOCALE(
+					"plugins/MobBountyReloaded/Locale.yml"), MAZEMANIA(
+			"plugins/MobBountyReloaded/External/MazeMania.yml"), MCMMO(
+			"plugins/MobBountyReloaded/External/mcMMO.yml"), MOBARENA(
+			"plugins/MobBountyReloaded/External/MobArena.yml"), MULTIPLIERS(
+			"plugins/MobBountyReloaded/Multiplier.yml"), PRECIOUSSTONES(
+			"plugins/MobBountyReloaded/External/PreciousStones.yml"), REGIOS(
+			"plugins/MobBountyReloaded/External/Regios.yml"), RESIDENCE(
+			"plugins/MobBountyReloaded/External/Residence.yml"), REWARDS(
+			"plugins/MobBountyReloaded/Reward.yml"), ROADPROTECTOR(
+			"plugins/MobBountyReloaded/External/RoadProtector.yml"), SIMPLECLANS(
+			"plugins/MobBountyReloaded/External/SimpleClans.yml"), SPOUT(
+			"plugins/MobBountyReloaded/External/Spout.yml"), TOWNY(
+			"plugins/MobBountyReloaded/External/Towny.yml"), ULTIMATEARENA(
+			"plugins/MobBountyReloaded/External/UltimateArena.yml"), WORLDGUARD(
+			"plugins/MobBountyReloaded/External/WorldGuard.yml");
 
 	public static MobBountyConfFile fromName(String name)
 	{

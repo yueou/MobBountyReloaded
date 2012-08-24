@@ -7,9 +7,9 @@ import info.hawksharbor.MobBounty.Listeners.MobBountyPlayerListener;
 public class MobBountyListeners
 {
 
-	private MobBountyReloaded _plugin;
 	private MobBountyEntityListener _entityListener;
 	private MobBountyPlayerListener _playerListener;
+	private MobBountyReloaded _plugin;
 
 	public MobBountyListeners(MobBountyReloaded plugin)
 	{

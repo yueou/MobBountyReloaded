@@ -7,10 +7,529 @@ import org.bukkit.entity.Sheep;
 public class MobBountyItemInfo
 {
 
-	public int itemID;
-	public byte dataID;
-	public int quantity;
 	public double chance;
+	public byte dataID;
+	public int itemID;
+	public int quantity;
+
+	public MobBountyItemInfo(int item, byte data, int amount, int dropChance)
+	{
+		itemID = item;
+		dataID = data;
+		quantity = amount;
+		chance = dropChance;
+	}
+
+	public MobBountyItemInfo(int item, int amount, int dropChance)
+	{
+		itemID = item;
+		dataID = 0;
+		quantity = amount;
+		chance = dropChance;
+	}
+
+	public MobBountyItemInfo(String itemInfo)
+	{
+		int idValue = 0;
+		boolean setId = false;
+		byte dmgValue = 0;
+		boolean setDmg = false;
+		int amtValue = 0;
+		boolean setAmt = false;
+		int perValue = 0;
+		boolean setPer = false;
+		String[] split = itemInfo.split(";");
+		if (split.length == 1)
+		{
+			String split0 = split[0];
+			if (!split0.contains("i:"))
+			{
+				idValue = 19;
+				setId = true;
+				dmgValue = 0;
+				setDmg = true;
+				amtValue = 1;
+				setAmt = true;
+				perValue = 100;
+				setPer = true;
+			}
+			else
+			{
+				if (split0.contains("-"))
+					idValue = MobBountyUtils.handleRange(
+							split[0].replace("i:", ""), "-");
+				else
+					idValue = MobBountyUtils.getInt(split0.replace("i:", ""),
+							19);
+				setId = true;
+				dmgValue = 0;
+				setDmg = true;
+				amtValue = 1;
+				setAmt = true;
+				perValue = 100;
+				setPer = true;
+			}
+		}
+		else if (split.length == 2)
+		{
+			String split0 = split[0];
+			String split1 = split[1];
+			if (split0.contains("i:") && !setId)
+			{
+				if (split0.contains("-"))
+					idValue = MobBountyUtils.handleRange(
+							split0.replace("i:", ""), "-");
+				else
+					idValue = MobBountyUtils.getInt(split0.replace("i:", ""),
+							19);
+				setId = true;
+			}
+			else if (split0.contains("d:") && !setDmg)
+			{
+				String dmgS = split0.replace("d:", "");
+				if (dmgS.equalsIgnoreCase("C"))
+				{
+					dmgValue = 0;
+				}
+				else
+				{
+					if (dmgS.contains("-"))
+						dmgValue = (byte) MobBountyUtils.handleRange(dmgS, "-");
+					else
+						dmgValue = (byte) MobBountyUtils.getInt(dmgS, 0);
+				}
+				setDmg = true;
+			}
+			else if (split0.contains("a:") && !setAmt)
+			{
+				if (split0.contains("-"))
+					amtValue = MobBountyUtils.handleRange(
+							split0.replace("a:", ""), "-");
+				else
+					amtValue = MobBountyUtils.getInt(split0.replace("a:", ""),
+							1);
+				setAmt = true;
+			}
+			else if (split0.contains("p:") && !setPer)
+			{
+				if (split0.contains("-"))
+					perValue = MobBountyUtils.handleRange(
+							split0.replace("p:", ""), "-");
+				else
+					perValue = (int) Math.round(MobBountyUtils.getDouble(
+							split0.replace("p:", ""), 100));
+				setPer = true;
+			}
+
+			if (split1.contains("i:") && !setId)
+			{
+				if (split1.contains("-"))
+					idValue = MobBountyUtils.handleRange(
+							split1.replace("i:", ""), "-");
+				else
+					idValue = MobBountyUtils.getInt(split1.replace("i:", ""),
+							19);
+				setId = true;
+			}
+			else if (split1.contains("d:") && !setDmg)
+			{
+				String dmgS = split1.replace("d:", "");
+				if (dmgS.equalsIgnoreCase("C"))
+				{
+					dmgValue = 0;
+				}
+				else
+				{
+					if (dmgS.contains("-"))
+						dmgValue = (byte) MobBountyUtils.handleRange(dmgS, "-");
+					else
+						dmgValue = (byte) MobBountyUtils.getInt(dmgS, 0);
+				}
+				setDmg = true;
+			}
+			else if (split1.contains("a:") && !setAmt)
+			{
+				if (split1.contains("-"))
+					amtValue = MobBountyUtils.handleRange(
+							split[0].replace("i:", ""), "-");
+				else
+					amtValue = MobBountyUtils.getInt(split1.replace("a:", ""),
+							1);
+				setAmt = true;
+			}
+			else if (split1.contains("p:") && !setPer)
+			{
+				if (split[0].contains("-"))
+					perValue = MobBountyUtils.handleRange(
+							split[0].replace("p:", ""), "-");
+				else
+					perValue = (int) Math.round(MobBountyUtils.getDouble(
+							split1.replace("p:", ""), 100));
+				setPer = true;
+			}
+		}
+		else if (split.length == 3)
+		{
+			String split0 = split[0];
+			String split1 = split[1];
+			String split2 = split[2];
+			if (split0.contains("i:") && !setId)
+			{
+				if (split0.contains("-"))
+					idValue = MobBountyUtils.handleRange(
+							split0.replace("i:", ""), "-");
+				else
+					idValue = MobBountyUtils.getInt(split0.replace("i:", ""),
+							19);
+				setId = true;
+			}
+			else if (split0.contains("d:") && !setDmg)
+			{
+				String dmgS = split0.replace("d:", "");
+				if (dmgS.equalsIgnoreCase("C"))
+				{
+					dmgValue = 0;
+				}
+				else
+				{
+					if (dmgS.contains("-"))
+						dmgValue = (byte) MobBountyUtils.handleRange(dmgS, "-");
+					else
+						dmgValue = (byte) MobBountyUtils.getInt(dmgS, 0);
+				}
+				setDmg = true;
+			}
+			else if (split0.contains("a:") && !setAmt)
+			{
+				if (split0.contains("-"))
+					amtValue = MobBountyUtils.handleRange(
+							split0.replace("a:", ""), "-");
+				else
+					amtValue = MobBountyUtils.getInt(split0.replace("a:", ""),
+							1);
+				setAmt = true;
+			}
+			else if (split0.contains("p:") && !setPer)
+			{
+				if (split0.contains("-"))
+					perValue = MobBountyUtils.handleRange(
+							split0.replace("p:", ""), "-");
+				else
+					perValue = (int) Math.round(MobBountyUtils.getDouble(
+							split0.replace("p:", ""), 100));
+				setPer = true;
+			}
+
+			if (split1.contains("i:") && !setId)
+			{
+				if (split1.contains("-"))
+					idValue = MobBountyUtils.handleRange(
+							split1.replace("i:", ""), "-");
+				else
+					idValue = MobBountyUtils.getInt(split1.replace("i:", ""),
+							19);
+				setId = true;
+			}
+			else if (split1.contains("d:") && !setDmg)
+			{
+				String dmgS = split1.replace("d:", "");
+				if (dmgS.equalsIgnoreCase("C"))
+				{
+					dmgValue = 0;
+				}
+				else
+				{
+					if (dmgS.contains("-"))
+						dmgValue = (byte) MobBountyUtils.handleRange(dmgS, "-");
+					else
+						dmgValue = (byte) MobBountyUtils.getInt(dmgS, 0);
+				}
+				setDmg = true;
+			}
+			else if (split1.contains("a:") && !setAmt)
+			{
+				if (split1.contains("-"))
+					amtValue = MobBountyUtils.handleRange(
+							split0.replace("i:", ""), "-");
+				else
+					amtValue = MobBountyUtils.getInt(split1.replace("a:", ""),
+							1);
+				setAmt = true;
+			}
+			else if (split1.contains("p:") && !setPer)
+			{
+				if (split0.contains("-"))
+					perValue = MobBountyUtils.handleRange(
+							split0.replace("p:", ""), "-");
+				else
+					perValue = (int) Math.round(MobBountyUtils.getDouble(
+							split1.replace("p:", ""), 100));
+				setPer = true;
+			}
+
+			if (split2.contains("i:") && !setId)
+			{
+				if (split2.contains("-"))
+					idValue = MobBountyUtils.handleRange(
+							split2.replace("i:", ""), "-");
+				else
+					idValue = MobBountyUtils.getInt(split2.replace("i:", ""),
+							19);
+				setId = true;
+			}
+			else if (split2.contains("d:") && !setDmg)
+			{
+				String dmgS = split2.replace("d:", "");
+				if (dmgS.equalsIgnoreCase("C"))
+				{
+					dmgValue = 0;
+				}
+				else
+				{
+					if (dmgS.contains("-"))
+						dmgValue = (byte) MobBountyUtils.handleRange(dmgS, "-");
+					else
+						dmgValue = (byte) MobBountyUtils.getInt(dmgS, 0);
+				}
+				setDmg = true;
+			}
+			else if (split2.contains("a:") && !setAmt)
+			{
+				if (split2.contains("-"))
+					amtValue = MobBountyUtils.handleRange(
+							split2.replace("a:", ""), "-");
+				else
+					amtValue = MobBountyUtils.getInt(split2.replace("a:", ""),
+							1);
+				setAmt = true;
+			}
+			else if (split2.contains("p:") && !setPer)
+			{
+				if (split2.contains("-"))
+					perValue = MobBountyUtils.handleRange(
+							split2.replace("p:", ""), "-");
+				else
+					perValue = (int) Math.round(MobBountyUtils.getDouble(
+							split2.replace("p:", ""), 100));
+				setPer = true;
+			}
+		}
+		else if (split.length == 4)
+		{
+			String split0 = split[0];
+			String split1 = split[1];
+			String split2 = split[2];
+			String split3 = split[3];
+			if (split0.contains("i:") && !setId)
+			{
+				if (split0.contains("-"))
+					idValue = MobBountyUtils.handleRange(
+							split0.replace("i:", ""), "-");
+				else
+					idValue = MobBountyUtils.getInt(split0.replace("i:", ""),
+							19);
+				setId = true;
+			}
+			else if (split0.contains("d:") && !setDmg)
+			{
+				String dmgS = split0.replace("d:", "");
+				if (dmgS.equalsIgnoreCase("C"))
+				{
+					dmgValue = 0;
+				}
+				else
+				{
+					if (dmgS.contains("-"))
+						dmgValue = (byte) MobBountyUtils.handleRange(dmgS, "-");
+					else
+						dmgValue = (byte) MobBountyUtils.getInt(dmgS, 0);
+				}
+				setDmg = true;
+			}
+			else if (split0.contains("a:") && !setAmt)
+			{
+				if (split0.contains("-"))
+					amtValue = MobBountyUtils.handleRange(
+							split0.replace("a:", ""), "-");
+				else
+					amtValue = MobBountyUtils.getInt(split0.replace("a:", ""),
+							1);
+				setAmt = true;
+			}
+			else if (split0.contains("p:") && !setPer)
+			{
+				if (split0.contains("-"))
+					perValue = MobBountyUtils.handleRange(
+							split0.replace("p:", ""), "-");
+				else
+					perValue = (int) Math.round(MobBountyUtils.getDouble(
+							split0.replace("p:", ""), 100));
+				setPer = true;
+			}
+
+			if (split1.contains("i:") && !setId)
+			{
+				if (split1.contains("-"))
+					idValue = MobBountyUtils.handleRange(
+							split1.replace("i:", ""), "-");
+				else
+					idValue = MobBountyUtils.getInt(split1.replace("i:", ""),
+							19);
+				setId = true;
+			}
+			else if (split1.contains("d:") && !setDmg)
+			{
+				String dmgS = split1.replace("d:", "");
+				if (dmgS.equalsIgnoreCase("C"))
+				{
+					dmgValue = 0;
+				}
+				else
+				{
+					if (dmgS.contains("-"))
+						dmgValue = (byte) MobBountyUtils.handleRange(dmgS, "-");
+					else
+						dmgValue = (byte) MobBountyUtils.getInt(dmgS, 0);
+				}
+				setDmg = true;
+			}
+			else if (split1.contains("a:") && !setAmt)
+			{
+				if (split1.contains("-"))
+					amtValue = MobBountyUtils.handleRange(
+							split0.replace("i:", ""), "-");
+				else
+					amtValue = MobBountyUtils.getInt(split1.replace("a:", ""),
+							1);
+				setAmt = true;
+			}
+			else if (split1.contains("p:") && !setPer)
+			{
+				if (split0.contains("-"))
+					perValue = MobBountyUtils.handleRange(
+							split0.replace("p:", ""), "-");
+				else
+					perValue = (int) Math.round(MobBountyUtils.getDouble(
+							split1.replace("p:", ""), 100));
+				setPer = true;
+			}
+
+			if (split2.contains("i:") && !setId)
+			{
+				if (split2.contains("-"))
+					idValue = MobBountyUtils.handleRange(
+							split2.replace("i:", ""), "-");
+				else
+					idValue = MobBountyUtils.getInt(split2.replace("i:", ""),
+							19);
+				setId = true;
+			}
+			else if (split2.contains("d:") && !setDmg)
+			{
+				String dmgS = split2.replace("d:", "");
+				if (dmgS.equalsIgnoreCase("C"))
+				{
+					dmgValue = 0;
+				}
+				else
+				{
+					if (dmgS.contains("-"))
+						dmgValue = (byte) MobBountyUtils.handleRange(dmgS, "-");
+					else
+						dmgValue = (byte) MobBountyUtils.getInt(dmgS, 0);
+				}
+				setDmg = true;
+			}
+			else if (split2.contains("a:") && !setAmt)
+			{
+				if (split2.contains("-"))
+					amtValue = MobBountyUtils.handleRange(
+							split2.replace("a:", ""), "-");
+				else
+					amtValue = MobBountyUtils.getInt(split2.replace("a:", ""),
+							1);
+				setAmt = true;
+			}
+			else if (split2.contains("p:") && !setPer)
+			{
+				if (split2.contains("-"))
+					perValue = MobBountyUtils.handleRange(
+							split2.replace("p:", ""), "-");
+				else
+					perValue = (int) Math.round(MobBountyUtils.getDouble(
+							split2.replace("p:", ""), 100));
+				setPer = true;
+			}
+
+			if (split3.contains("i:") && !setId)
+			{
+				if (split3.contains("-"))
+					idValue = MobBountyUtils.handleRange(
+							split3.replace("i:", ""), "-");
+				else
+					idValue = MobBountyUtils.getInt(split3.replace("i:", ""),
+							19);
+				setId = true;
+			}
+			else if (split3.contains("d:") && !setDmg)
+			{
+				String dmgS = split3.replace("d:", "");
+				if (dmgS.equalsIgnoreCase("C"))
+				{
+					dmgValue = 0;
+				}
+				else
+				{
+					if (dmgS.contains("-"))
+						dmgValue = (byte) MobBountyUtils.handleRange(dmgS, "-");
+					else
+						dmgValue = (byte) MobBountyUtils.getInt(dmgS, 0);
+				}
+				setDmg = true;
+			}
+			else if (split3.contains("a:") && !setAmt)
+			{
+				if (split3.contains("-"))
+					amtValue = MobBountyUtils.handleRange(
+							split3.replace("i:", ""), "-");
+				else
+					amtValue = MobBountyUtils.getInt(split3.replace("a:", ""),
+							1);
+				setAmt = true;
+			}
+			else if (split3.contains("p:") && !setPer)
+			{
+				if (split3.contains("-"))
+					perValue = MobBountyUtils.handleRange(
+							split3.replace("p:", ""), "-");
+				else
+					perValue = (int) Math.round(MobBountyUtils.getDouble(
+							split3.replace("p:", ""), 100));
+				setPer = true;
+			}
+		}
+		if (setId = false)
+		{
+			idValue = 0;
+		}
+		if (setDmg = false)
+		{
+			dmgValue = 0;
+		}
+		if (setAmt = false)
+		{
+			if (amtValue == 0)
+				amtValue = 1;
+		}
+		if (setPer = false)
+		{
+			perValue = 100;
+		}
+		itemID = idValue;
+		dataID = dmgValue;
+		quantity = amtValue;
+		chance = perValue;
+	}
 
 	public MobBountyItemInfo(String itemInfo, LivingEntity entity)
 	{
@@ -553,557 +1072,6 @@ public class MobBountyItemInfo
 		chance = perValue;
 	}
 
-	public MobBountyItemInfo(String itemInfo)
-	{
-		int idValue = 0;
-		boolean setId = false;
-		byte dmgValue = 0;
-		boolean setDmg = false;
-		int amtValue = 0;
-		boolean setAmt = false;
-		int perValue = 0;
-		boolean setPer = false;
-		String[] split = itemInfo.split(";");
-		if (split.length == 1)
-		{
-			String split0 = split[0];
-			if (!split0.contains("i:"))
-			{
-				idValue = 19;
-				setId = true;
-				dmgValue = 0;
-				setDmg = true;
-				amtValue = 1;
-				setAmt = true;
-				perValue = 100;
-				setPer = true;
-			}
-			else
-			{
-				if (split0.contains("-"))
-					idValue = MobBountyUtils.handleRange(
-							split[0].replace("i:", ""), "-");
-				else
-					idValue = MobBountyUtils.getInt(split0.replace("i:", ""),
-							19);
-				setId = true;
-				dmgValue = 0;
-				setDmg = true;
-				amtValue = 1;
-				setAmt = true;
-				perValue = 100;
-				setPer = true;
-			}
-		}
-		else if (split.length == 2)
-		{
-			String split0 = split[0];
-			String split1 = split[1];
-			if (split0.contains("i:") && !setId)
-			{
-				if (split0.contains("-"))
-					idValue = MobBountyUtils.handleRange(
-							split0.replace("i:", ""), "-");
-				else
-					idValue = MobBountyUtils.getInt(split0.replace("i:", ""),
-							19);
-				setId = true;
-			}
-			else if (split0.contains("d:") && !setDmg)
-			{
-				String dmgS = split0.replace("d:", "");
-				if (dmgS.equalsIgnoreCase("C"))
-				{
-					dmgValue = 0;
-				}
-				else
-				{
-					if (dmgS.contains("-"))
-						dmgValue = (byte) MobBountyUtils.handleRange(dmgS, "-");
-					else
-						dmgValue = (byte) MobBountyUtils.getInt(dmgS, 0);
-				}
-				setDmg = true;
-			}
-			else if (split0.contains("a:") && !setAmt)
-			{
-				if (split0.contains("-"))
-					amtValue = MobBountyUtils.handleRange(
-							split0.replace("a:", ""), "-");
-				else
-					amtValue = MobBountyUtils.getInt(split0.replace("a:", ""),
-							1);
-				setAmt = true;
-			}
-			else if (split0.contains("p:") && !setPer)
-			{
-				if (split0.contains("-"))
-					perValue = MobBountyUtils.handleRange(
-							split0.replace("p:", ""), "-");
-				else
-					perValue = (int) Math.round(MobBountyUtils.getDouble(
-							split0.replace("p:", ""), 100));
-				setPer = true;
-			}
-
-			if (split1.contains("i:") && !setId)
-			{
-				if (split1.contains("-"))
-					idValue = MobBountyUtils.handleRange(
-							split1.replace("i:", ""), "-");
-				else
-					idValue = MobBountyUtils.getInt(split1.replace("i:", ""),
-							19);
-				setId = true;
-			}
-			else if (split1.contains("d:") && !setDmg)
-			{
-				String dmgS = split1.replace("d:", "");
-				if (dmgS.equalsIgnoreCase("C"))
-				{
-					dmgValue = 0;
-				}
-				else
-				{
-					if (dmgS.contains("-"))
-						dmgValue = (byte) MobBountyUtils.handleRange(dmgS, "-");
-					else
-						dmgValue = (byte) MobBountyUtils.getInt(dmgS, 0);
-				}
-				setDmg = true;
-			}
-			else if (split1.contains("a:") && !setAmt)
-			{
-				if (split1.contains("-"))
-					amtValue = MobBountyUtils.handleRange(
-							split[0].replace("i:", ""), "-");
-				else
-					amtValue = MobBountyUtils.getInt(split1.replace("a:", ""),
-							1);
-				setAmt = true;
-			}
-			else if (split1.contains("p:") && !setPer)
-			{
-				if (split[0].contains("-"))
-					perValue = MobBountyUtils.handleRange(
-							split[0].replace("p:", ""), "-");
-				else
-					perValue = (int) Math.round(MobBountyUtils.getDouble(
-							split1.replace("p:", ""), 100));
-				setPer = true;
-			}
-		}
-		else if (split.length == 3)
-		{
-			String split0 = split[0];
-			String split1 = split[1];
-			String split2 = split[2];
-			if (split0.contains("i:") && !setId)
-			{
-				if (split0.contains("-"))
-					idValue = MobBountyUtils.handleRange(
-							split0.replace("i:", ""), "-");
-				else
-					idValue = MobBountyUtils.getInt(split0.replace("i:", ""),
-							19);
-				setId = true;
-			}
-			else if (split0.contains("d:") && !setDmg)
-			{
-				String dmgS = split0.replace("d:", "");
-				if (dmgS.equalsIgnoreCase("C"))
-				{
-					dmgValue = 0;
-				}
-				else
-				{
-					if (dmgS.contains("-"))
-						dmgValue = (byte) MobBountyUtils.handleRange(dmgS, "-");
-					else
-						dmgValue = (byte) MobBountyUtils.getInt(dmgS, 0);
-				}
-				setDmg = true;
-			}
-			else if (split0.contains("a:") && !setAmt)
-			{
-				if (split0.contains("-"))
-					amtValue = MobBountyUtils.handleRange(
-							split0.replace("a:", ""), "-");
-				else
-					amtValue = MobBountyUtils.getInt(split0.replace("a:", ""),
-							1);
-				setAmt = true;
-			}
-			else if (split0.contains("p:") && !setPer)
-			{
-				if (split0.contains("-"))
-					perValue = MobBountyUtils.handleRange(
-							split0.replace("p:", ""), "-");
-				else
-					perValue = (int) Math.round(MobBountyUtils.getDouble(
-							split0.replace("p:", ""), 100));
-				setPer = true;
-			}
-
-			if (split1.contains("i:") && !setId)
-			{
-				if (split1.contains("-"))
-					idValue = MobBountyUtils.handleRange(
-							split1.replace("i:", ""), "-");
-				else
-					idValue = MobBountyUtils.getInt(split1.replace("i:", ""),
-							19);
-				setId = true;
-			}
-			else if (split1.contains("d:") && !setDmg)
-			{
-				String dmgS = split1.replace("d:", "");
-				if (dmgS.equalsIgnoreCase("C"))
-				{
-					dmgValue = 0;
-				}
-				else
-				{
-					if (dmgS.contains("-"))
-						dmgValue = (byte) MobBountyUtils.handleRange(dmgS, "-");
-					else
-						dmgValue = (byte) MobBountyUtils.getInt(dmgS, 0);
-				}
-				setDmg = true;
-			}
-			else if (split1.contains("a:") && !setAmt)
-			{
-				if (split1.contains("-"))
-					amtValue = MobBountyUtils.handleRange(
-							split0.replace("i:", ""), "-");
-				else
-					amtValue = MobBountyUtils.getInt(split1.replace("a:", ""),
-							1);
-				setAmt = true;
-			}
-			else if (split1.contains("p:") && !setPer)
-			{
-				if (split0.contains("-"))
-					perValue = MobBountyUtils.handleRange(
-							split0.replace("p:", ""), "-");
-				else
-					perValue = (int) Math.round(MobBountyUtils.getDouble(
-							split1.replace("p:", ""), 100));
-				setPer = true;
-			}
-
-			if (split2.contains("i:") && !setId)
-			{
-				if (split2.contains("-"))
-					idValue = MobBountyUtils.handleRange(
-							split2.replace("i:", ""), "-");
-				else
-					idValue = MobBountyUtils.getInt(split2.replace("i:", ""),
-							19);
-				setId = true;
-			}
-			else if (split2.contains("d:") && !setDmg)
-			{
-				String dmgS = split2.replace("d:", "");
-				if (dmgS.equalsIgnoreCase("C"))
-				{
-					dmgValue = 0;
-				}
-				else
-				{
-					if (dmgS.contains("-"))
-						dmgValue = (byte) MobBountyUtils.handleRange(dmgS, "-");
-					else
-						dmgValue = (byte) MobBountyUtils.getInt(dmgS, 0);
-				}
-				setDmg = true;
-			}
-			else if (split2.contains("a:") && !setAmt)
-			{
-				if (split2.contains("-"))
-					amtValue = MobBountyUtils.handleRange(
-							split2.replace("a:", ""), "-");
-				else
-					amtValue = MobBountyUtils.getInt(split2.replace("a:", ""),
-							1);
-				setAmt = true;
-			}
-			else if (split2.contains("p:") && !setPer)
-			{
-				if (split2.contains("-"))
-					perValue = MobBountyUtils.handleRange(
-							split2.replace("p:", ""), "-");
-				else
-					perValue = (int) Math.round(MobBountyUtils.getDouble(
-							split2.replace("p:", ""), 100));
-				setPer = true;
-			}
-		}
-		else if (split.length == 4)
-		{
-			String split0 = split[0];
-			String split1 = split[1];
-			String split2 = split[2];
-			String split3 = split[3];
-			if (split0.contains("i:") && !setId)
-			{
-				if (split0.contains("-"))
-					idValue = MobBountyUtils.handleRange(
-							split0.replace("i:", ""), "-");
-				else
-					idValue = MobBountyUtils.getInt(split0.replace("i:", ""),
-							19);
-				setId = true;
-			}
-			else if (split0.contains("d:") && !setDmg)
-			{
-				String dmgS = split0.replace("d:", "");
-				if (dmgS.equalsIgnoreCase("C"))
-				{
-					dmgValue = 0;
-				}
-				else
-				{
-					if (dmgS.contains("-"))
-						dmgValue = (byte) MobBountyUtils.handleRange(dmgS, "-");
-					else
-						dmgValue = (byte) MobBountyUtils.getInt(dmgS, 0);
-				}
-				setDmg = true;
-			}
-			else if (split0.contains("a:") && !setAmt)
-			{
-				if (split0.contains("-"))
-					amtValue = MobBountyUtils.handleRange(
-							split0.replace("a:", ""), "-");
-				else
-					amtValue = MobBountyUtils.getInt(split0.replace("a:", ""),
-							1);
-				setAmt = true;
-			}
-			else if (split0.contains("p:") && !setPer)
-			{
-				if (split0.contains("-"))
-					perValue = MobBountyUtils.handleRange(
-							split0.replace("p:", ""), "-");
-				else
-					perValue = (int) Math.round(MobBountyUtils.getDouble(
-							split0.replace("p:", ""), 100));
-				setPer = true;
-			}
-
-			if (split1.contains("i:") && !setId)
-			{
-				if (split1.contains("-"))
-					idValue = MobBountyUtils.handleRange(
-							split1.replace("i:", ""), "-");
-				else
-					idValue = MobBountyUtils.getInt(split1.replace("i:", ""),
-							19);
-				setId = true;
-			}
-			else if (split1.contains("d:") && !setDmg)
-			{
-				String dmgS = split1.replace("d:", "");
-				if (dmgS.equalsIgnoreCase("C"))
-				{
-					dmgValue = 0;
-				}
-				else
-				{
-					if (dmgS.contains("-"))
-						dmgValue = (byte) MobBountyUtils.handleRange(dmgS, "-");
-					else
-						dmgValue = (byte) MobBountyUtils.getInt(dmgS, 0);
-				}
-				setDmg = true;
-			}
-			else if (split1.contains("a:") && !setAmt)
-			{
-				if (split1.contains("-"))
-					amtValue = MobBountyUtils.handleRange(
-							split0.replace("i:", ""), "-");
-				else
-					amtValue = MobBountyUtils.getInt(split1.replace("a:", ""),
-							1);
-				setAmt = true;
-			}
-			else if (split1.contains("p:") && !setPer)
-			{
-				if (split0.contains("-"))
-					perValue = MobBountyUtils.handleRange(
-							split0.replace("p:", ""), "-");
-				else
-					perValue = (int) Math.round(MobBountyUtils.getDouble(
-							split1.replace("p:", ""), 100));
-				setPer = true;
-			}
-
-			if (split2.contains("i:") && !setId)
-			{
-				if (split2.contains("-"))
-					idValue = MobBountyUtils.handleRange(
-							split2.replace("i:", ""), "-");
-				else
-					idValue = MobBountyUtils.getInt(split2.replace("i:", ""),
-							19);
-				setId = true;
-			}
-			else if (split2.contains("d:") && !setDmg)
-			{
-				String dmgS = split2.replace("d:", "");
-				if (dmgS.equalsIgnoreCase("C"))
-				{
-					dmgValue = 0;
-				}
-				else
-				{
-					if (dmgS.contains("-"))
-						dmgValue = (byte) MobBountyUtils.handleRange(dmgS, "-");
-					else
-						dmgValue = (byte) MobBountyUtils.getInt(dmgS, 0);
-				}
-				setDmg = true;
-			}
-			else if (split2.contains("a:") && !setAmt)
-			{
-				if (split2.contains("-"))
-					amtValue = MobBountyUtils.handleRange(
-							split2.replace("a:", ""), "-");
-				else
-					amtValue = MobBountyUtils.getInt(split2.replace("a:", ""),
-							1);
-				setAmt = true;
-			}
-			else if (split2.contains("p:") && !setPer)
-			{
-				if (split2.contains("-"))
-					perValue = MobBountyUtils.handleRange(
-							split2.replace("p:", ""), "-");
-				else
-					perValue = (int) Math.round(MobBountyUtils.getDouble(
-							split2.replace("p:", ""), 100));
-				setPer = true;
-			}
-
-			if (split3.contains("i:") && !setId)
-			{
-				if (split3.contains("-"))
-					idValue = MobBountyUtils.handleRange(
-							split3.replace("i:", ""), "-");
-				else
-					idValue = MobBountyUtils.getInt(split3.replace("i:", ""),
-							19);
-				setId = true;
-			}
-			else if (split3.contains("d:") && !setDmg)
-			{
-				String dmgS = split3.replace("d:", "");
-				if (dmgS.equalsIgnoreCase("C"))
-				{
-					dmgValue = 0;
-				}
-				else
-				{
-					if (dmgS.contains("-"))
-						dmgValue = (byte) MobBountyUtils.handleRange(dmgS, "-");
-					else
-						dmgValue = (byte) MobBountyUtils.getInt(dmgS, 0);
-				}
-				setDmg = true;
-			}
-			else if (split3.contains("a:") && !setAmt)
-			{
-				if (split3.contains("-"))
-					amtValue = MobBountyUtils.handleRange(
-							split3.replace("i:", ""), "-");
-				else
-					amtValue = MobBountyUtils.getInt(split3.replace("a:", ""),
-							1);
-				setAmt = true;
-			}
-			else if (split3.contains("p:") && !setPer)
-			{
-				if (split3.contains("-"))
-					perValue = MobBountyUtils.handleRange(
-							split3.replace("p:", ""), "-");
-				else
-					perValue = (int) Math.round(MobBountyUtils.getDouble(
-							split3.replace("p:", ""), 100));
-				setPer = true;
-			}
-		}
-		if (setId = false)
-		{
-			idValue = 0;
-		}
-		if (setDmg = false)
-		{
-			dmgValue = 0;
-		}
-		if (setAmt = false)
-		{
-			if (amtValue == 0)
-				amtValue = 1;
-		}
-		if (setPer = false)
-		{
-			perValue = 100;
-		}
-		itemID = idValue;
-		dataID = dmgValue;
-		quantity = amtValue;
-		chance = perValue;
-	}
-
-	public MobBountyItemInfo(int item, int amount, int dropChance)
-	{
-		itemID = item;
-		dataID = 0;
-		quantity = amount;
-		chance = dropChance;
-	}
-
-	public MobBountyItemInfo(int item, byte data, int amount, int dropChance)
-	{
-		itemID = item;
-		dataID = data;
-		quantity = amount;
-		chance = dropChance;
-	}
-
-	public boolean isValid()
-	{
-		return (itemID != -1 && dataID != -1 && quantity != -1 && chance != -1);
-	}
-
-	public String toString()
-	{
-		return "i:" + String.valueOf(itemID) + ";d:" + String.valueOf(dataID)
-				+ ";a:" + String.valueOf(quantity) + ";p:"
-				+ String.valueOf(chance);
-	}
-
-	public void invalidate()
-	{
-		itemID = -1;
-		dataID = -1;
-		quantity = -1;
-		chance = -1;
-	}
-
-	public boolean isItem(int item)
-	{
-		if (item >= 0 && item <= 124)
-			return true;
-		else if (item >= 256 && item <= 385)
-			return true;
-		else if (item >= 2256 && item <= 2266)
-			return true;
-
-		return false;
-	}
-
 	public boolean hasData(int item, int data)
 	{
 		if (data == 0)
@@ -1251,6 +1219,38 @@ public class MobBountyItemInfo
 		}
 
 		return false;
+	}
+
+	public void invalidate()
+	{
+		itemID = -1;
+		dataID = -1;
+		quantity = -1;
+		chance = -1;
+	}
+
+	public boolean isItem(int item)
+	{
+		if (item >= 0 && item <= 124)
+			return true;
+		else if (item >= 256 && item <= 385)
+			return true;
+		else if (item >= 2256 && item <= 2266)
+			return true;
+
+		return false;
+	}
+
+	public boolean isValid()
+	{
+		return (itemID != -1 && dataID != -1 && quantity != -1 && chance != -1);
+	}
+
+	public String toString()
+	{
+		return "i:" + String.valueOf(itemID) + ";d:" + String.valueOf(dataID)
+				+ ";a:" + String.valueOf(quantity) + ";p:"
+				+ String.valueOf(chance);
 	}
 
 }

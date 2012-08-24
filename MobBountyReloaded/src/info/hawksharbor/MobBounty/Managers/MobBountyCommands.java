@@ -21,22 +21,22 @@ import info.hawksharbor.MobBounty.Commands.MobBounty;
 public class MobBountyCommands
 {
 
-	private final MobBounty _mobBounty;
+	private final MBCheckDrop _mbCheckDrop;
+	private final MBCheckExperience _mbCheckXP;
 	private final MBEnvMulti _mbEnvMulti;
 	private final MBGeneral _mbGeneral;
+	private final MBGroupMulti _mbGroupMulti;
 	private final MBLoad _mbLoad;
+	private final MBModifyDrop _mbModifyDrop;
+	private final MBWorldModifyDrop _mbModifyWorldDrop;
 	private final MBReward _mbReward;
 	private final MBSave _mbSave;
 	private final MBTimeMulti _mbTimeMulti;
-	private final MBWorldReward _mbWorldReward;
 	private final MBWorldMulti _mbWorldMulti;
-	private final MBGroupMulti _mbGroupMulti;
-	private final MBWorldModifyDrop _mbModifyWorldDrop;
-	private final MBCheckDrop _mbCheckDrop;
-	private final MBModifyDrop _mbModifyDrop;
-	private final MBCheckExperience _mbCheckXP;
-	private final MBExperience _mbXP;
+	private final MBWorldReward _mbWorldReward;
 	private final MBWorldExperience _mbWXP;
+	private final MBExperience _mbXP;
+	private final MobBounty _mobBounty;
 
 	public MobBountyCommands(MobBountyReloaded plugin)
 	{

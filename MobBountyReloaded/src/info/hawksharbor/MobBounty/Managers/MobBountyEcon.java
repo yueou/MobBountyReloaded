@@ -35,10 +35,10 @@ import com.massivecraft.factions.FPlayers;
 public class MobBountyEcon
 {
 
-	private static MobBountyReloaded _plugin;
-	private static Economy econ = null;
-
 	public static Map<String, MobBountyPlayerKillData> _playerData;
+	private static MobBountyReloaded _plugin;
+
+	private static Economy econ = null;
 
 	private static boolean fineAccount(String accountName, double amount)
 	{

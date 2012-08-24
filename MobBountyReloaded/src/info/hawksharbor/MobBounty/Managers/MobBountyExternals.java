@@ -65,33 +65,33 @@ public class MobBountyExternals
 
 	private MobBountyReloaded _plugin;
 
-	private Towny towny;
+	private ChunkOwn chunkOwn;
+	private MobBountyConfigs configs;
+	private DeityProtect deityProtect;
 	private P factions_17;
-	private mcMMO mcmmo;
+	private GriefPrevention griefPrevention;
 	private Heroes heroes;
-	private WorldGuardPlugin worldguard;
+	private HeroStronghold heroStronghold;
+	private ArrayList<String> hooks;
+	private Likeaboss likeaboss;
+	private MazeMania mazeMania;
+	private mcMMO mcmmo;
+	private MobArena mobArena;
+	private MobArenaHandler mobArenaHandler;
+	private MobBountyPermissions perms;
+	private PluginManager pm;
+	private PreciousStones preciousStones;
 	private Regios regios;
 	private RegiosAPI regiosAPI;
-	private Likeaboss likeaboss;
-	private MobArenaHandler mobArenaHandler;
-	private MobArena mobArena;
-	private Spout spout;
-	private GriefPrevention griefPrevention;
-	private DeityProtect deityProtect;
-	private ChunkOwn chunkOwn;
-	private PreciousStones preciousStones;
-	private RoadProtector roadProtector;
-	private MazeMania mazeMania;
-	private UltimateArena ultimateArena;
-	private HeroStronghold heroStronghold;
 	private Residence residence;
+	private RoadProtector roadProtector;
 	private SimpleClans simpleClans;
 
-	private MobBountyConfigs configs;
-	private PluginManager pm;
-	private MobBountyPermissions perms;
+	private Spout spout;
+	private Towny towny;
+	private UltimateArena ultimateArena;
 
-	private ArrayList<String> hooks;
+	private WorldGuardPlugin worldguard;
 
 	public MobBountyExternals(MobBountyReloaded plugin)
 	{

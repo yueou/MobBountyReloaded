@@ -36,11 +36,6 @@ public class MobBountyMessage
 		}
 	}
 
-	public static void logWarningToConsole(String message)
-	{
-		MobBountyReloaded._logger.warning("[MobBountyReloaded] " + message);
-	}
-
 	public static void logSevereToConsole(String message)
 	{
 		MobBountyReloaded._logger.severe("[MobBountyReloaded] " + message);
@@ -49,6 +44,11 @@ public class MobBountyMessage
 	public static void logToConsole(String message)
 	{
 		MobBountyReloaded._logger.info("[MobBountyReloaded] " + message);
+	}
+
+	public static void logWarningToConsole(String message)
+	{
+		MobBountyReloaded._logger.warning("[MobBountyReloaded] " + message);
 	}
 
 	public static void sendMessage(CommandSender sender, String message)

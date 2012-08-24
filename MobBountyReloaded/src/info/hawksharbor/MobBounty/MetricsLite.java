@@ -23,19 +23,9 @@ public class MetricsLite
 {
 
 	/**
-	 * The current revision number
-	 */
-	private final static int REVISION = 5;
-
-	/**
 	 * The base url of the metrics domain
 	 */
 	private static final String BASE_URL = "http://mcstats.org";
-
-	/**
-	 * The url used to report a server's status
-	 */
-	private static final String REPORT_URL = "/report/%s";
 
 	/**
 	 * The file where guid and opt out is stored in
@@ -46,6 +36,16 @@ public class MetricsLite
 	 * Interval of time to ping (in minutes)
 	 */
 	private final static int PING_INTERVAL = 10;
+
+	/**
+	 * The url used to report a server's status
+	 */
+	private static final String REPORT_URL = "/report/%s";
+
+	/**
+	 * The current revision number
+	 */
+	private final static int REVISION = 5;
 
 	/**
 	 * Encode text as UTF-8
@@ -84,11 +84,6 @@ public class MetricsLite
 	}
 
 	/**
-	 * The plugin this metrics submits for
-	 */
-	private final Plugin plugin;
-
-	/**
 	 * The plugin configuration file
 	 */
 	private final YamlConfiguration configuration;
@@ -107,6 +102,11 @@ public class MetricsLite
 	 * Lock for synchronization
 	 */
 	private final Object optOutLock = new Object();
+
+	/**
+	 * The plugin this metrics submits for
+	 */
+	private final Plugin plugin;
 
 	/**
 	 * Id of the scheduled task

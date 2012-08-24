@@ -8,9 +8,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class MobBountyReloaded extends JavaPlugin
 {
-	public static final Logger _logger = Logger.getLogger("Minecraft");
-
 	private static MobBountyAPI _apiManager;
+
+	public static final Logger _logger = Logger.getLogger("Minecraft");
 
 	/**
 	 * Gets the plugin's API

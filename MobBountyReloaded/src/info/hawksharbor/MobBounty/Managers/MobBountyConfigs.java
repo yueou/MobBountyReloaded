@@ -21,10 +21,10 @@ import org.bukkit.entity.LivingEntity;
 public class MobBountyConfigs
 {
 
+	private final HashMap<MobBountyConfFile, YamlConfiguration> _configurations;
+
 	@SuppressWarnings("unused")
 	private final MobBountyReloaded _plugin;
-
-	private final HashMap<MobBountyConfFile, YamlConfiguration> _configurations;
 	private final HashMap<String, HashMap<MobBountyCreature, ArrayList<MobBountyItemInfo>>> _worldDropTable;
 
 	public MobBountyConfigs(MobBountyReloaded plugin)
@@ -802,6 +802,39 @@ public class MobBountyConfigs
 	}
 
 	/**
+	 * Gets drop information for creature
+	 * 
+	 * @param String
+	 *            World to get it from
+	 * @param MobBountyCreature
+	 *            Creature type to get
+	 * @param LivingEntity
+	 *            Entity that drops are being gotten for
+	 * @return
+	 */
+	public ArrayList<MobBountyItemInfo> getDrop(String worldName,
+			MobBountyCreature creature, LivingEntity entity)
+	{
+		HashMap<MobBountyCreature, ArrayList<MobBountyItemInfo>> dropTable = _worldDropTable
+				.get(worldName);
+
+		if (dropTable == null)
+		{
+			if (propertyExists(MobBountyConfFile.DROPS, creature.getName()
+					+ "." + worldName + ".drops"))
+				dropTable = loadWorld(worldName, entity);
+			else
+				dropTable = loadWorld("Default", entity);
+		}
+
+		ArrayList<MobBountyItemInfo> drop = dropTable.get(creature);
+
+		if (drop == null || drop.size() == 0)
+			return null;
+		return drop;
+	}
+
+	/**
 	 * Gets a value for path in file
 	 * 
 	 * @param MobBountyConfFile
@@ -881,6 +914,34 @@ public class MobBountyConfigs
 
 	}
 
+	private HashMap<MobBountyCreature, ArrayList<MobBountyItemInfo>> loadWorld(
+			String worldName, LivingEntity entity)
+	{
+		HashMap<MobBountyCreature, ArrayList<MobBountyItemInfo>> dropTable = new HashMap<MobBountyCreature, ArrayList<MobBountyItemInfo>>();
+
+		for (MobBountyCreature creature : MobBountyCreature.values())
+		{
+			ArrayList<String> creatureDropData = (ArrayList<String>) getPropertyList(
+					MobBountyConfFile.DROPS, creature.getName() + "."
+							+ worldName + ".drops");
+			ArrayList<MobBountyItemInfo> creatureDrop = new ArrayList<MobBountyItemInfo>();
+			Iterator<String> creatureDropDataIterator = creatureDropData
+					.iterator();
+
+			while (creatureDropDataIterator.hasNext())
+			{
+				creatureDrop.add(new MobBountyItemInfo(creatureDropDataIterator
+						.next(), entity));
+			}
+
+			dropTable.put(creature, creatureDrop);
+		}
+
+		_worldDropTable.put(worldName, dropTable);
+
+		return dropTable;
+	}
+
 	/**
 	 * Checks if path exists in file
 	 * 
@@ -944,6 +1005,38 @@ public class MobBountyConfigs
 		}
 
 		MobBountyReloaded._logger.info("[MobBountyReloaded] Config saved.");
+	}
+
+	/**
+	 * Sets a creature's drop in world
+	 * 
+	 * @param String
+	 *            Name of world to set in
+	 * @param MobBountyCreature
+	 *            Creature type to set
+	 * @param String
+	 *            [] Array of strings to set as drops
+	 * @param LivingEntity
+	 *            Entity of drop change
+	 */
+	public void setDrop(String worldName, MobBountyCreature creature,
+			String[] items, LivingEntity entity)
+	{
+		HashMap<MobBountyCreature, ArrayList<MobBountyItemInfo>> dropTable = new HashMap<MobBountyCreature, ArrayList<MobBountyItemInfo>>();
+		ArrayList<String> itemDropsData = new ArrayList<String>();
+		ArrayList<MobBountyItemInfo> itemDrops = new ArrayList<MobBountyItemInfo>();
+
+		for (int i = 0; i < items.length; i++)
+		{
+			itemDrops.add(new MobBountyItemInfo(items[i], entity));
+			itemDropsData.add(items[i]);
+		}
+
+		dropTable.put(creature, itemDrops);
+
+		setPropertyList(MobBountyConfFile.DROPS, creature.getName() + "."
+				+ worldName + ".drops", itemDropsData);
+		_worldDropTable.put(worldName, dropTable);
 	}
 
 	/**
@@ -1078,38 +1171,6 @@ public class MobBountyConfigs
 	 *            File to set in
 	 * @param String
 	 *            Path to set
-	 * @param List
-	 *            <String> List of values to set
-	 * @return boolean If completed
-	 */
-	public boolean setPropertyList(MobBountyConfFile file, String path,
-			List<String> list)
-	{
-		FileConfiguration conf = _configurations.get(file);
-
-		if (conf != null)
-		{
-			conf.set(path, list);
-			try
-			{
-				conf.save(new File(file.getPath()));
-			}
-			catch (IOException e)
-			{
-			}
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Sets path to list of values in file
-	 * 
-	 * @param MobBountyConfFile
-	 *            File to set in
-	 * @param String
-	 *            Path to set
 	 * @param ArrayList
 	 *            <String> List of values
 	 * @return boolean If completed
@@ -1136,95 +1197,34 @@ public class MobBountyConfigs
 	}
 
 	/**
-	 * Sets a creature's drop in world
+	 * Sets path to list of values in file
 	 * 
+	 * @param MobBountyConfFile
+	 *            File to set in
 	 * @param String
-	 *            Name of world to set in
-	 * @param MobBountyCreature
-	 *            Creature type to set
-	 * @param String
-	 *            [] Array of strings to set as drops
-	 * @param LivingEntity
-	 *            Entity of drop change
+	 *            Path to set
+	 * @param List
+	 *            <String> List of values to set
+	 * @return boolean If completed
 	 */
-	public void setDrop(String worldName, MobBountyCreature creature,
-			String[] items, LivingEntity entity)
+	public boolean setPropertyList(MobBountyConfFile file, String path,
+			List<String> list)
 	{
-		HashMap<MobBountyCreature, ArrayList<MobBountyItemInfo>> dropTable = new HashMap<MobBountyCreature, ArrayList<MobBountyItemInfo>>();
-		ArrayList<String> itemDropsData = new ArrayList<String>();
-		ArrayList<MobBountyItemInfo> itemDrops = new ArrayList<MobBountyItemInfo>();
+		FileConfiguration conf = _configurations.get(file);
 
-		for (int i = 0; i < items.length; i++)
+		if (conf != null)
 		{
-			itemDrops.add(new MobBountyItemInfo(items[i], entity));
-			itemDropsData.add(items[i]);
-		}
-
-		dropTable.put(creature, itemDrops);
-
-		setPropertyList(MobBountyConfFile.DROPS, creature.getName() + "."
-				+ worldName + ".drops", itemDropsData);
-		_worldDropTable.put(worldName, dropTable);
-	}
-
-	private HashMap<MobBountyCreature, ArrayList<MobBountyItemInfo>> loadWorld(
-			String worldName, LivingEntity entity)
-	{
-		HashMap<MobBountyCreature, ArrayList<MobBountyItemInfo>> dropTable = new HashMap<MobBountyCreature, ArrayList<MobBountyItemInfo>>();
-
-		for (MobBountyCreature creature : MobBountyCreature.values())
-		{
-			ArrayList<String> creatureDropData = (ArrayList<String>) getPropertyList(
-					MobBountyConfFile.DROPS, creature.getName() + "."
-							+ worldName + ".drops");
-			ArrayList<MobBountyItemInfo> creatureDrop = new ArrayList<MobBountyItemInfo>();
-			Iterator<String> creatureDropDataIterator = creatureDropData
-					.iterator();
-
-			while (creatureDropDataIterator.hasNext())
+			conf.set(path, list);
+			try
 			{
-				creatureDrop.add(new MobBountyItemInfo(creatureDropDataIterator
-						.next(), entity));
+				conf.save(new File(file.getPath()));
 			}
-
-			dropTable.put(creature, creatureDrop);
+			catch (IOException e)
+			{
+			}
+			return true;
 		}
 
-		_worldDropTable.put(worldName, dropTable);
-
-		return dropTable;
-	}
-
-	/**
-	 * Gets drop information for creature
-	 * 
-	 * @param String
-	 *            World to get it from
-	 * @param MobBountyCreature
-	 *            Creature type to get
-	 * @param LivingEntity
-	 *            Entity that drops are being gotten for
-	 * @return
-	 */
-	public ArrayList<MobBountyItemInfo> getDrop(String worldName,
-			MobBountyCreature creature, LivingEntity entity)
-	{
-		HashMap<MobBountyCreature, ArrayList<MobBountyItemInfo>> dropTable = _worldDropTable
-				.get(worldName);
-
-		if (dropTable == null)
-		{
-			if (propertyExists(MobBountyConfFile.DROPS, creature.getName()
-					+ "." + worldName + ".drops"))
-				dropTable = loadWorld(worldName, entity);
-			else
-				dropTable = loadWorld("Default", entity);
-		}
-
-		ArrayList<MobBountyItemInfo> drop = dropTable.get(creature);
-
-		if (drop == null || drop.size() == 0)
-			return null;
-		return drop;
+		return false;
 	}
 }

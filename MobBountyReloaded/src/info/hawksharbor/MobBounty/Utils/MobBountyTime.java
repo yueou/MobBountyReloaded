@@ -2,8 +2,8 @@ package info.hawksharbor.MobBounty.Utils;
 
 public enum MobBountyTime
 {
-	DAY("Day", 0, 10000), SUNSET("Sunset", 10000, 1500), NIGHT("Night", 11500,
-			7000), SUNRISE("Sunrise", 18500, 1500);
+	DAY("Day", 0, 10000), NIGHT("Night", 11500, 7000), SUNRISE("Sunrise",
+			18500, 1500), SUNSET("Sunset", 10000, 1500);
 
 	public static MobBountyTime getTimeFromString(String time)
 	{
@@ -31,11 +31,11 @@ public enum MobBountyTime
 		return MobBountyTime.SUNRISE;
 	}
 
+	private final int _length;
+
 	private final String _name;
 
 	private final int _starts;
-
-	private final int _length;
 
 	private MobBountyTime(final String name, final int starts, final int length)
 	{

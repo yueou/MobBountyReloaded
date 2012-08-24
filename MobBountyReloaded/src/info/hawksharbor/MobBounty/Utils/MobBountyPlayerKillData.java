@@ -4,14 +4,14 @@ import org.bukkit.Location;
 
 public class MobBountyPlayerKillData
 {
-	public MobBountyCreature lastKill;
-	public double lastRewardPercentage;
-	public Location lastKillLoc;
-	public int lastKillAmount;
-	public int killStreak;
-	public long cacheTime;
 	public double cacheEarned;
 	public int cacheSize;
+	public long cacheTime;
+	public int killStreak;
+	public MobBountyCreature lastKill;
+	public int lastKillAmount;
+	public Location lastKillLoc;
+	public double lastRewardPercentage;
 
 	public MobBountyPlayerKillData()
 	{

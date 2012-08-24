@@ -26,17 +26,17 @@ import org.bukkit.entity.Zombie;
 
 public enum MobBountyCreature
 {
-	CHICKEN("Chicken"), COW("Cow"), CREEPER("Creeper"), ELECTRIFIED_CREEPER(
-			"ElectrifiedCreeper"), GHAST("Ghast"), GIANT("Giant"), MONSTER(
-			"Monster"), PIG("Pig"), PIG_ZOMBIE("PigZombie"), SELF_TAMED_WOLF(
-			"SelfTamedWolf"), SHEEP("Sheep"), SKELETON("Skeleton"), SLIME(
-			"Slime"), SPIDER("Spider"), SQUID("Squid"), TAMED_WOLF("TamedWolf"), WOLF(
-			"Wolf"), ZOMBIE("Zombie"), IRONGOLEM("IronGolem"), OCELOT("Ocelot"), ENDERMAN(
-			"Enderman"), BLAZE("Blaze"), SILVERFISH("Silverfish"), SNOWGOLEM(
-			"SnowGolem"), TAMED_CAT("TamedCat"), VILLAGER("Villager"), SELF_TAMED_CAT(
-			"SelfTamedCat"), ENDERDRAGON("Enderdragon"), CAVESPIDER(
-			"CaveSpider"), MOOSHROOM("Mooshroom"), MAGMACUBE("MagmaCube"), PLAYER(
-			"Player"), UNKNOWN("Unknown");
+	BLAZE("Blaze"), CAVESPIDER("CaveSpider"), CHICKEN("Chicken"), COW("Cow"), CREEPER(
+			"Creeper"), ELECTRIFIED_CREEPER("ElectrifiedCreeper"), ENDERDRAGON(
+			"Enderdragon"), ENDERMAN("Enderman"), GHAST("Ghast"), GIANT("Giant"), IRONGOLEM(
+			"IronGolem"), MAGMACUBE("MagmaCube"), MONSTER("Monster"), MOOSHROOM(
+			"Mooshroom"), OCELOT("Ocelot"), PIG("Pig"), PIG_ZOMBIE("PigZombie"), PLAYER(
+			"Player"), SELF_TAMED_CAT("SelfTamedCat"), SELF_TAMED_WOLF(
+			"SelfTamedWolf"), SHEEP("Sheep"), SILVERFISH("Silverfish"), SKELETON(
+			"Skeleton"), SLIME("Slime"), SNOWGOLEM("SnowGolem"), SPIDER(
+			"Spider"), SQUID("Squid"), TAMED_CAT("TamedCat"), TAMED_WOLF(
+			"TamedWolf"), UNKNOWN("Unknown"), VILLAGER("Villager"), WOLF("Wolf"), ZOMBIE(
+			"Zombie");
 
 	public static MobBountyCreature fromName(String name)
 	{
