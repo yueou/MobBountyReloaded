@@ -1,4 +1,4 @@
-package info.hawksharbor.MobBounty.managers;
+package info.hawksharbor.MobBounty.Managers;
 
 import info.hawksharbor.MobBounty.MobBountyReloaded;
 import info.hawksharbor.MobBounty.Utils.MobBountyConfFile;
@@ -13,8 +13,11 @@ public class MobBountyLocale
 	}
 
 	/**
-	 * @param key
-	 * @return
+	 * Gets a string from Locale.yml
+	 * 
+	 * @param String
+	 *            Key to look for
+	 * @return String String requested
 	 */
 	public String getString(String key)
 	{

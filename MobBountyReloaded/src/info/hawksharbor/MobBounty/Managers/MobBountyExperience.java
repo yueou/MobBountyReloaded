@@ -1,4 +1,4 @@
-package info.hawksharbor.MobBounty.managers;
+package info.hawksharbor.MobBounty.Managers;
 
 import info.hawksharbor.MobBounty.Utils.MobBountyAPI;
 import info.hawksharbor.MobBounty.Utils.MobBountyConfFile;
@@ -30,6 +30,18 @@ public class MobBountyExperience
 		return resultTest;
 	}
 
+	/**
+	 * Handles all experience modifying required by plugin
+	 * 
+	 * @param Player
+	 *            Killer in EntityDeathEvent
+	 * @param LivingEntity
+	 *            Dead entity in EntityDeathEvent
+	 * @param MobBountyCreature
+	 *            Creature of LivingEntity
+	 * @param EntityDeathEvent
+	 *            Death event being called for
+	 */
 	public static void handleExperience(Player killer, LivingEntity entity,
 			MobBountyCreature creature, EntityDeathEvent event)
 	{

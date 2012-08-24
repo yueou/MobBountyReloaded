@@ -2,20 +2,23 @@ package info.hawksharbor.MobBounty.Utils;
 
 import info.hawksharbor.MobBounty.MetricsLite;
 import info.hawksharbor.MobBounty.MobBountyReloaded;
-import info.hawksharbor.MobBounty.managers.MobBountyCommands;
-import info.hawksharbor.MobBounty.managers.MobBountyConfigs;
-import info.hawksharbor.MobBounty.managers.MobBountyEcon;
-import info.hawksharbor.MobBounty.managers.MobBountyExternals;
-import info.hawksharbor.MobBounty.managers.MobBountyListeners;
-import info.hawksharbor.MobBounty.managers.MobBountyLocale;
-import info.hawksharbor.MobBounty.managers.MobBountyPermissions;
+import info.hawksharbor.MobBounty.Managers.MobBountyCommands;
+import info.hawksharbor.MobBounty.Managers.MobBountyConfigs;
+import info.hawksharbor.MobBounty.Managers.MobBountyEcon;
+import info.hawksharbor.MobBounty.Managers.MobBountyExternals;
+import info.hawksharbor.MobBounty.Managers.MobBountyListeners;
+import info.hawksharbor.MobBounty.Managers.MobBountyLocale;
+import info.hawksharbor.MobBounty.Managers.MobBountyPermissions;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -45,6 +48,8 @@ public class MobBountyAPI
 
 	private static HashMap<String, Long> loginTimer = new HashMap<String, Long>();
 
+	public Map<UUID, SpawnReason> _spawnReason;
+
 	public static MobBountyAPI instance;
 
 	public MobBountyAPI(MobBountyReloaded plugin)
@@ -63,6 +68,7 @@ public class MobBountyAPI
 		_permsManager = new MobBountyPermissions(_plugin);
 		_listenerManager = new MobBountyListeners(_plugin);
 		_externalsManager = new MobBountyExternals(_plugin);
+		_spawnReason = new HashMap<UUID, SpawnReason>();
 		getLoginTimer().clear();
 		startStatistics();
 		_plugin.getServer().getScheduler()

@@ -1,4 +1,4 @@
-package info.hawksharbor.MobBounty.managers;
+package info.hawksharbor.MobBounty.Managers;
 
 import info.hawksharbor.MobBounty.MobBountyReloaded;
 import info.hawksharbor.MobBounty.Utils.MobBountyAPI;
@@ -791,6 +791,15 @@ public class MobBountyConfigs
 
 	}
 
+	/**
+	 * Gets a value for path in file
+	 * 
+	 * @param MobBountyConfFile
+	 *            File to search in
+	 * @param String
+	 *            Path to search for
+	 * @return String Value contained by path
+	 */
 	public String getProperty(MobBountyConfFile file, String path)
 	{
 		FileConfiguration conf = _configurations.get(file);
@@ -807,6 +816,15 @@ public class MobBountyConfigs
 		return null;
 	}
 
+	/**
+	 * Gets a value for path in file
+	 * 
+	 * @param MobBountyConfFile
+	 *            File to search in
+	 * @param String
+	 *            Path to search for
+	 * @return List<String> Value contained by path
+	 */
 	public List<String> getPropertyList(MobBountyConfFile file, String path)
 	{
 		FileConfiguration conf = _configurations.get(file);
@@ -822,6 +840,9 @@ public class MobBountyConfigs
 		return null;
 	}
 
+	/**
+	 * Loads the plugin's configuration files
+	 */
 	public void loadConfig()
 	{
 		for (MobBountyConfFile file : MobBountyConfFile.values())
@@ -1017,8 +1038,145 @@ public class MobBountyConfigs
 		defaultDrops.put("Zombie", zombieDrops);
 	}
 
-	public boolean modifyProperty(MobBountyConfFile file, String path,
+	/**
+	 * Checks if path exists in file
+	 * 
+	 * @param MobBountyConfFile
+	 *            File to search in
+	 * @param String
+	 *            Path to search for
+	 * @return boolean Property exists
+	 */
+	public boolean propertyExists(MobBountyConfFile file, String path)
+	{
+		FileConfiguration conf = _configurations.get(file);
+
+		if (conf != null)
+		{
+			if (conf.contains(path))
+				return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Sets path to null in file
+	 * 
+	 * @param MobBountyConfFile
+	 *            File to set in
+	 * @param String
+	 *            Path to set null
+	 * @return boolean If completed
+	 */
+	public boolean removeProperty(MobBountyConfFile file, String path)
+	{
+		FileConfiguration conf = _configurations.get(file);
+
+		if (conf != null)
+		{
+			conf.set(path, null);
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Saves the plugin's configs
+	 */
+	public void saveConfig()
+	{
+		for (MobBountyConfFile file : MobBountyConfFile.values())
+		{
+			if (_configurations.containsKey(file))
+				try
+				{
+					_configurations.get(file).save(new File(file.getPath()));
+				}
+				catch (IOException e)
+				{
+
+				}
+		}
+
+		MobBountyReloaded._logger.info("[MobBountyReloaded] Config saved.");
+	}
+
+	/**
+	 * Sets path to value in file
+	 * 
+	 * @param MobBountyConfFile
+	 *            File to set in
+	 * @param String
+	 *            Path to set
+	 * @param boolean Value to set
+	 * @return boolean If completed
+	 */
+	public boolean setProperty(MobBountyConfFile file, String path,
 			boolean value)
+	{
+		FileConfiguration conf = _configurations.get(file);
+
+		if (conf != null)
+		{
+			conf.set(path, value);
+			try
+			{
+				conf.save(new File(file.getPath()));
+			}
+			catch (IOException e)
+			{
+
+			}
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Sets path to value in file
+	 * 
+	 * @param MobBountyConfFile
+	 *            File to set in
+	 * @param String
+	 *            Path to set
+	 * @param double Value to set
+	 * @return boolean If completed
+	 */
+	public boolean setProperty(MobBountyConfFile file, String path, Double value)
+	{
+		FileConfiguration conf = _configurations.get(file);
+
+		if (conf != null)
+		{
+			conf.set(path, value);
+			try
+			{
+				conf.save(new File(file.getPath()));
+			}
+			catch (IOException e)
+			{
+
+			}
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Sets path to value in file
+	 * 
+	 * @param MobBountyConfFile
+	 *            File to set in
+	 * @param String
+	 *            Path to set
+	 * @param int Value to set
+	 * @return boolean If completed
+	 */
+	public boolean setProperty(MobBountyConfFile file, String path, int value)
 	{
 		FileConfiguration conf = _configurations.get(file);
 
@@ -1038,114 +1196,17 @@ public class MobBountyConfigs
 		return false;
 	}
 
-	public boolean propertyExists(MobBountyConfFile file, String path)
-	{
-		FileConfiguration conf = _configurations.get(file);
-
-		if (conf != null)
-		{
-			if (conf.contains(path))
-				return true;
-		}
-
-		return false;
-	}
-
-	public boolean removeProperty(MobBountyConfFile file, String path)
-	{
-		FileConfiguration conf = _configurations.get(file);
-
-		if (conf != null)
-		{
-			conf.set(path, null);
-			return true;
-		}
-
-		return false;
-	}
-
-	public void saveConfig()
-	{
-		for (MobBountyConfFile file : MobBountyConfFile.values())
-		{
-			if (_configurations.containsKey(file))
-				try
-				{
-					_configurations.get(file).save(new File(file.getPath()));
-				}
-				catch (IOException e)
-				{
-
-				}
-		}
-
-		MobBountyReloaded._logger.info("[MobBountyReloaded] Config saved.");
-	}
-
-	public boolean setProperty(MobBountyConfFile file, String path, boolean b)
-	{
-		FileConfiguration conf = _configurations.get(file);
-
-		if (conf != null)
-		{
-			conf.set(path, b);
-			try
-			{
-				conf.save(new File(file.getPath()));
-			}
-			catch (IOException e)
-			{
-
-			}
-			return true;
-		}
-
-		return false;
-	}
-
-	public boolean setProperty(MobBountyConfFile file, String path,
-			Double double1)
-	{
-		FileConfiguration conf = _configurations.get(file);
-
-		if (conf != null)
-		{
-			conf.set(path, double1);
-			try
-			{
-				conf.save(new File(file.getPath()));
-			}
-			catch (IOException e)
-			{
-
-			}
-			return true;
-		}
-
-		return false;
-	}
-
-	public boolean setProperty(MobBountyConfFile file, String path,
-			Integer integer)
-	{
-		FileConfiguration conf = _configurations.get(file);
-
-		if (conf != null)
-		{
-			conf.set(path, integer);
-			try
-			{
-				conf.save(new File(file.getPath()));
-			}
-			catch (IOException e)
-			{
-			}
-			return true;
-		}
-
-		return false;
-	}
-
+	/**
+	 * Sets path to value in file
+	 * 
+	 * @param MobBountyConfFile
+	 *            File to set in
+	 * @param String
+	 *            Path to set
+	 * @param String
+	 *            Value to set
+	 * @return boolean If completed
+	 */
 	public boolean setProperty(MobBountyConfFile file, String path, String value)
 	{
 		FileConfiguration conf = _configurations.get(file);
@@ -1167,6 +1228,17 @@ public class MobBountyConfigs
 		return false;
 	}
 
+	/**
+	 * Sets path to list of values in file
+	 * 
+	 * @param MobBountyConfFile
+	 *            File to set in
+	 * @param String
+	 *            Path to set
+	 * @param List
+	 *            <String> List of values to set
+	 * @return boolean If completed
+	 */
 	public boolean setPropertyList(MobBountyConfFile file, String path,
 			List<String> list)
 	{
@@ -1188,6 +1260,17 @@ public class MobBountyConfigs
 		return false;
 	}
 
+	/**
+	 * Sets path to list of values in file
+	 * 
+	 * @param MobBountyConfFile
+	 *            File to set in
+	 * @param String
+	 *            Path to set
+	 * @param ArrayList
+	 *            <String> List of values
+	 * @return boolean If completed
+	 */
 	public boolean setPropertyList(MobBountyConfFile file, String path,
 			ArrayList<String> list)
 	{
@@ -1209,6 +1292,18 @@ public class MobBountyConfigs
 		return false;
 	}
 
+	/**
+	 * Sets a creature's drop in world
+	 * 
+	 * @param String
+	 *            Name of world to set in
+	 * @param MobBountyCreature
+	 *            Creature type to set
+	 * @param String
+	 *            [] Array of strings to set as drops
+	 * @param LivingEntity
+	 *            Entity of drop change
+	 */
 	public void setDrop(String worldName, MobBountyCreature creature,
 			String[] items, LivingEntity entity)
 	{
@@ -1257,6 +1352,17 @@ public class MobBountyConfigs
 		return dropTable;
 	}
 
+	/**
+	 * Gets drop information for creature
+	 * 
+	 * @param String
+	 *            World to get it from
+	 * @param MobBountyCreature
+	 *            Creature type to get
+	 * @param LivingEntity
+	 *            Entity that drops are being gotten for
+	 * @return
+	 */
 	public ArrayList<MobBountyItemInfo> getDrop(String worldName,
 			MobBountyCreature creature, LivingEntity entity)
 	{

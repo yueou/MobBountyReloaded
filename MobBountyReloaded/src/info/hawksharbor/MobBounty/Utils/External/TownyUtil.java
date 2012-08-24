@@ -1,4 +1,4 @@
-package info.hawksharbor.MobBounty.Utils.external;
+package info.hawksharbor.MobBounty.Utils.External;
 
 import org.bukkit.Location;
 

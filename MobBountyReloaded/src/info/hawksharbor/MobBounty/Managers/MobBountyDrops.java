@@ -1,4 +1,4 @@
-package info.hawksharbor.MobBounty.managers;
+package info.hawksharbor.MobBounty.Managers;
 
 import info.hawksharbor.MobBounty.MobBountyReloaded;
 import info.hawksharbor.MobBounty.Utils.MobBountyAPI;
@@ -20,6 +20,18 @@ import org.bukkit.material.MaterialData;
 public class MobBountyDrops
 {
 
+	/**
+	 * Handles all drop modifying for the plugin
+	 * 
+	 * @param Player
+	 *            Killer in EntityDeathEvent
+	 * @param LivingEntity
+	 *            Entity that died in EntityDeathEvent
+	 * @param MobBountyCreature
+	 *            Creature of Entity
+	 * @param EntityDeathEvent
+	 *            Event being called for
+	 */
 	public static void handleDrops(Player killer, LivingEntity entity,
 			MobBountyCreature creature, EntityDeathEvent event)
 	{

@@ -23,7 +23,29 @@
 		</javac>
 	</target>
 
-	<target name="package" depends="compile" description="Make the distributable jar file">
+	<target name="document" depends="compile" description="Create JavaDocs">
+		<delete dir="javadoc" includes="**/*" failonerror="false" />
+	    <javadoc packagenames="info.hawksharbor.*"
+	                    sourcepath="src"
+	                    destdir="javadoc"
+	                    access="public"
+	                    windowtitle="MobBountyReloaded"
+	                    verbose="false"
+	                    author="true"
+	                    version="true">
+	        <link href="http://java.sun.com/j2se/1.5.0/docs/api/" />
+	        <link href="http://jd.bukkit.org/apidocs/" />
+
+	        <classpath>
+	            <fileset dir="lib" includes="**/*.jar"/>
+	        </classpath>
+	        <bottom>
+	            <![CDATA[<b>ToppleTheNun, 2012</b>]]>
+	        </bottom>
+	    </javadoc>
+	</target>
+	
+	<target name="package" depends="document" description="Make the distributable jar file">
 		<copy todir="bin" overwrite="true">
 			<fileset dir="." includes="plugin.yml" />
 			<!-- 
@@ -42,7 +64,7 @@
                 <filter token="VERSION" value="${env.BUILD_NUMBER}" />
             </filterset>
         </copy>
-		<jar basedir="bin" jarfile="${ant.project.name}_v${env.BUILD_NUMBER}.jar" defaultexcludes="true" />
+		<jar basedir="bin" jarfile="${ant.project.name}_v${env.BUILD_NUMBER}.jar" defaultexcludes="true" excludes="javadoc/*,docs/*,lib/*"/>
 		<zip basedir="." destfile="dist/${ant.project.name}_v${env.BUILD_NUMBER}.zip" defaultexcludes="true" includes="jar/${ant.project.name}_v${env.BUILD_NUMBER}.jar">
 			<fileset dir="." includes="${ant.project.name}_v${env.BUILD_NUMBER}.jar" defaultexcludes="true"/>
 			<fileset dir="." includes="SETUP.txt" defaultexcludes="true"/>

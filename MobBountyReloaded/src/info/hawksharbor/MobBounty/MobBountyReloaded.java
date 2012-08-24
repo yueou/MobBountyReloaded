@@ -12,11 +12,21 @@ public class MobBountyReloaded extends JavaPlugin
 
 	private static MobBountyAPI _apiManager;
 
+	/**
+	 * Gets the plugin's API
+	 * 
+	 * @return MobBountyAPI API that handles everything
+	 */
 	public static MobBountyAPI getAPI()
 	{
 		return _apiManager;
 	}
 
+	/**
+	 * Gets the plugin's API
+	 * 
+	 * @return MobBountyAPI API that handles everything
+	 */
 	public MobBountyAPI getAPIManager()
 	{
 		return _apiManager;

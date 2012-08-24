@@ -537,15 +537,11 @@ permissions:
     mbr.admin.debug.general:
         description: Allows user to receive general debug messages.
         default: false
-    mbr.admin.update:
-        description: Allows user to receive update messages.
-        default: false
     mbr.admin.*:
         description: Gives user all admin permissions.
         children:
             mbr.admin.debug.permissions: true
             mbr.admin.debug.general: true
-            mbr.admin.update: true
     mbr.*:
         description: Gives user all MobBountyReloaded permissions.
         default: op
@@ -637,4 +633,3 @@ permissions:
             mbr.command.mbwe: true
             mbr.admin.debug.permissions: true
             mbr.admin.debug.general: true
-            mbr.admin.update: true

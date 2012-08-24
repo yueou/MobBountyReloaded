@@ -1,4 +1,4 @@
-package info.hawksharbor.MobBounty.managers;
+package info.hawksharbor.MobBounty.Managers;
 
 import info.hawksharbor.MobBounty.MobBountyReloaded;
 import info.hawksharbor.MobBounty.Utils.MobBountyAPI;
@@ -7,9 +7,11 @@ import info.hawksharbor.MobBounty.Utils.MobBountyCreature;
 import info.hawksharbor.MobBounty.Utils.MobBountyMessage;
 import info.hawksharbor.MobBounty.Utils.MobBountyPlayerKillData;
 import info.hawksharbor.MobBounty.Utils.MobBountyUtils;
-import info.hawksharbor.MobBounty.Utils.external.TownyUtil;
+import info.hawksharbor.MobBounty.Utils.External.TownyUtil;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import net.milkbowl.vault.economy.Economy;
@@ -34,8 +36,9 @@ public class MobBountyEcon
 {
 
 	private static MobBountyReloaded _plugin;
-
 	private static Economy econ = null;
+
+	public static Map<String, MobBountyPlayerKillData> _playerData;
 
 	private static boolean fineAccount(String accountName, double amount)
 	{
@@ -65,8 +68,8 @@ public class MobBountyEcon
 				.getProperty(MobBountyConfFile.GENERAL, "killCache.use");
 		if (useKillCache != null && useKillCache.equalsIgnoreCase("true"))
 		{
-			MobBountyPlayerKillData killData = MobBountyAPI.instance
-					.getListenerManager().getPlayerData().get(player.getName());
+			MobBountyPlayerKillData killData = _playerData
+					.get(player.getName());
 			if (killData == null)
 				killData = new MobBountyPlayerKillData();
 			handleKillCache(player, entity, killData, amount);
@@ -114,8 +117,8 @@ public class MobBountyEcon
 				.getProperty(MobBountyConfFile.GENERAL, "killCache.use");
 		if (useKillCache != null && useKillCache.equalsIgnoreCase("true"))
 		{
-			MobBountyPlayerKillData killData = MobBountyAPI.instance
-					.getListenerManager().getPlayerData().get(player.getName());
+			MobBountyPlayerKillData killData = _playerData
+					.get(player.getName());
 			if (killData == null)
 				killData = new MobBountyPlayerKillData();
 			handleKillCache(player, entity, killData, amount);
@@ -153,7 +156,8 @@ public class MobBountyEcon
 		return econ.format(amount);
 	}
 
-	public static double getBaseReward(Player player, MobBountyCreature creature)
+	private static double getBaseReward(Player player,
+			MobBountyCreature creature)
 	{
 		double baseReward = 0.0;
 		String resultTest = MobBountyAPI.instance.getConfigManager()
@@ -209,48 +213,42 @@ public class MobBountyEcon
 		String booleanTest;
 		booleanTest = MobBountyAPI.instance.getConfigManager().getProperty(
 				MobBountyConfFile.GENERAL, "useDepreciativeReturn");
-		if (booleanTest != null
-				&& (booleanTest.equalsIgnoreCase("true")
-						|| booleanTest.equalsIgnoreCase("yes") || booleanTest
-							.equalsIgnoreCase("1")))
+		boolean useDeprReturn = Boolean.valueOf(booleanTest);
+		if (!useDeprReturn)
+			return result;
+		MobBountyPlayerKillData playerData = _playerData.get(player.getName());
+		if (playerData == null)
 		{
-			MobBountyPlayerKillData playerData = MobBountyAPI.instance
-					.getListenerManager().getPlayerData().get(player.getName());
-
-			if (playerData == null)
-			{
-				playerData = new MobBountyPlayerKillData();
-			}
-			else if (playerData.lastKill == creature)
-			{
-				double originalReward = amount;
-				String returnRate = MobBountyAPI.instance.getConfigManager()
-						.getProperty(MobBountyConfFile.GENERAL,
-								"depreciativeReturnRate");
-				playerData.lastRewardPercentage -= Double.valueOf(returnRate);
-				result *= playerData.lastRewardPercentage;
-				if (originalReward >= 0.0 && result <= 0.0)
-				{
-					result = 0.0;
-				}
-				else if (originalReward <= 0.0 && result >= 0.0)
-				{
-					result = 0.0;
-				}
-				MobBountyMessage.logToConsole("New lastRewardPercentage: "
-						+ String.valueOf(playerData.lastRewardPercentage));
-			}
-			else
-			{
-				MobBountyMessage
-						.logToConsole("Setting lastRewardPercentage to 1");
-				playerData.lastRewardPercentage = 1;
-			}
-
+			playerData = new MobBountyPlayerKillData();
 			playerData.lastKill = creature;
-			MobBountyAPI.instance.getListenerManager().getPlayerData()
-					.put(player.getName(), playerData);
+			_playerData.put(player.getName(), playerData);
+			return result;
 		}
+		if (playerData.lastKill.equals(creature))
+		{
+			double originalReward = result;
+			String returnRate = MobBountyAPI.instance.getConfigManager()
+					.getProperty(MobBountyConfFile.GENERAL,
+							"depreciativeReturnRate");
+			playerData.lastRewardPercentage = playerData.lastRewardPercentage -= Double
+					.valueOf(returnRate);
+			double reward = result * playerData.lastRewardPercentage;
+			MobBountyMessage.logToConsole("result: " + String.valueOf(reward));
+			if (reward <= 0.0 && originalReward >= 0.0)
+			{
+				reward = 0.0;
+			}
+			else if (reward >= 0.0 && originalReward <= 0.0)
+			{
+				reward = 0.0;
+			}
+			playerData.lastKill = creature;
+			_playerData.put(player.getName(), playerData);
+			return reward;
+		}
+		playerData.lastRewardPercentage = 1;
+		playerData.lastKill = creature;
+		_playerData.put(player.getName(), playerData);
 		return result;
 	}
 
@@ -379,8 +377,7 @@ public class MobBountyEcon
 				}
 			}
 		}
-		MobBountyAPI.instance.getListenerManager().getPlayerData()
-				.put(killer.getName(), playerData);
+		_playerData.put(killer.getName(), playerData);
 	}
 
 	private static double handleKillstreak(Player killer, LivingEntity entity,
@@ -388,8 +385,8 @@ public class MobBountyEcon
 	{
 		double reward = killerReward;
 		if (MobBountyUtils.nearMobSpawner(killer.getLocation())
-				|| MobBountyAPI.instance.getListenerManager().getSpawnReason()
-						.containsKey(entity.getUniqueId())
+				|| MobBountyAPI.instance._spawnReason.containsKey(entity
+						.getUniqueId())
 				|| !MobBountyAPI.instance.getPermissionsManager()
 						.hasPermission(killer, "mbr.user.killstreak"))
 		{
@@ -405,8 +402,7 @@ public class MobBountyEcon
 		{
 			return result;
 		}
-		MobBountyPlayerKillData playerData = MobBountyAPI.instance
-				.getListenerManager().getPlayerData().get(killer.getName());
+		MobBountyPlayerKillData playerData = _playerData.get(killer.getName());
 		if (playerData == null)
 		{
 			playerData = new MobBountyPlayerKillData();
@@ -445,28 +441,36 @@ public class MobBountyEcon
 		else
 			result = result + confBonus;
 		sendStreakMessage(killer, confBonus, playerData);
-		MobBountyAPI.instance.getListenerManager().getPlayerData()
-				.put(killer.getName(), playerData);
+		_playerData.put(killer.getName(), playerData);
 		return result;
 	}
 
+	/**
+	 * Handles any transaction required by plugin
+	 * 
+	 * @param Player
+	 *            Killer in EntityDeathEvent
+	 * @param LivingEntity
+	 *            Dead entity in EntityDeathEvent
+	 * @param MobBountyCreature
+	 *            Creature of LivingEntity
+	 */
 	public static void handleMobBountyTransaction(Player killer,
 			LivingEntity entity, MobBountyCreature creature)
 	{
 		double baseReward = getBaseReward(killer, creature);
-		double deprReward = baseReward;
-		deprReward = handleDepreciativeReturn(killer, creature, baseReward);
+		double deprReward = handleDepreciativeReturn(killer, creature,
+				baseReward);
 		double multiplier = MobBountyAPI.instance.getExternalsManager()
 				.checkEarnMultiplier(killer, entity.getLocation(), entity);
 		double killerReward = deprReward *= multiplier;
-		double finalReward = deprReward;
-		handlePartyEarnings(killer, baseReward, creature, entity);
-		killerReward = handlePluginEarnings(killer, baseReward);
-		finalReward = handleKillstreak(killer, entity, killerReward);
-		monetaryTransaction(killer, finalReward, creature, entity);
+		handlePartyEarnings(killer, killerReward, creature, entity);
+		double finalReward = handlePluginEarnings(killer, killerReward);
+		double payReward = handleKillstreak(killer, entity, finalReward);
+		monetaryTransaction(killer, payReward, creature, entity);
 	}
 
-	public static void handlePartyEarnings(Player killer, double baseReward,
+	private static void handlePartyEarnings(Player killer, double baseReward,
 			MobBountyCreature creature, LivingEntity entity)
 	{
 		double base = baseReward;
@@ -535,7 +539,7 @@ public class MobBountyEcon
 		return econ.hasAccount(accountName);
 	}
 
-	public static boolean monetaryTransaction(Player player, double amount,
+	private static boolean monetaryTransaction(Player player, double amount,
 			MobBountyCreature creature, LivingEntity entity)
 	{
 		if (!hasAccount(player))
@@ -552,7 +556,7 @@ public class MobBountyEcon
 			return true;
 	}
 
-	public static boolean monetaryTransactionAccount(String accountName,
+	private static boolean monetaryTransactionAccount(String accountName,
 			double amount)
 	{
 		if (!hasAccount(accountName))
@@ -569,7 +573,7 @@ public class MobBountyEcon
 			return true;
 	}
 
-	public static boolean monetaryTransactionParty(Player player,
+	private static boolean monetaryTransactionParty(Player player,
 			double amount, Player killer, MobBountyCreature creature,
 			LivingEntity entity)
 	{
@@ -614,8 +618,8 @@ public class MobBountyEcon
 				.getProperty(MobBountyConfFile.GENERAL, "killCache.use");
 		if (useKillCache != null && useKillCache.equalsIgnoreCase("true"))
 		{
-			MobBountyPlayerKillData killData = MobBountyAPI.instance
-					.getListenerManager().getPlayerData().get(player.getName());
+			MobBountyPlayerKillData killData = _playerData
+					.get(player.getName());
 			if (killData == null)
 				killData = new MobBountyPlayerKillData();
 			handleKillCache(player, entity, killData, amount);
@@ -666,8 +670,8 @@ public class MobBountyEcon
 				.getProperty(MobBountyConfFile.GENERAL, "killCache.use");
 		if (useKillCache != null && useKillCache.equalsIgnoreCase("true"))
 		{
-			MobBountyPlayerKillData killData = MobBountyAPI.instance
-					.getListenerManager().getPlayerData().get(player.getName());
+			MobBountyPlayerKillData killData = _playerData
+					.get(player.getName());
 			if (killData == null)
 				killData = new MobBountyPlayerKillData();
 			handleKillCache(player, entity, killData, amount);
@@ -769,7 +773,7 @@ public class MobBountyEcon
 		{
 			_plugin.getServer().getPluginManager().disablePlugin(_plugin);
 		}
-
+		_playerData = new HashMap<String, MobBountyPlayerKillData>();
 	}
 
 	public Economy getEconomy()

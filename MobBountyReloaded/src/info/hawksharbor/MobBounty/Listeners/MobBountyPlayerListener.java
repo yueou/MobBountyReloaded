@@ -1,10 +1,10 @@
 package info.hawksharbor.MobBounty.Listeners;
 
 import info.hawksharbor.MobBounty.MobBountyReloaded;
+import info.hawksharbor.MobBounty.Managers.MobBountyEcon;
 import info.hawksharbor.MobBounty.Utils.MobBountyMessage;
 import info.hawksharbor.MobBounty.Utils.MobBountyPlayerKillData;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -23,27 +23,20 @@ public class MobBountyPlayerListener implements Listener
 		_plugin = plugin;
 	}
 
-	// @EventHandler
-	// public boolean onCommand(CommandSender sender, Command command,
-	// String label, String[] args)
-	// {
-	// return _plugin.getAPIManager().getCommandManager()
-	// .onCommand(sender, command, label, args);
-	// }
-
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerDeath(PlayerDeathEvent event)
 	{
 		Player p = event.getEntity();
-		MobBountyPlayerKillData playerData = _plugin.getAPIManager()
-				.getListenerManager().getPlayerData().get(p.getName());
+		MobBountyPlayerKillData playerData = MobBountyEcon._playerData.get(p
+				.getName());
 		if (playerData == null)
 		{
 			playerData = new MobBountyPlayerKillData();
 		}
 		playerData.killStreak = 0;
-		_plugin.getAPIManager().getListenerManager().getPlayerData()
-				.put(p.getName(), playerData);
+		MobBountyEcon._playerData.put(p.getName(), playerData);
+		MobBountyMessage.logToConsole(MobBountyEcon._playerData.keySet()
+				.toString());
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR)
@@ -52,48 +45,31 @@ public class MobBountyPlayerListener implements Listener
 		String name = event.getPlayer().getName();
 		long cT = System.currentTimeMillis();
 		_plugin.getAPIManager().getLoginTimer().put(name, cT);
-		MobBountyPlayerKillData playerData = _plugin.getAPIManager()
-				.getListenerManager().getPlayerData().get(name);
+		MobBountyPlayerKillData playerData = MobBountyEcon._playerData
+				.get(name);
 		if (playerData == null)
 		{
 			playerData = new MobBountyPlayerKillData();
 		}
 		playerData.killStreak = 0;
-		_plugin.getAPIManager().getListenerManager().getPlayerData()
-				.put(name, playerData);
-		if (_plugin.getAPIManager().getPermissionsManager()
-				.hasPermission(event.getPlayer(), "mbr.admin.update"))
-		{
-			try
-			{
-				if (_plugin.getAPIManager().getNewVersion() > _plugin
-						.getAPIManager().getCurrentVersion())
-				{
-					MobBountyMessage
-							.sendMessage(
-									event.getPlayer(),
-									ChatColor.DARK_GREEN
-											+ "A new version of MobBountyReloaded is available.");
-				}
-			}
-			catch (Exception e)
-			{
-			}
-		}
+		MobBountyEcon._playerData.put(name, playerData);
+		MobBountyMessage.logToConsole(MobBountyEcon._playerData.keySet()
+				.toString());
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onPlayerQuit(PlayerQuitEvent event)
 	{
 		String name = event.getPlayer().getName();
-		MobBountyPlayerKillData playerData = _plugin.getAPIManager()
-				.getListenerManager().getPlayerData().get(name);
+		MobBountyPlayerKillData playerData = MobBountyEcon._playerData
+				.get(name);
 		if (playerData == null)
 		{
 			playerData = new MobBountyPlayerKillData();
 		}
 		playerData.killStreak = 0;
-		_plugin.getAPIManager().getListenerManager().getPlayerData()
-				.put(name, playerData);
+		MobBountyEcon._playerData.put(name, playerData);
+		MobBountyMessage.logToConsole(MobBountyEcon._playerData.keySet()
+				.toString());
 	}
 }

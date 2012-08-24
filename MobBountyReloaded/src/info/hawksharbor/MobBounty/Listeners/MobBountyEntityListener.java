@@ -1,12 +1,12 @@
 package info.hawksharbor.MobBounty.Listeners;
 
 import info.hawksharbor.MobBounty.MobBountyReloaded;
+import info.hawksharbor.MobBounty.Managers.MobBountyDrops;
+import info.hawksharbor.MobBounty.Managers.MobBountyEcon;
+import info.hawksharbor.MobBounty.Managers.MobBountyExperience;
 import info.hawksharbor.MobBounty.Utils.MobBountyAPI;
 import info.hawksharbor.MobBounty.Utils.MobBountyConfFile;
 import info.hawksharbor.MobBounty.Utils.MobBountyCreature;
-import info.hawksharbor.MobBounty.managers.MobBountyDrops;
-import info.hawksharbor.MobBounty.managers.MobBountyEcon;
-import info.hawksharbor.MobBounty.managers.MobBountyExperience;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.LivingEntity;
@@ -47,8 +47,7 @@ public class MobBountyEntityListener implements Listener
 						.getExternalsManager()
 						.checkEarnPermission(killer, entity.getLocation(),
 								entity)
-						&& !MobBountyAPI.instance.getListenerManager()
-								.getSpawnReason()
+						&& !MobBountyAPI.instance._spawnReason
 								.containsKey(entity.getUniqueId()))
 				{
 					MobBountyCreature creature = MobBountyCreature.valueOf(
@@ -61,17 +60,5 @@ public class MobBountyEntityListener implements Listener
 				}
 			}
 		}
-	}
-
-	public static double getCreative(Player player)
-	{
-		String mC = MobBountyAPI.instance.getConfigManager().getProperty(
-				MobBountyConfFile.GENERAL, "preventCreativeEarning");
-		boolean prevent = Boolean.parseBoolean(mC);
-		if (prevent && player.getGameMode().equals(GameMode.CREATIVE))
-		{
-			return 0.0;
-		}
-		return 1.0;
 	}
 }

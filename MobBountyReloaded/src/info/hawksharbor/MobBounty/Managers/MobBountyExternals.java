@@ -1,4 +1,4 @@
-package info.hawksharbor.MobBounty.managers;
+package info.hawksharbor.MobBounty.Managers;
 
 import fromgate.roadprotector.RoadProtector;
 import info.hawksharbor.MobBounty.MobBountyReloaded;
@@ -7,8 +7,8 @@ import info.hawksharbor.MobBounty.Utils.MobBountyConfFile;
 import info.hawksharbor.MobBounty.Utils.MobBountyMessage;
 import info.hawksharbor.MobBounty.Utils.MobBountyMultipliers;
 import info.hawksharbor.MobBounty.Utils.MobBountyUtils;
-import info.hawksharbor.MobBounty.Utils.external.FactionsUtil;
-import info.hawksharbor.MobBounty.Utils.external.TownyUtil;
+import info.hawksharbor.MobBounty.Utils.External.FactionsUtil;
+import info.hawksharbor.MobBounty.Utils.External.TownyUtil;
 import info.plugmania.mazemania.MazeMania;
 
 import java.util.ArrayList;

@@ -1,5 +1,7 @@
 package info.hawksharbor.MobBounty.Utils;
 
+import info.hawksharbor.MobBounty.Managers.MobBountyEcon;
+
 import org.bukkit.Location;
 import org.bukkit.World.Environment;
 import org.bukkit.enchantments.Enchantment;
@@ -87,9 +89,7 @@ public class MobBountyMultipliers
 	public static double getPermMult(Player player)
 	{
 		double result = 1.0;
-		if (MobBountyAPI.instance.getPermissionsManager().getPermission() == null
-				|| MobBountyAPI.instance.getPermissionsManager()
-						.getPermission().equals("SuperPerms")
+		if (!MobBountyAPI.instance.getPermissionsManager().permissionsHooked
 				|| !MobBountyAPI.instance.getPermissionsManager()
 						.hasPermission(player, "mbr.user.multiplier.group"))
 		{
@@ -248,8 +248,8 @@ public class MobBountyMultipliers
 			mCD = 30;
 		}
 
-		MobBountyPlayerKillData playerData = MobBountyAPI.instance
-				.getListenerManager().getPlayerData().get(player.getName());
+		MobBountyPlayerKillData playerData = MobBountyEcon._playerData
+				.get(player.getName());
 
 		if (playerData == null)
 		{
@@ -270,8 +270,7 @@ public class MobBountyMultipliers
 				{
 					playerData.lastKillLoc = loc2;
 					playerData.lastKillAmount = 0;
-					MobBountyAPI.instance.getListenerManager().getPlayerData()
-							.put(player.getName(), playerData);
+					MobBountyEcon._playerData.put(player.getName(), playerData);
 				}
 				int killed = playerData.lastKillAmount;
 				if (killed >= mCL)
@@ -289,8 +288,7 @@ public class MobBountyMultipliers
 				{
 					playerData.lastKillLoc = loc2;
 					playerData.lastKillAmount = 0;
-					MobBountyAPI.instance.getListenerManager().getPlayerData()
-							.put(player.getName(), playerData);
+					MobBountyEcon._playerData.put(player.getName(), playerData);
 				}
 				int killed = playerData.lastKillAmount;
 				if (killed >= mCL)
@@ -301,8 +299,7 @@ public class MobBountyMultipliers
 			}
 		}
 		playerData.lastKillAmount++;
-		MobBountyAPI.instance.getListenerManager().getPlayerData()
-				.put(player.getName(), playerData);
+		MobBountyEcon._playerData.put(player.getName(), playerData);
 		return result;
 	}
 

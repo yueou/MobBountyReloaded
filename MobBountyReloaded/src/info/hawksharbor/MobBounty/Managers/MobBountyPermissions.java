@@ -1,4 +1,4 @@
-package info.hawksharbor.MobBounty.managers;
+package info.hawksharbor.MobBounty.Managers;
 
 import info.hawksharbor.MobBounty.MobBountyReloaded;
 import info.hawksharbor.MobBounty.Utils.MobBountyConfFile;
@@ -14,23 +14,54 @@ public class MobBountyPermissions
 	private MobBountyReloaded _plugin;
 
 	private static Permission permission = null;
+	public boolean permissionsHooked;
 
 	public MobBountyPermissions(MobBountyReloaded plugin)
 	{
 		_plugin = plugin;
 		setupPermissions();
+		if (permission.getName().equalsIgnoreCase("SuperPerms")
+				|| permission == null)
+		{
+			permissionsHooked = false;
+		}
+		else
+		{
+			permissionsHooked = true;
+		}
 	}
 
+	/**
+	 * Gets player's main group
+	 * 
+	 * @param Player
+	 *            Player being requested
+	 * @return String Player's main group
+	 */
 	public String getGroup(Player player)
 	{
 		return permission.getPrimaryGroup(player);
 	}
 
+	/**
+	 * Gets permissions providers
+	 * 
+	 * @return Permission Permissions provider
+	 */
 	public Permission getPermission()
 	{
 		return permission;
 	}
 
+	/**
+	 * Returns if player has permission
+	 * 
+	 * @param Player
+	 *            Player to check
+	 * @param String
+	 *            Permission node to check
+	 * @return boolean If player has permission
+	 */
 	public boolean hasPermission(Player player, String node)
 	{
 		if (player.hasPermission(node))
