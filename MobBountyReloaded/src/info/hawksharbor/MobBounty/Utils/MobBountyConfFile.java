@@ -2,18 +2,18 @@ package info.hawksharbor.MobBounty.Utils;
 
 public enum MobBountyConfFile
 {
-	CHUNKOWN(
-	"plugins/MobBountyReloaded/External/ChunkOwn.yml"), DEITYPROTECT(
-	"plugins/MobBountyReloaded/External/DeityProtect.yml"), DROPS(
+	CHUNKOWN("plugins/MobBountyReloaded/External/ChunkOwn.yml"), DEITYPROTECT(
+			"plugins/MobBountyReloaded/External/DeityProtect.yml"), DROPS(
 			"plugins/MobBountyReloaded/Drops.yml"), EXPERIENCE(
 			"plugins/MobBountyReloaded/Experience.yml"), FACTIONS(
-			"plugins/MobBountyReloaded/External/Factions.yml"), GENERAL("plugins/MobBountyReloaded/General.yml"), GRIEFPREVENTION(
+			"plugins/MobBountyReloaded/External/Factions.yml"), GENERAL(
+			"plugins/MobBountyReloaded/General.yml"), GRIEFPREVENTION(
 			"plugins/MobBountyReloaded/External/GriefPrevention.yml"), HEROES(
 			"plugins/MobBountyReloaded/External/Heroes.yml"), HEROSTRONGHOLD(
 			"plugins/MobBountyReloaded/External/HeroStronghold.yml"), KILLSTREAK(
 			"plugins/MobBountyReloaded/Killstreak.yml"), LIKEABOSS(
 			"plugins/MobBountyReloaded/External/Likeaboss.yml"), LOCALE(
-					"plugins/MobBountyReloaded/Locale.yml"), MAZEMANIA(
+			"plugins/MobBountyReloaded/Locale.yml"), MAZEMANIA(
 			"plugins/MobBountyReloaded/External/MazeMania.yml"), MCMMO(
 			"plugins/MobBountyReloaded/External/mcMMO.yml"), MOBARENA(
 			"plugins/MobBountyReloaded/External/MobArena.yml"), MULTIPLIERS(

@@ -396,6 +396,7 @@ permissions:
     mbr.user.*:
         description: Gives user ability to earn everywhere and use all multipliers.
         children:
+            mbr.user.collect.normal: true
             mbr.user.collect.towny.normal: true
             mbr.user.collect.towny.wild: true
             mbr.user.collect.towny.own: true
