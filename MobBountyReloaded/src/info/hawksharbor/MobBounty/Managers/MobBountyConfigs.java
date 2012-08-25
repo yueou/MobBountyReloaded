@@ -1,6 +1,7 @@
 package info.hawksharbor.MobBounty.Managers;
 
 import info.hawksharbor.MobBounty.MobBountyReloaded;
+import info.hawksharbor.MobBounty.Utils.CommentedYamlConfiguration;
 import info.hawksharbor.MobBounty.Utils.MobBountyAPI;
 import info.hawksharbor.MobBounty.Utils.MobBountyConfFile;
 import info.hawksharbor.MobBounty.Utils.MobBountyCreature;
@@ -42,8 +43,7 @@ public class MobBountyConfigs
 		switch (config)
 		{
 		case GENERAL:
-			YamlConfiguration generalConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration generalConf = new CommentedYamlConfiguration();
 			generalConf.set("locale", "en");
 			generalConf.set("useMobSpawnerProtection", false);
 			generalConf.set("mobSpawnerProtectionRadius", new Integer(5));
@@ -73,8 +73,7 @@ public class MobBountyConfigs
 			break;
 
 		case LOCALE:
-			YamlConfiguration localeConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration localeConf = new CommentedYamlConfiguration();
 			localeConf.set("en.Awarded",
 					"&2You have been awarded &F%A &2for killing a &F%M&2.");
 			localeConf.set("en.SpoutAwarded", "Earned %A");
@@ -211,8 +210,7 @@ public class MobBountyConfigs
 			break;
 
 		case MULTIPLIERS:
-			YamlConfiguration multiplierConfig = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration multiplierConfig = new CommentedYamlConfiguration();
 			multiplierConfig.set("Environment.Normal", new Double(1.0));
 			multiplierConfig.set("Environment.Nether", new Double(1.0));
 			multiplierConfig.set("Environment.End", new Double(1.0));
@@ -235,8 +233,7 @@ public class MobBountyConfigs
 			break;
 
 		case REWARDS:
-			YamlConfiguration rewardConfig = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration rewardConfig = new CommentedYamlConfiguration();
 			rewardConfig.set("Default.Blaze", new Double(40.0));
 			rewardConfig.set("Default.CaveSpider", new Double(28.5));
 			rewardConfig.set("Default.Chicken", new Double(0.0));
@@ -282,8 +279,7 @@ public class MobBountyConfigs
 			break;
 
 		case KILLSTREAK:
-			YamlConfiguration killConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration killConf = new CommentedYamlConfiguration();
 			killConf.set("broadcastKillstreak", true);
 			killConf.set("killStreakMultiply", false);
 			killConf.set("KillBonus.5", new Double(5.0));
@@ -311,8 +307,7 @@ public class MobBountyConfigs
 			break;
 
 		case SPOUT:
-			YamlConfiguration spoutConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration spoutConf = new CommentedYamlConfiguration();
 			spoutConf.set("useSpout", false);
 			try
 			{
@@ -326,8 +321,7 @@ public class MobBountyConfigs
 			break;
 
 		case MOBARENA:
-			YamlConfiguration mobarenaConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration mobarenaConf = new CommentedYamlConfiguration();
 			mobarenaConf.set("useMobArena", false);
 			mobarenaConf.set("allowPaymentInsideArena", true);
 			mobarenaConf.set("MobArenaMultiplierRate", new Double(0.05));
@@ -343,8 +337,7 @@ public class MobBountyConfigs
 			break;
 
 		case TOWNY:
-			YamlConfiguration townyConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration townyConf = new CommentedYamlConfiguration();
 			townyConf.set("useTowny", false);
 			townyConf.set("autoDepositInTownRate", new Double(0.0));
 			townyConf.set("wilderness.allowPayments", true);
@@ -369,8 +362,7 @@ public class MobBountyConfigs
 			break;
 
 		case FACTIONS:
-			YamlConfiguration factionsConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration factionsConf = new CommentedYamlConfiguration();
 			factionsConf.set("useFactions", false);
 			factionsConf.set("autoDepositInFactionRate", new Double(0.0));
 			factionsConf.set("ownLand.allowPayments", true);
@@ -401,8 +393,7 @@ public class MobBountyConfigs
 			break;
 
 		case WORLDGUARD:
-			YamlConfiguration worldguardConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration worldguardConf = new CommentedYamlConfiguration();
 			worldguardConf.set("useWorldGuard", false);
 			worldguardConf.set("allowPaymentInsideRegions", true);
 			worldguardConf.set("regionMultiplierRate", new Double(1.0));
@@ -418,8 +409,7 @@ public class MobBountyConfigs
 			break;
 
 		case REGIOS:
-			YamlConfiguration regiosConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration regiosConf = new CommentedYamlConfiguration();
 			regiosConf.set("useRegios", false);
 			regiosConf.set("allowPaymentInsideRegions", true);
 			regiosConf.set("regionMultiplierRate", new Double(1.0));
@@ -435,8 +425,7 @@ public class MobBountyConfigs
 			break;
 
 		case MCMMO:
-			YamlConfiguration mcmmoConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration mcmmoConf = new CommentedYamlConfiguration();
 			mcmmoConf.set("useMCMMO", false);
 			mcmmoConf.set("splitAmongParty", true);
 			mcmmoConf.set("killerBonusRate", new Double(1.0));
@@ -452,8 +441,7 @@ public class MobBountyConfigs
 			break;
 
 		case HEROES:
-			YamlConfiguration heroesConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration heroesConf = new CommentedYamlConfiguration();
 			heroesConf.set("useHeroes", false);
 			heroesConf.set("splitAmongParty", true);
 			heroesConf.set("killerBonusRate", new Double(1.0));
@@ -469,8 +457,7 @@ public class MobBountyConfigs
 			break;
 
 		case LIKEABOSS:
-			YamlConfiguration likeabossConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration likeabossConf = new CommentedYamlConfiguration();
 			likeabossConf.set("useLikeaboss", false);
 			likeabossConf.set("bossMultiplierRate", new Double(2.0));
 			try
@@ -485,8 +472,7 @@ public class MobBountyConfigs
 			break;
 
 		case GRIEFPREVENTION:
-			YamlConfiguration gpConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration gpConf = new CommentedYamlConfiguration();
 			gpConf.set("useGriefPrevention", false);
 			gpConf.set("allowPaymentInsideClaims", true);
 			gpConf.set("ClaimMultiplierRate", new Double(1.0));
@@ -502,8 +488,7 @@ public class MobBountyConfigs
 			break;
 
 		case DEITYPROTECT:
-			YamlConfiguration dpConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration dpConf = new CommentedYamlConfiguration();
 			dpConf.set("useDeityProtect", false);
 			dpConf.set("allowPaymentInsideRegions", true);
 			dpConf.set("RegionMultiplierRate", new Double(1.0));
@@ -519,8 +504,7 @@ public class MobBountyConfigs
 			break;
 
 		case CHUNKOWN:
-			YamlConfiguration coConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration coConf = new CommentedYamlConfiguration();
 			coConf.set("useChunkOwn", false);
 			coConf.set("allowPaymentInsideChunks", true);
 			coConf.set("ChunkMultiplierRate", new Double(1.0));
@@ -536,8 +520,7 @@ public class MobBountyConfigs
 			break;
 
 		case PRECIOUSSTONES:
-			YamlConfiguration psConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration psConf = new CommentedYamlConfiguration();
 			psConf.set("usePreciousStones", false);
 			psConf.set("allowPaymentInsideRegions", true);
 			psConf.set("RegionMultiplierRate", new Double(1.0));
@@ -553,8 +536,7 @@ public class MobBountyConfigs
 			break;
 
 		case HEROSTRONGHOLD:
-			YamlConfiguration hsConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration hsConf = new CommentedYamlConfiguration();
 			hsConf.set("useHeroStronghold", false);
 			hsConf.set("allowPaymentInsideRegions", true);
 			hsConf.set("RegionMultiplierRate", new Double(1.0));
@@ -570,8 +552,7 @@ public class MobBountyConfigs
 			break;
 
 		case MAZEMANIA:
-			YamlConfiguration mmConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration mmConf = new CommentedYamlConfiguration();
 			mmConf.set("useMazeMania", false);
 			mmConf.set("allowPaymentInsideMaze", true);
 			mmConf.set("MazeMultiplierRate", new Double(1.0));
@@ -587,8 +568,7 @@ public class MobBountyConfigs
 			break;
 
 		case RESIDENCE:
-			YamlConfiguration resConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration resConf = new CommentedYamlConfiguration();
 			resConf.set("useResidence", false);
 			resConf.set("allowPaymentInsideResidence", true);
 			resConf.set("ResidenceMultiplierRate", new Double(1.0));
@@ -604,8 +584,7 @@ public class MobBountyConfigs
 			break;
 
 		case ROADPROTECTOR:
-			YamlConfiguration rpConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration rpConf = new CommentedYamlConfiguration();
 			rpConf.set("useRoadProtector", false);
 			rpConf.set("allowPaymentInsideRegions", true);
 			rpConf.set("RegionMultiplierRate", new Double(1.0));
@@ -621,8 +600,7 @@ public class MobBountyConfigs
 			break;
 
 		case ULTIMATEARENA:
-			YamlConfiguration uaConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration uaConf = new CommentedYamlConfiguration();
 			uaConf.set("useUltimateArena", false);
 			uaConf.set("allowPaymentInsideArenas", true);
 			uaConf.set("ArenaMultiplierRate", new Double(1.0));
@@ -638,8 +616,7 @@ public class MobBountyConfigs
 			break;
 
 		case SIMPLECLANS:
-			YamlConfiguration scConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration scConf = new CommentedYamlConfiguration();
 			scConf.set("useSimpleClans", true);
 			scConf.set("allyClans.allowPayment", true);
 			scConf.set("allyClans.multiplierRate", new Double(1.0));
@@ -659,8 +636,7 @@ public class MobBountyConfigs
 			break;
 
 		case EXPERIENCE:
-			YamlConfiguration expConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration expConf = new CommentedYamlConfiguration();
 			for (MobBountyCreature creature : MobBountyCreature.values())
 			{
 				expConf.set(creature.getName() + ".Default.modifyExp", false);
@@ -678,8 +654,7 @@ public class MobBountyConfigs
 			break;
 
 		case DROPS:
-			YamlConfiguration dropConf = YamlConfiguration
-					.loadConfiguration(file);
+			CommentedYamlConfiguration dropConf = new CommentedYamlConfiguration();
 			String[] drop =
 			{
 				"i:0;d:0;a:0;p:0"
