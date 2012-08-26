@@ -583,6 +583,8 @@ public class MobBountyEcon
 					+ " does not have an economy account.");
 			return false;
 		}
+		if (player.equals(killer))
+			return false;
 		if (amount > 0.0)
 			return payPlayerParty(player, amount, killer, creature, entity);
 		else if (amount < 0.0)
@@ -731,19 +733,31 @@ public class MobBountyEcon
 	private static void splitHeroes(Player killer, double base,
 			MobBountyCreature creature, LivingEntity entity)
 	{
-		if (MobBountyAPI.instance.getExternalsManager().getHeroes() != null)
+		String splitString = MobBountyAPI.instance.getConfigManager()
+				.getProperty(MobBountyConfFile.HEROES, "splitAmongParty");
+		if (splitString == null)
 		{
-			Heroes heroes = MobBountyAPI.instance.getExternalsManager()
-					.getHeroes();
-			HeroParty party = heroes.getCharacterManager().getHero(killer)
-					.getParty();
-			if (party != null)
+			splitString = "true";
+			MobBountyAPI.instance.getConfigManager().setProperty(
+					MobBountyConfFile.HEROES, "splitAmongParty", true);
+		}
+		boolean canSplit = Boolean.parseBoolean(splitString);
+		if (canSplit)
+		{
+			if (MobBountyAPI.instance.getExternalsManager().getHeroes() != null)
 			{
-				double split = (base / (party.getMembers().size()));
-				for (Hero h : party.getMembers())
+				Heroes heroes = MobBountyAPI.instance.getExternalsManager()
+						.getHeroes();
+				HeroParty party = heroes.getCharacterManager().getHero(killer)
+						.getParty();
+				if (party != null)
 				{
-					monetaryTransactionParty(h.getPlayer(), split, killer,
-							creature, entity);
+					double split = (base / (party.getMembers().size()));
+					for (Hero h : party.getMembers())
+					{
+						monetaryTransactionParty(h.getPlayer(), split, killer,
+								creature, entity);
+					}
 				}
 			}
 		}
@@ -752,15 +766,29 @@ public class MobBountyEcon
 	private static void splitMCMMO(Player killer, double base,
 			MobBountyCreature creature, LivingEntity entity)
 	{
-		if (MobBountyAPI.instance.getExternalsManager().getMCMMO() != null)
+		String splitString = MobBountyAPI.instance.getConfigManager()
+				.getProperty(MobBountyConfFile.MCMMO, "splitAmongParty");
+		if (splitString == null)
 		{
-			Party party = mcMMO.p.getPlayerProfile(killer.getName()).getParty();
-			if (party != null)
+			splitString = "true";
+			MobBountyAPI.instance.getConfigManager().setProperty(
+					MobBountyConfFile.MCMMO, "splitAmongParty", true);
+		}
+		boolean canSplit = Boolean.parseBoolean(splitString);
+		if (canSplit)
+		{
+			if (MobBountyAPI.instance.getExternalsManager().getMCMMO() != null)
 			{
-				double split = (base / (party.getOnlineMembers().size()));
-				for (Player p : party.getOnlineMembers())
+				Party party = mcMMO.p.getPlayerProfile(killer.getName())
+						.getParty();
+				if (party != null)
 				{
-					monetaryTransactionParty(p, split, killer, creature, entity);
+					double split = (base / (party.getOnlineMembers().size()));
+					for (Player p : party.getOnlineMembers())
+					{
+						monetaryTransactionParty(p, split, killer, creature,
+								entity);
+					}
 				}
 			}
 		}
