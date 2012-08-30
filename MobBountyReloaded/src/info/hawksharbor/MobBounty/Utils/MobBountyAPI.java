@@ -66,6 +66,10 @@ public class MobBountyAPI
 		instance = this;
 		v = _plugin.getDescription().getVersion();
 		_econManager = new MobBountyEcon(_plugin);
+		if (!_plugin.isEnabled())
+		{
+			return;
+		}
 		configVersion = new Double(2.4);
 		_configManager = new MobBountyConfigs(_plugin);
 		_commandManager = new MobBountyCommands(_plugin);

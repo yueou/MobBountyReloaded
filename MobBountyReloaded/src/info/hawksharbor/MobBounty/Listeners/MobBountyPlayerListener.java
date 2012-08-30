@@ -21,6 +21,7 @@ public class MobBountyPlayerListener implements Listener
 	public MobBountyPlayerListener(MobBountyReloaded plugin)
 	{
 		_plugin = plugin;
+		_plugin.getServer().getPluginManager().registerEvents(this, _plugin);
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR)

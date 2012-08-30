@@ -800,6 +800,7 @@ public class MobBountyEcon
 		if (!setupEconomy())
 		{
 			_plugin.getServer().getPluginManager().disablePlugin(_plugin);
+			return;
 		}
 		_playerData = new HashMap<String, MobBountyPlayerKillData>();
 	}
