@@ -2,7 +2,6 @@ package info.hawksharbor.MobBounty.Listeners;
 
 import info.hawksharbor.MobBounty.MobBountyReloaded;
 import info.hawksharbor.MobBounty.Managers.MobBountyEcon;
-import info.hawksharbor.MobBounty.Utils.MobBountyMessage;
 import info.hawksharbor.MobBounty.Utils.MobBountyPlayerKillData;
 
 import org.bukkit.entity.Player;
@@ -36,8 +35,6 @@ public class MobBountyPlayerListener implements Listener
 		}
 		playerData.killStreak = 0;
 		MobBountyEcon._playerData.put(p.getName(), playerData);
-		MobBountyMessage.logToConsole(MobBountyEcon._playerData.keySet()
-				.toString());
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR)
@@ -54,8 +51,6 @@ public class MobBountyPlayerListener implements Listener
 		}
 		playerData.killStreak = 0;
 		MobBountyEcon._playerData.put(name, playerData);
-		MobBountyMessage.logToConsole(MobBountyEcon._playerData.keySet()
-				.toString());
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR)
@@ -70,7 +65,5 @@ public class MobBountyPlayerListener implements Listener
 		}
 		playerData.killStreak = 0;
 		MobBountyEcon._playerData.put(name, playerData);
-		MobBountyMessage.logToConsole(MobBountyEcon._playerData.keySet()
-				.toString());
 	}
 }

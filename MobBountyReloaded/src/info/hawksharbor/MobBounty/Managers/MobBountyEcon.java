@@ -224,7 +224,7 @@ public class MobBountyEcon
 			_playerData.put(player.getName(), playerData);
 			return result;
 		}
-		if (playerData.lastKill.equals(creature))
+		if (playerData.lastKill != null && playerData.lastKill.equals(creature))
 		{
 			double originalReward = result;
 			String returnRate = MobBountyAPI.instance.getConfigManager()
