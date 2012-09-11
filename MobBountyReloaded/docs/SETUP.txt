@@ -1,6 +1,8 @@
 #======MobBountyReloaded Setup======#
 Version: @VERSION@
 
+DISREGARD ANYTHING YOU MAY READ IN THIS FOR NOW.
+
 PERMISSIONS SETUP:
   Setting up permissions for MobBountyReloaded is extremely easy. Just give all of your players
   the "mbr.user.*" permission so that they can earn everywhere and be affected by all of the

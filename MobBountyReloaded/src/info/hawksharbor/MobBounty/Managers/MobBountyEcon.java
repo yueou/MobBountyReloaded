@@ -1,6 +1,7 @@
 package info.hawksharbor.MobBounty.Managers;
 
 import info.hawksharbor.MobBounty.MobBountyReloaded;
+import info.hawksharbor.MobBounty.Event.MobBountyPaymentEvent;
 import info.hawksharbor.MobBounty.Utils.MobBountyAPI;
 import info.hawksharbor.MobBounty.Utils.MobBountyConfFile;
 import info.hawksharbor.MobBounty.Utils.MobBountyCreature;
@@ -40,7 +41,7 @@ public class MobBountyEcon
 
 	private static Economy econ = null;
 
-	private static boolean fineAccount(String accountName, double amount)
+	public static boolean fineAccount(String accountName, double amount)
 	{
 		double absAmount = Math.abs(amount);
 		EconomyResponse r = econ.withdrawPlayer(accountName, absAmount);
@@ -54,7 +55,7 @@ public class MobBountyEcon
 	}
 
 	private static boolean finePlayer(Player player, double amount,
-			MobBountyCreature creature, LivingEntity entity)
+			MobBountyCreature creature)
 	{
 		double absAmount = Math.abs(amount);
 		EconomyResponse r = econ.withdrawPlayer(player.getName(), absAmount);
@@ -72,7 +73,7 @@ public class MobBountyEcon
 					.get(player.getName());
 			if (killData == null)
 				killData = new MobBountyPlayerKillData();
-			handleKillCache(player, entity, killData, amount);
+			handleKillCache(player, killData, amount);
 		}
 		else
 		{
@@ -103,7 +104,7 @@ public class MobBountyEcon
 	}
 
 	private static boolean finePlayerParty(Player player, double amount,
-			Player killer, MobBountyCreature creature, LivingEntity entity)
+			Player killer, MobBountyCreature creature)
 	{
 		double absAmount = Math.abs(amount);
 		EconomyResponse r = econ.withdrawPlayer(player.getName(), absAmount);
@@ -121,7 +122,7 @@ public class MobBountyEcon
 					.get(player.getName());
 			if (killData == null)
 				killData = new MobBountyPlayerKillData();
-			handleKillCache(player, entity, killData, amount);
+			handleKillCache(player, killData, amount);
 		}
 		else
 		{
@@ -290,7 +291,7 @@ public class MobBountyEcon
 		return baseReward;
 	}
 
-	private static void handleKillCache(Player killer, LivingEntity entity,
+	private static void handleKillCache(Player killer,
 			MobBountyPlayerKillData playerData, double amount)
 	{
 		playerData.cacheSize++;
@@ -464,18 +465,26 @@ public class MobBountyEcon
 		double multiplier = MobBountyAPI.instance.getExternalsManager()
 				.checkEarnMultiplier(killer, entity.getLocation(), entity);
 		double killerReward = deprReward *= multiplier;
-		handlePartyEarnings(killer, killerReward, creature, entity);
+		handlePartyEarnings(killer, killerReward, creature);
 		double finalReward = handlePluginEarnings(killer, killerReward);
 		double payReward = handleKillstreak(killer, entity, finalReward);
-		monetaryTransaction(killer, payReward, creature, entity);
+		MobBountyPaymentEvent paymentEvent = new MobBountyPaymentEvent(
+				killer.getName(), payReward, creature);
+		MobBountyAPI.instance.getPlugin().getServer().getPluginManager()
+				.callEvent(paymentEvent);
+		if (paymentEvent.isCancelled())
+		{
+			return;
+		}
+		monetaryTransaction(killer, paymentEvent.getAmount(), creature);
 	}
 
 	private static void handlePartyEarnings(Player killer, double baseReward,
-			MobBountyCreature creature, LivingEntity entity)
+			MobBountyCreature creature)
 	{
 		double base = baseReward;
-		splitHeroes(killer, base, creature, entity);
-		splitMCMMO(killer, base, creature, entity);
+		splitHeroes(killer, base, creature);
+		splitMCMMO(killer, base, creature);
 	}
 
 	private static double handlePluginEarnings(Player killer, double baseReward)
@@ -540,7 +549,7 @@ public class MobBountyEcon
 	}
 
 	private static boolean monetaryTransaction(Player player, double amount,
-			MobBountyCreature creature, LivingEntity entity)
+			MobBountyCreature creature)
 	{
 		if (!hasAccount(player))
 		{
@@ -549,9 +558,9 @@ public class MobBountyEcon
 			return false;
 		}
 		if (amount > 0.0)
-			return payPlayer(player, amount, creature, entity);
+			return payPlayer(player, amount, creature);
 		else if (amount < 0.0)
-			return finePlayer(player, amount, creature, entity);
+			return finePlayer(player, amount, creature);
 		else
 			return true;
 	}
@@ -574,8 +583,7 @@ public class MobBountyEcon
 	}
 
 	private static boolean monetaryTransactionParty(Player player,
-			double amount, Player killer, MobBountyCreature creature,
-			LivingEntity entity)
+			double amount, Player killer, MobBountyCreature creature)
 	{
 		if (!hasAccount(player))
 		{
@@ -586,14 +594,14 @@ public class MobBountyEcon
 		if (player.equals(killer))
 			return false;
 		if (amount > 0.0)
-			return payPlayerParty(player, amount, killer, creature, entity);
+			return payPlayerParty(player, amount, killer, creature);
 		else if (amount < 0.0)
-			return finePlayerParty(player, amount, killer, creature, entity);
+			return finePlayerParty(player, amount, killer, creature);
 		else
 			return true;
 	}
 
-	private static boolean payAccount(String accountName, double amount)
+	public static boolean payAccount(String accountName, double amount)
 	{
 		double absAmount = Math.abs(amount);
 		EconomyResponse r = econ.depositPlayer(accountName, absAmount);
@@ -606,7 +614,7 @@ public class MobBountyEcon
 	}
 
 	private static boolean payPlayer(Player player, double amount,
-			MobBountyCreature creature, LivingEntity entity)
+			MobBountyCreature creature)
 	{
 		double absAmount = Math.abs(amount);
 		EconomyResponse r = econ.depositPlayer(player.getName(), absAmount);
@@ -624,7 +632,7 @@ public class MobBountyEcon
 					.get(player.getName());
 			if (killData == null)
 				killData = new MobBountyPlayerKillData();
-			handleKillCache(player, entity, killData, amount);
+			handleKillCache(player, killData, amount);
 		}
 		else
 		{
@@ -658,7 +666,7 @@ public class MobBountyEcon
 	}
 
 	private static boolean payPlayerParty(Player player, double amount,
-			Player killer, MobBountyCreature creature, LivingEntity entity)
+			Player killer, MobBountyCreature creature)
 	{
 		double absAmount = Math.abs(amount);
 		EconomyResponse r = econ.depositPlayer(player.getName(), absAmount);
@@ -676,7 +684,7 @@ public class MobBountyEcon
 					.get(player.getName());
 			if (killData == null)
 				killData = new MobBountyPlayerKillData();
-			handleKillCache(player, entity, killData, amount);
+			handleKillCache(player, killData, amount);
 		}
 		else
 		{
@@ -731,7 +739,7 @@ public class MobBountyEcon
 	}
 
 	private static void splitHeroes(Player killer, double base,
-			MobBountyCreature creature, LivingEntity entity)
+			MobBountyCreature creature)
 	{
 		String splitString = MobBountyAPI.instance.getConfigManager()
 				.getProperty(MobBountyConfFile.HEROES, "splitAmongParty");
@@ -756,7 +764,7 @@ public class MobBountyEcon
 					for (Hero h : party.getMembers())
 					{
 						monetaryTransactionParty(h.getPlayer(), split, killer,
-								creature, entity);
+								creature);
 					}
 				}
 			}
@@ -764,7 +772,7 @@ public class MobBountyEcon
 	}
 
 	private static void splitMCMMO(Player killer, double base,
-			MobBountyCreature creature, LivingEntity entity)
+			MobBountyCreature creature)
 	{
 		String splitString = MobBountyAPI.instance.getConfigManager()
 				.getProperty(MobBountyConfFile.MCMMO, "splitAmongParty");
@@ -786,8 +794,7 @@ public class MobBountyEcon
 					double split = (base / (party.getOnlineMembers().size()));
 					for (Player p : party.getOnlineMembers())
 					{
-						monetaryTransactionParty(p, split, killer, creature,
-								entity);
+						monetaryTransactionParty(p, split, killer, creature);
 					}
 				}
 			}

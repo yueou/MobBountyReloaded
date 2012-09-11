@@ -17,6 +17,7 @@ import java.util.List;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
 import multitallented.redcastlemedia.bukkit.herostronghold.HeroStronghold;
+import net.jzx7.regios.RegiosPlugin;
 import net.sacredlabyrinth.Phaed.PreciousStones.FieldFlag;
 import net.sacredlabyrinth.Phaed.PreciousStones.PreciousStones;
 import net.sacredlabyrinth.Phaed.PreciousStones.vectors.Field;
@@ -56,10 +57,6 @@ import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
-import couk.Adamki11s.Regios.API.RegiosAPI;
-import couk.Adamki11s.Regios.Main.Regios;
-import couk.Adamki11s.Regios.Regions.GlobalRegionManager;
-
 public class MobBountyExternals
 {
 
@@ -81,8 +78,7 @@ public class MobBountyExternals
 	private MobBountyPermissions perms;
 	private PluginManager pm;
 	private PreciousStones preciousStones;
-	private Regios regios;
-	private RegiosAPI regiosAPI;
+	private RegiosPlugin regios;
 	private Residence residence;
 	private RoadProtector roadProtector;
 	private SimpleClans simpleClans;
@@ -645,18 +641,18 @@ public class MobBountyExternals
 		return 1.0;
 	}
 
-	private Regios checkRegios()
+	private RegiosPlugin checkRegios()
 	{
 		Plugin plugin = pm.getPlugin("Regios");
 
-		if (plugin == null || !(plugin instanceof Regios))
+		if (plugin == null || !(plugin instanceof RegiosPlugin))
 		{
 			return null;
 		}
 
 		MobBountyMessage.logToConsole("Regios hooked.");
 		hooks.add("Regios");
-		return (Regios) plugin;
+		return (RegiosPlugin) plugin;
 	}
 
 	private double checkRegiosMult(Player player, Location location)
@@ -1136,7 +1132,7 @@ public class MobBountyExternals
 		String cRS = configs.getProperty(MobBountyConfFile.REGIOS,
 				"allowPaymentInRegion");
 		boolean cR = Boolean.parseBoolean(cRS);
-		if (GlobalRegionManager.getRegion(location) != null)
+		if (regios.getRegions(location) != null)
 		{
 			if (perms.hasPermission(player, "mbr.user.collect.regios"))
 				return cR;
@@ -1374,14 +1370,9 @@ public class MobBountyExternals
 		return preciousStones;
 	}
 
-	public Regios getRegios()
+	public RegiosPlugin getRegios()
 	{
 		return regios;
-	}
-
-	public RegiosAPI getRegiosAPI()
-	{
-		return regiosAPI;
 	}
 
 	public Residence getResidence()
