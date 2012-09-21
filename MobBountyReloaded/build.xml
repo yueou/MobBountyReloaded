@@ -22,32 +22,11 @@
 			</classpath>
 		</javac>
 	</target>
-
-	<target name="document" depends="compile" description="Create JavaDocs">
-		<delete dir="javadoc" includes="**/*" failonerror="false" />
-	    <javadoc packagenames="info.hawksharbor.*"
-	                    sourcepath="src"
-	                    destdir="javadoc"
-	                    access="public"
-	                    windowtitle="MobBountyReloaded"
-	                    verbose="false"
-	                    author="true"
-	                    version="true">
-	        <link href="http://java.sun.com/j2se/1.5.0/docs/api/" />
-	        <link href="http://jd.bukkit.org/apidocs/" />
-
-	        <classpath>
-	            <fileset dir="lib" includes="**/*.jar"/>
-	        </classpath>
-	        <bottom>
-	            <![CDATA[<b>ToppleTheNun, 2012</b>]]>
-	        </bottom>
-	    </javadoc>
-	</target>
 	
-	<target name="package" depends="document" description="Make the distributable jar file">
+	<target name="package" depends="compile" description="Make the distributable jar file">
 		<copy todir="bin" overwrite="true">
-			<fileset dir="." includes="plugin.yml" />
+			<fileset dir="resources" includes="plugin.yml" />
+			<fileset dir="resources" includes="license.txt" />
 			<!-- 
             This filterset tells Ant to replace @VERSION@ in the yml file with whatever is in the property env.BUILD_NUMBER, which Jenkins passes in 
             -->

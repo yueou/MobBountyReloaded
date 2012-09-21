@@ -763,8 +763,9 @@ public class MobBountyEcon
 					double split = (base / (party.getMembers().size()));
 					for (Hero h : party.getMembers())
 					{
-						monetaryTransactionParty(h.getPlayer(), split, killer,
-								creature);
+						if (!h.getPlayer().equals(killer))
+							monetaryTransactionParty(h.getPlayer(), split,
+									killer, creature);
 					}
 				}
 			}
@@ -794,7 +795,8 @@ public class MobBountyEcon
 					double split = (base / (party.getOnlineMembers().size()));
 					for (Player p : party.getOnlineMembers())
 					{
-						monetaryTransactionParty(p, split, killer, creature);
+						if (!p.equals(killer))
+							monetaryTransactionParty(p, split, killer, creature);
 					}
 				}
 			}
