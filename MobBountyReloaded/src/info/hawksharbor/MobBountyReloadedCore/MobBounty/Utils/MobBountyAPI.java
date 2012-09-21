@@ -19,7 +19,9 @@ import java.util.UUID;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.w3c.dom.Document;
@@ -247,5 +249,30 @@ public class MobBountyAPI
 		{
 		}
 		return currentVersion;
+	}
+
+	public boolean nearby(Player player, Player p, double dist)
+	{
+		double radius = dist;
+		World playerWorld;
+		Location playerLocation;
+		World pWorld;
+		Location pLocation;
+		double distance;
+
+		playerLocation = player.getLocation();
+		pLocation = p.getLocation();
+
+		playerWorld = playerLocation.getWorld();
+		pWorld = pLocation.getWorld();
+
+		if (playerWorld != pWorld)
+		{
+			return false;
+		}
+
+		distance = playerLocation.distance(pLocation);
+
+		return (distance <= radius);
 	}
 }

@@ -281,6 +281,8 @@ public class MobBountyConfigs
 		case KILLSTREAK:
 			CommentedYamlConfiguration killConf = new CommentedYamlConfiguration();
 			killConf.set("broadcastKillstreak", true);
+			killConf.set("killStreakRange.use", false);
+			killConf.set("killStreakRange.blockRange", new Integer(100));
 			killConf.set("killStreakMultiply", false);
 			killConf.set("KillBonus.5", new Double(5.0));
 			killConf.set("KillBonus.10", new Double(10.0));
@@ -397,6 +399,8 @@ public class MobBountyConfigs
 			worldguardConf.set("useWorldGuard", false);
 			worldguardConf.set("allowPaymentInsideRegions", true);
 			worldguardConf.set("regionMultiplierRate", new Double(1.0));
+			worldguardConf.set("regionBlacklist",
+					Arrays.asList(new String[] {}));
 			try
 			{
 				worldguardConf.save(file);

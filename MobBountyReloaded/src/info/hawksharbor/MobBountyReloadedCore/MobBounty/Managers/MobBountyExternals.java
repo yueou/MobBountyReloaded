@@ -56,6 +56,7 @@ import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 public class MobBountyExternals
 {
@@ -1298,6 +1299,17 @@ public class MobBountyExternals
 		if (worldguard.getRegionManager(location.getWorld())
 				.getApplicableRegions(location).size() != 0)
 		{
+			for (ProtectedRegion pr : worldguard.getRegionManager(
+					location.getWorld()).getApplicableRegions(location))
+			{
+				List<String> regions = MobBountyAPI.instance.getConfigManager()
+						.getPropertyList(MobBountyConfFile.WORLDGUARD,
+								"regionBlacklist");
+				if (regions != null && regions.contains(pr.getId()))
+				{
+					return false;
+				}
+			}
 			if (perms.hasPermission(player, "mbr.user.collect.worldguard"))
 				return cR;
 			return false;

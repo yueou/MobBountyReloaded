@@ -18,7 +18,6 @@ import java.util.Random;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.economy.EconomyResponse;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -730,11 +729,36 @@ public class MobBountyEcon
 			return;
 		String broadcast = MobBountyAPI.instance.getLocaleManager().getString(
 				"BroadcastStreak");
-		if (broadcast != null)
+		broadcast = broadcast.replace("%P", killer.getName()).replace("%A",
+				String.valueOf(playerData.killStreak));
+		booleanTest = MobBountyAPI.instance.getConfigManager().getProperty(
+				MobBountyConfFile.KILLSTREAK, "killStreakRange.use");
+		if (booleanTest == null)
 		{
-			broadcast = broadcast.replace("%P", killer.getName()).replace("%A",
-					String.valueOf(playerData.killStreak));
-			Bukkit.getServer().broadcastMessage(broadcast);
+			MobBountyAPI.instance.getConfigManager().setProperty(
+					MobBountyConfFile.KILLSTREAK, "killStreakRange.use", false);
+			booleanTest = "true";
+		}
+		if (!"true".equalsIgnoreCase(booleanTest))
+		{
+			String di = MobBountyAPI.instance.getConfigManager().getProperty(
+					MobBountyConfFile.KILLSTREAK, "killStreakRange.blockRange");
+			int dist = MobBountyUtils.getInt(di, 50);
+			if (broadcast != null)
+			{
+				for (Player p : _plugin.getServer().getOnlinePlayers())
+				{
+					if (_plugin.getAPIManager().nearby(killer, p, dist))
+						p.sendMessage(broadcast);
+				}
+			}
+		}
+		else
+		{
+			if (broadcast != null)
+			{
+				_plugin.getServer().broadcastMessage(broadcast);
+			}
 		}
 	}
 
