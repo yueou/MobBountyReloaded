@@ -103,7 +103,10 @@ public class MobBountyDrops
 								{
 									break;
 								}
-
+								if (dropInfo.quantity <= 0)
+								{
+									break;
+								}
 								if (dropInfo.chance == 100)
 								{
 									if (dropInfo.dataID == 0)
