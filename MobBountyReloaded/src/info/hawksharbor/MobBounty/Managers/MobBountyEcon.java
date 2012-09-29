@@ -233,7 +233,6 @@ public class MobBountyEcon
 			playerData.lastRewardPercentage = playerData.lastRewardPercentage -= Double
 					.valueOf(returnRate);
 			double reward = result * playerData.lastRewardPercentage;
-			MobBountyMessage.logToConsole("result: " + String.valueOf(reward));
 			if (reward <= 0.0 && originalReward >= 0.0)
 			{
 				reward = 0.0;
@@ -736,10 +735,10 @@ public class MobBountyEcon
 		if (booleanTest == null)
 		{
 			MobBountyAPI.instance.getConfigManager().setProperty(
-					MobBountyConfFile.KILLSTREAK, "killStreakRange.use", false);
+					MobBountyConfFile.KILLSTREAK, "killStreakRange.use", true);
 			booleanTest = "true";
 		}
-		if (!"true".equalsIgnoreCase(booleanTest))
+		if ("true".equalsIgnoreCase(booleanTest))
 		{
 			String di = MobBountyAPI.instance.getConfigManager().getProperty(
 					MobBountyConfFile.KILLSTREAK, "killStreakRange.blockRange");
@@ -749,7 +748,9 @@ public class MobBountyEcon
 				for (Player p : _plugin.getServer().getOnlinePlayers())
 				{
 					if (_plugin.getAPIManager().nearby(killer, p, dist))
+					{
 						p.sendMessage(broadcast);
+					}
 				}
 			}
 		}
