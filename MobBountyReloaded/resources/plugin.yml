@@ -1,5 +1,5 @@
 name: MobBountyReloaded
-main: info.hawksharbor.MobBountyReloadedCore.MobBounty.MobBountyReloaded
+main: info.hawksharbor.MobBounty.MobBountyReloaded
 version: @VERSION@
 authors: [ToppleTheNun, MCForger]
 description: Simple plugin that pays and/or fines players for killing mobs.
