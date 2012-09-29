@@ -44,21 +44,56 @@ public class MobBountyConfigs
 		{
 		case GENERAL:
 			CommentedYamlConfiguration generalConf = new CommentedYamlConfiguration();
+			generalConf.addComment("locale",
+					"The locale version to use in locale.yml");
 			generalConf.set("locale", "en");
+			generalConf
+					.addComment("useMobSpawnerProtection",
+							"Whether or not to use the mobSpawnerProtection options below");
 			generalConf.set("useMobSpawnerProtection", false);
+			generalConf.addComment("mobSpawnerProtectionRadius",
+					"Distance from the spawner");
 			generalConf.set("mobSpawnerProtectionRadius", new Integer(5));
+			generalConf.addComment("mobSpawnerProtectionRate",
+					"What to multiply earnings by");
 			generalConf.set("mobSpawnerProtectionRate", new Double(0.0));
+			generalConf.addComment("spawnedMobProtection",
+					"Prevent any kind of spawned mob from being earned for");
 			generalConf.set("spawnedMobProtection", false);
+			generalConf.addComment("useDepreciativeReturn",
+					"Whether or not to use Depreciative Return");
 			generalConf.set("useDepreciativeReturn", false);
+			generalConf
+					.addComment("depreciativeReturnRate",
+							"How much (percentage-wise) of the original reward to take away each kill");
 			generalConf.set("depreciativeReturnRate", new Double(0.1));
+			generalConf.addComment("timeAfterLogin",
+					"Can't earn for this many seconds after logging in");
 			generalConf.set("timeAfterLogin", new Long(10));
+			generalConf.addComment("mobCap.use",
+					"Whether or not to use the mob cap");
 			generalConf.set("mobCap.use", false);
+			generalConf
+					.addComment("mobCap.limit",
+							"How many mobs can be killed within a <distance> of first kill");
 			generalConf.set("mobCap.limit", new Integer(30));
+			generalConf.addComment("mobCap.distance",
+					"Distance from first kill for mobCap");
 			generalConf.set("mobCap.distance", new Integer(30));
+			generalConf.addComment("killCache.use",
+					"Whether or not to use killCache");
 			generalConf.set("killCache.use", false);
+			generalConf.addComment("killCache.timeLimit",
+					"Milliseconds between earning updates");
 			generalConf.set("killCache.timeLimit", new Integer(30000));
+			generalConf.addComment("preventCreativeEarning",
+					"Whether or not to prevent earning in creative");
 			generalConf.set("preventCreativeEarning", false);
+			generalConf.addComment("debugMode",
+					"Whether or not the plugin is in debugMode");
 			generalConf.set("debugMode", false);
+			generalConf.addComment("configsVersion",
+					"Version of configs - don't touch");
 			generalConf.set("configsVersion",
 					MobBountyAPI.instance.getConfigVersion());
 			try
