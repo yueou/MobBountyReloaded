@@ -742,7 +742,7 @@ public class MobBountyEcon
 		{
 			String di = MobBountyAPI.instance.getConfigManager().getProperty(
 					MobBountyConfFile.KILLSTREAK, "killStreakRange.blockRange");
-			int dist = MobBountyUtils.getInt(di, 50);
+			int dist = MobBountyUtils.getInt(di, 100);
 			if (broadcast != null)
 			{
 				for (Player p : _plugin.getServer().getOnlinePlayers())

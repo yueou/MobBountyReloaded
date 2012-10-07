@@ -317,7 +317,7 @@ public class MobBountyConfigs
 			CommentedYamlConfiguration killConf = new CommentedYamlConfiguration();
 			killConf.set("broadcastKillstreak", true);
 			killConf.set("killStreakRange.use", false);
-			killConf.set("killStreakRange.blockRange", new Integer(100));
+			killConf.set("killStreakRange.blockRange", new Double(100.0));
 			killConf.set("killStreakMultiply", false);
 			killConf.set("KillBonus.5", new Double(5.0));
 			killConf.set("KillBonus.10", new Double(10.0));
