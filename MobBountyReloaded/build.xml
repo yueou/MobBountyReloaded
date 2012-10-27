@@ -1,4 +1,5 @@
 <project name="MobBountyReloaded" default="package">
+	<property environment="env" />
 
 	<target name="init" description="Initialize directories, etc.">
 		<mkdir dir="bin" />
