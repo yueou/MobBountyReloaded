@@ -1,7 +1,4 @@
 <project name="MobBountyReloaded" default="package">
-	<!-- Use a default build number of zero unless a real value is passed in by Jenkins -->
-	<property environment="env" />
-	<property name="env.BUILD_NUMBER" value="0" />
 
 	<target name="init" description="Initialize directories, etc.">
 		<mkdir dir="bin" />
@@ -25,11 +22,11 @@
 	
 	<target name="document" depends="compile" description="Create JavaDocs">
 	    <delete dir="javadoc" includes="**/*" failonerror="false" />
-	        <javadoc packagenames="info.hawksharbor.*"
+	        <javadoc packagenames="org.inesgar.*"
 	                        sourcepath="src"
 	                        destdir="javadoc"
 	                        access="public"
-	                        windowtitle="MobBountyReloadedCore"
+	                        windowtitle="MobBountyReloaded"
 	                        verbose="false"
 	                        author="true"
 	                        version="true">
@@ -53,7 +50,7 @@
             This filterset tells Ant to replace @VERSION@ in the yml file with whatever is in the property env.BUILD_NUMBER, which Jenkins passes in 
             -->
 			<filterset>
-				<filter token="VERSION" value="${env.BUILD_NUMBER}" />
+				<filter token="VERSION" value="${bamboo.buildNumber}" />
 			</filterset>
 		</copy>
         <copy todir="." overwrite="true">
@@ -62,19 +59,22 @@
             This filterset tells Ant to replace @VERSION@ in the txt file with whatever is in the property env.BUILD_NUMBER, which Jenkins passes in 
             -->
             <filterset>
-                <filter token="VERSION" value="${env.BUILD_NUMBER}" />
+                <filter token="VERSION" value="${bamboo.buildNumber}" />
             </filterset>
         </copy>
-		<jar basedir="bin" jarfile="${ant.project.name}_v${env.BUILD_NUMBER}.jar" defaultexcludes="true" excludes="javadoc/*,docs/*,lib/*"/>
-		<jar basedir="." jarfile="${ant.project.name}_v${env.BUILD_NUMBER}_source.jar" defaultexcludes="true" excludes="javadoc/*"/>
-		<zip basedir="." destfile="dist/${ant.project.name}_v${env.BUILD_NUMBER}.zip" defaultexcludes="true" includes="jar/${ant.project.name}_v${env.BUILD_NUMBER}.jar">
-			<fileset dir="." includes="${ant.project.name}_v${env.BUILD_NUMBER}.jar" defaultexcludes="true"/>
+		<copy todir="." overwrite="true">
+		    <fileset dir="resources" includes="license.txt" />
+		</copy>
+		<jar basedir="bin" jarfile="${ant.project.name}_v${bamboo.buildNumber}.jar" defaultexcludes="true" excludes="javadoc/*,docs/*,lib/*"/>
+		<jar basedir="." jarfile="${ant.project.name}_v${bamboo.buildNumber}_source.jar" defaultexcludes="true" excludes="javadoc/*"/>
+		<zip basedir="." destfile="dist/${ant.project.name}_v${bamboo.buildNumber}.zip" defaultexcludes="true" includes="jar/${ant.project.name}_v${env.BUILD_NUMBER}.jar">
+			<fileset dir="." includes="${ant.project.name}_v${bamboo.buildNumber}.jar" defaultexcludes="true"/>
 			<fileset dir="." includes="SETUP.txt" defaultexcludes="true"/>
 		</zip>
-		<copy file="${ant.project.name}_v${env.BUILD_NUMBER}.jar" todir="dist"/>
-		<copy file="${ant.project.name}_v${env.BUILD_NUMBER}_source.jar" todir="dist"/>
-		<delete file="${ant.project.name}_v${env.BUILD_NUMBER}.jar" />
-		<delete file="${ant.project.name}_v${env.BUILD_NUMBER}_source.jar" />
+		<copy file="${ant.project.name}_v${bamboo.buildNumber}.jar" todir="dist"/>
+		<copy file="${ant.project.name}_v${bamboo.buildNumber}_source.jar" todir="dist"/>
+		<delete file="${ant.project.name}_v${bamboo.buildNumber}.jar" />
+		<delete file="${ant.project.name}_v${bamboo.buildNumber}_source.jar" />
 		<delete file="SETUP.txt" />
 	</target>
 
