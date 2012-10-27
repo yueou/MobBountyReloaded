@@ -65,7 +65,7 @@ public class MobBountyPermission
 				if (has != null)
 					sender.sendMessage(getPlugin().getAPI().formatString(has,
 							sender.getName(), "", "", "", "", "", "", "", node,
-							""));
+							"", ""));
 			}
 			return true;
 		}
@@ -73,7 +73,8 @@ public class MobBountyPermission
 		{
 			if (lacks != null)
 				sender.sendMessage(getPlugin().getAPI().formatString(lacks,
-						sender.getName(), "", "", "", "", "", "", "", node, ""));
+						sender.getName(), "", "", "", "", "", "", "", node, "",
+						""));
 		}
 		return false;
 	}

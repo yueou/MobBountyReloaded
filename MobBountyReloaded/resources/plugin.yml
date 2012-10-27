@@ -176,6 +176,9 @@ permissions:
     mbr.admin.command.mbem:
         description: Allows user to change environment multipliers.
         default: op
+    mbr.admin.command.mbtm:
+        description: Allows user to change time multipliers.
+        default: op
 commands:
     mobbountyload:
         description: Allows user to reload the MBR configs.
@@ -213,3 +216,7 @@ commands:
         description: Allows user to change an environment multiplier.
         aliases: [mbemulti, mbem, mobbountyem, mbountyemulti, mbountyemulti,mbountyem,mobbem,mobbemulti]
         usage: /<command> <environment> <amount>
+    mobbountytimemulti:
+        description: Allows user to change a time multiplier.
+        aliases: [mbtmulti, mbtm, mobbountytm, mbountytmulti, mbountytmulti,mbountytm,mobbem,mobbtmulti]
+        usage: /<command> <time> <amount>

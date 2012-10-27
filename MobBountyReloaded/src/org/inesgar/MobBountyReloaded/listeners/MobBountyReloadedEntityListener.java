@@ -85,18 +85,21 @@ public class MobBountyReloadedEntityListener implements Listener
 			{
 				return;
 			}
-			player.sendMessage(getMBR().getAPI().formatString(
-					string,
-					player.getName(),
-					cde.getCreature().getName(),
-					player.getWorld().getName(),
-					amt,
-					amt,
-					amt,
-					"",
-					"",
-					"mbr.user.collect."
-							+ cde.getCreature().getName().toLowerCase(), ""));
+			player.sendMessage(getMBR()
+					.getAPI()
+					.formatString(
+							string,
+							player.getName(),
+							cde.getCreature().getName(),
+							player.getWorld().getName(),
+							amt,
+							amt,
+							amt,
+							"",
+							"",
+							"mbr.user.collect."
+									+ cde.getCreature().getName().toLowerCase(),
+							"", ""));
 		}
 		else if (amount < 0.0)
 		{
@@ -105,18 +108,21 @@ public class MobBountyReloadedEntityListener implements Listener
 			{
 				return;
 			}
-			player.sendMessage(getMBR().getAPI().formatString(
-					string,
-					player.getName(),
-					cde.getCreature().getName(),
-					player.getWorld().getName(),
-					amt,
-					amt,
-					amt,
-					"",
-					"",
-					"mbr.user.collect."
-							+ cde.getCreature().getName().toLowerCase(), ""));
+			player.sendMessage(getMBR()
+					.getAPI()
+					.formatString(
+							string,
+							player.getName(),
+							cde.getCreature().getName(),
+							player.getWorld().getName(),
+							amt,
+							amt,
+							amt,
+							"",
+							"",
+							"mbr.user.collect."
+									+ cde.getCreature().getName().toLowerCase(),
+							"", ""));
 		}
 	}
 }

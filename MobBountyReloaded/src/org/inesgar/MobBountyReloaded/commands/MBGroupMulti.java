@@ -65,7 +65,7 @@ public class MBGroupMulti implements CommandExecutor
 						{
 							message = getPlugin().getAPI().formatString(
 									message, player.getName(), "", args[0],
-									amount, amount, amount, "", "", "", "");
+									amount, amount, amount, "", "", "", "", "");
 							sender.sendMessage(message);
 						}
 					}

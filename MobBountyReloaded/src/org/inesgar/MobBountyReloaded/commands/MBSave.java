@@ -22,11 +22,10 @@ public class MBSave implements CommandExecutor
 		if (!getPlugin().getPermissionManager().hasPermission(sender,
 				"mbr.admin.command.save"))
 		{
-			message = getPlugin().getAPI()
-					.formatString(
-							getPlugin().getLocaleManager()
-									.getString("NoAccess"), "", "", "", 0.0,
-							0.0, 0.0, "", "", "mbr.admin.command.save", "");
+			message = getPlugin().getAPI().formatString(
+					getPlugin().getLocaleManager().getString("NoAccess"), "",
+					"", "", 0.0, 0.0, 0.0, "", "", "mbr.admin.command.save",
+					"", "");
 			if (message != null)
 			{
 				sender.sendMessage(message);
@@ -36,7 +35,7 @@ public class MBSave implements CommandExecutor
 		getPlugin().getConfigManager().saveConfig();
 		message = getPlugin().getAPI().formatString(
 				getPlugin().getLocaleManager().getString("MBSSaved"), "", "",
-				"", 0.0, 0.0, 0.0, "", "", "mbr.admin.command.save", "");
+				"", 0.0, 0.0, 0.0, "", "", "mbr.admin.command.save", "", "");
 		if (message != null)
 		{
 			sender.sendMessage(message);

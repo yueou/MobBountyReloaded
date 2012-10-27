@@ -38,7 +38,7 @@ public class MobBountyAPI
 	public String formatString(String string, String playerName,
 			String creatureName, String worldName, double amount, double a1,
 			double a2, String commandName, String commandHelp,
-			String permission, String environment)
+			String permission, String environment, String time)
 	{
 		String message = string;
 		message = message.replace("%P", playerName);
@@ -54,13 +54,14 @@ public class MobBountyAPI
 		message = message.replace("%H", commandHelp);
 		message = message.replace("%D", permission);
 		message = message.replace("%E", environment);
+		message = message.replace("%T", time);
 		return message;
 	}
 
 	public String formatString(String string, String playerName,
 			String creatureName, String worldName, String amount, String a1,
 			String a2, String commandName, String commandHelp,
-			String permission, String environment)
+			String permission, String environment, String time)
 	{
 		String message = string;
 		message = message.replace("%P", playerName);
@@ -73,6 +74,7 @@ public class MobBountyAPI
 		message = message.replace("%H", commandHelp);
 		message = message.replace("%D", permission);
 		message = message.replace("%E", environment);
+		message = message.replace("%T", environment);
 		return message;
 	}
 

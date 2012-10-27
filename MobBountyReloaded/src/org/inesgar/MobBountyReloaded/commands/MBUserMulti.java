@@ -64,7 +64,8 @@ public class MBUserMulti implements CommandExecutor
 								amount.toString());
 						message = getPlugin().getAPI().formatString(message,
 								args[0], "", player.getWorld().getName(), "",
-								"", "", "", "", "mbr.admin.command.mbum", "");
+								"", "", "", "", "mbr.admin.command.mbum", "",
+								"");
 						sender.sendMessage(message);
 					}
 				}

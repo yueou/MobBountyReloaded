@@ -5,29 +5,37 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.inesgar.MobBountyReloaded.MobBountyReloaded;
+import org.inesgar.MobBountyReloaded.utils.MobBountyTime;
 import org.inesgar.MobBountyReloaded.utils.configuration.MobBountyReloadedConfFile;
 
-public class MBEnvMulti implements CommandExecutor
+public class MBTimeMulti implements CommandExecutor
 {
 	private MobBountyReloaded _plugin;
 
-	public MBEnvMulti(MobBountyReloaded plugin)
+	public MBTimeMulti(MobBountyReloaded plugin)
 	{
 		setPlugin(plugin);
 	}
 
 	private void commandUsage(CommandSender sender, String command)
 	{
-		String message = getPlugin().getLocaleManager().getString("MBEMUsage");
+		String message = getPlugin().getLocaleManager().getString("MBTMUsage");
 		if (message != null)
 		{
-			message = message.replace("%C", command);
+			message = getPlugin().getAPI().formatString(message,
+					sender.getName(), "", "", 0.0, 0.0, 0.0, command, "", "",
+					"", "");
 			sender.sendMessage(message);
 		}
 
-		message = getPlugin().getLocaleManager().getString("MBEMEnvs");
+		message = getPlugin().getLocaleManager().getString("MBTMTimes");
 		if (message != null)
+		{
+			message = getPlugin().getAPI().formatString(message,
+					sender.getName(), "", "", 0.0, 0.0, 0.0, command, "", "",
+					"", "");
 			sender.sendMessage(message);
+		}
 	}
 
 	public boolean onCommand(CommandSender sender, Command command,
@@ -39,9 +47,8 @@ public class MBEnvMulti implements CommandExecutor
 			return true;
 		}
 		Player player = ((Player) sender);
-
 		if (getPlugin().getPermissionManager().hasPermission(player,
-				"mbr.command.mbem"))
+				"mbr.admin.command.mbtm"))
 		{
 			if (args.length == 2)
 			{
@@ -56,49 +63,25 @@ public class MBEnvMulti implements CommandExecutor
 					{
 						amount = 1.0;
 					}
+					MobBountyTime time = MobBountyTime
+							.getTimeFromString(args[0]);
 
-					if (args[0].equalsIgnoreCase("end"))
+					if (time != null)
 					{
 						getPlugin().getConfigManager().setProperty(
 								MobBountyReloadedConfFile.MULTIPLIERS,
-								"Environment.End", amount);
-						String message = getPlugin().getLocaleManager()
-								.getString("MBEMChange");
-						if (message != null)
-						{
-							message = message.replace("%E", "end").replace(
-									"%A", amount.toString());
-							sender.sendMessage(message);
-						}
-					}
-					else if (args[0].equalsIgnoreCase("nether"))
-					{
-						getPlugin().getConfigManager().setProperty(
-								MobBountyReloadedConfFile.MULTIPLIERS,
-								"Environment.Nether", amount);
+								"Time." + time.getName(), amount);
 
 						String message = getPlugin().getLocaleManager()
-								.getString("MBEMChange");
-						if (message != null)
-						{
-							message = message.replace("%E", "nether").replace(
-									"%A", amount.toString());
-							sender.sendMessage(message);
-						}
-					}
-					else if (args[0].equalsIgnoreCase("normal"))
-					{
-						getPlugin().getConfigManager().setProperty(
-								MobBountyReloadedConfFile.MULTIPLIERS,
-								"Environment.Normal", amount);
-
-						String message = getPlugin().getLocaleManager()
-								.getString("MBEMChange");
+								.getString("MBTMChange");
 						if (message != null)
 						{
 							message = getPlugin().getAPI().formatString(
-									message, player.getName(), "", args[0],
-									amount, amount, amount, "", "", "", "", "");
+									message, sender.getName(), "", "", amount,
+									amount, amount, command.getName(), "", "",
+									"", time.getName());
+							message = message.replace("%T", time.getName())
+									.replace("%A", amount.toString());
 							sender.sendMessage(message);
 						}
 					}

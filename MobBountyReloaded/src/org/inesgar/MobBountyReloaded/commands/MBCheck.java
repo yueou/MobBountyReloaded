@@ -96,7 +96,7 @@ public class MBCheck implements CommandExecutor
 													(from + to) / 2, from, to,
 													"", "",
 													"mbr.user.command.check",
-													"");
+													"", "");
 									player.sendMessage(message);
 								}
 							}
@@ -114,7 +114,7 @@ public class MBCheck implements CommandExecutor
 													(from + to) / 2, from, to,
 													"", "",
 													"mbr.user.command.check",
-													"");
+													"", "");
 									player.sendMessage(message);
 								}
 							}
@@ -139,7 +139,7 @@ public class MBCheck implements CommandExecutor
 													world.getName(), reward,
 													reward, reward, "", "",
 													"mbr.user.command.check",
-													"");
+													"", "");
 									player.sendMessage(message);
 								}
 							}
@@ -156,7 +156,7 @@ public class MBCheck implements CommandExecutor
 													world.getName(), reward,
 													reward, reward, "", "",
 													"mbr.user.command.check",
-													"");
+													"", "");
 									player.sendMessage(message);
 								}
 							}
