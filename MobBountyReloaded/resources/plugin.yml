@@ -163,6 +163,9 @@ permissions:
     mbr.user.command.check:
         description: Allows user to check value of creatures.
         default: op
+    mbr.user.finebypass:
+        description: Allows user to bypass fines.
+        default: false
     mbr.user.*:
         description: Gives all user permissions.
         default: op

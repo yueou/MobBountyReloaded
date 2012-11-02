@@ -57,6 +57,12 @@ public class MobBountyReloadedEntityListener implements Listener
 		}
 		double amount = getMBR().getAPI().getEntityValue(player.getName(),
 				creature);
+		if (amount < 0.0
+				&& getMBR().getPermissionManager().hasPermission(player,
+						"mbr.user.finebypass"))
+		{
+			return;
+		}
 		MobBountyReloadedPaymentEvent mbrpe = new MobBountyReloadedPaymentEvent(
 				player.getName(), creature, amount);
 		getMBR().getServer().getPluginManager().callEvent(mbrpe);

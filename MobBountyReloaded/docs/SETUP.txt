@@ -65,6 +65,10 @@ Here is a list of all of the commands that come with the core of MobBountyReload
 
 Here is a list of all MobBountyReloaded permissions.
 
+'mbr.user.*' does not include 'mbr.user.finebypass' for a reason: it would be easier for admins
+    to give their users 'mbr.user.*' and not have to worry about 'mbr.user.finebypass' than to
+    have to negate it.
+
     mbr.user.collect.normal:
         description: Required for users to be able to collect rewards/fines.
         default: op
@@ -223,6 +227,9 @@ Here is a list of all MobBountyReloaded permissions.
     mbr.user.command.check:
         description: Allows user to check value of creatures.
         default: op
+    mbr.user.finebypass:
+        description: Allows user to bypass fines.
+        default: false
     mbr.user.*:
         description: Gives all user permissions.
         default: op
@@ -296,7 +303,7 @@ Here is a list of all MobBountyReloaded permissions.
         description: Allows user to receive debug messages.
         default: op
     mbr.admin.command.*:
-        description: Gives all user permissions.
+        description: Gives all admin command permissions.
         default: op
         children:
             mbr.admin.command.load: true
@@ -309,7 +316,7 @@ Here is a list of all MobBountyReloaded permissions.
             mbr.admin.command.mbtm: true
             mbr.admin.command.mbg: true
     mbr.admin.*:
-        description: Gives all user permissions.
+        description: Gives all admin permissions.
         default: op
         children:
             mbr.admin.command.load: true
@@ -323,7 +330,7 @@ Here is a list of all MobBountyReloaded permissions.
             mbr.admin.command.mbg: true
             mbr.admin.debug: true
     mbr.*:
-        description: Gives all user permissions.
+        description: Gives all permissions.
         default: op
         children:
             mbr.user.collect.normal: true
@@ -364,6 +371,7 @@ Here is a list of all MobBountyReloaded permissions.
             mbr.user.collect.wolf: true
             mbr.user.collect.zombie: true
             mbr.user.command.check: true
+            mbr.user.finebypass: true
             mbr.admin.command.load: true
             mbr.admin.command.save: true
             mbr.admin.command.reward: true
