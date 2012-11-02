@@ -25,7 +25,7 @@ public class MBLoad implements CommandExecutor
 			message = getPlugin().getAPI().formatString(
 					getPlugin().getLocaleManager().getString("NoAccess"), "",
 					"", "", 0.0, 0.0, 0.0, "", "", "mbr.admin.command.load",
-					"", "");
+					"", "", 0);
 			if (message != null)
 			{
 				sender.sendMessage(message);
@@ -35,7 +35,7 @@ public class MBLoad implements CommandExecutor
 		getPlugin().getConfigManager().loadConfig();
 		message = getPlugin().getAPI().formatString(
 				getPlugin().getLocaleManager().getString("MBLLoaded"), "", "",
-				"", 0.0, 0.0, 0.0, "", "", "mbr.admin.command.load", "", "");
+				"", 0.0, 0.0, 0.0, "", "", "mbr.admin.command.load", "", "", 0);
 		if (message != null)
 		{
 			sender.sendMessage(message);

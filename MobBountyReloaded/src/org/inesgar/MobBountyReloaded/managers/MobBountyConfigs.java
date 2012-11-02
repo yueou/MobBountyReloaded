@@ -38,48 +38,12 @@ public class MobBountyConfigs
 			generalConf.addComment("locale",
 					"The locale version to use in locale.yml");
 			generalConf.set("locale", "en");
-			generalConf
-					.addComment("useMobSpawnerProtection",
-							"Whether or not to use the mobSpawnerProtection options below");
-			generalConf.set("useMobSpawnerProtection", false);
-			generalConf.addComment("mobSpawnerProtectionRadius",
-					"Distance from the spawner");
-			generalConf.set("mobSpawnerProtectionRadius", new Integer(5));
-			generalConf.addComment("mobSpawnerProtectionRate",
-					"What to multiply earnings by");
-			generalConf.set("mobSpawnerProtectionRate", new Double(0.0));
-			generalConf.addComment("spawnedMobProtection",
-					"Prevent any kind of spawned mob from being earned for");
-			generalConf.set("spawnedMobProtection", false);
-			generalConf.addComment("useDepreciativeReturn",
-					"Whether or not to use Depreciative Return");
-			generalConf.set("useDepreciativeReturn", false);
-			generalConf
-					.addComment("depreciativeReturnRate",
-							"How much (percentage-wise) of the original reward to take away each kill");
-			generalConf.set("depreciativeReturnRate", new Double(0.1));
-			generalConf.addComment("timeAfterLogin",
-					"Can't earn for this many seconds after logging in");
-			generalConf.set("timeAfterLogin", new Long(10));
-			generalConf.addComment("mobCap.use",
-					"Whether or not to use the mob cap");
-			generalConf.set("mobCap.use", false);
-			generalConf
-					.addComment("mobCap.limit",
-							"How many mobs can be killed within a <distance> of first kill");
-			generalConf.set("mobCap.limit", new Integer(30));
-			generalConf.addComment("mobCap.distance",
-					"Distance from first kill for mobCap");
-			generalConf.set("mobCap.distance", new Integer(30));
 			generalConf.addComment("killCache.use",
 					"Whether or not to use killCache");
 			generalConf.set("killCache.use", false);
 			generalConf.addComment("killCache.timeLimit",
 					"Milliseconds between earning updates");
 			generalConf.set("killCache.timeLimit", new Integer(30000));
-			generalConf.addComment("preventCreativeEarning",
-					"Whether or not to prevent earning in creative");
-			generalConf.set("preventCreativeEarning", false);
 			generalConf.addComment("debugMode",
 					"Whether or not the plugin is in debugMode");
 			generalConf.set("debugMode", false);
@@ -106,7 +70,8 @@ public class MobBountyConfigs
 					"  %1 - the first number in a reward range",
 					"  %2 - the second number in a reward range",
 					"  %C - command", "  %H - help for command",
-					"  %D - permission", "  %E - environment");
+					"  %D - permission", "  %E - environment",
+					"  %K - kill cache amount", "%T - kill cache time");
 			localeConf.set("en.Awarded",
 					"&2You have been awarded &F%A &2for killing a &F%M&2.");
 			localeConf
@@ -231,7 +196,7 @@ public class MobBountyConfigs
 			rewardConfig
 					.addComment(
 							"Default",
-							"You can some cool things with the MBR reward system.",
+							"You can do some cool things with the MBR reward system.",
 							"If you add a colon (:) to your reward, it will produce a range.",
 							"Having '28.5:30.0' will produce a reward between those two numbers.",
 							"If you'd like to make a creature not give a reward, set its value to '0.0'.",
@@ -271,6 +236,8 @@ public class MobBountyConfigs
 			rewardConfig.set("Default.Unknown", new Double(0.0));
 			rewardConfig.set("Default.Villager", new Double(0.0));
 			rewardConfig.set("Default.Witch", new Double(0.0));
+			rewardConfig.set("Default.Wither", new Double(750.0));
+			rewardConfig.set("Default.WitherSkeleton", new Double(57.0));
 			rewardConfig.set("Default.Wolf", new Double(28.5));
 			rewardConfig.set("Default.Zombie", new Double(21.0));
 			try

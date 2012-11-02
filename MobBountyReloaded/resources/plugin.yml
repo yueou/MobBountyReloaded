@@ -107,6 +107,12 @@ permissions:
     mbr.user.collect.witch:
         description: Allows users to collect rewards/fines for killing witches.
         default: op
+    mbr.user.collect.wither:
+        description: Allows users to collect rewards/fines for killing withers.
+        default: op
+    mbr.user.collect.witherskull:
+        description: Allows users to collect rewards/fines for killing wither skeletons.
+        default: op
     mbr.user.collect.wolf:
         description: Allows users to collect rewards/fines for killing wolves.
         default: op

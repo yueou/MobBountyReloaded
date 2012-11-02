@@ -98,7 +98,8 @@ public class MBEnvMulti implements CommandExecutor
 						{
 							message = getPlugin().getAPI().formatString(
 									message, player.getName(), "", args[0],
-									amount, amount, amount, "", "", "", "", "");
+									amount, amount, amount, "", "", "", "", "",
+									0);
 							sender.sendMessage(message);
 						}
 					}

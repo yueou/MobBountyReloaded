@@ -21,6 +21,9 @@ import org.bukkit.entity.Snowman;
 import org.bukkit.entity.Spider;
 import org.bukkit.entity.Squid;
 import org.bukkit.entity.Villager;
+import org.bukkit.entity.Witch;
+import org.bukkit.entity.Wither;
+import org.bukkit.entity.WitherSkull;
 import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zombie;
 
@@ -36,7 +39,8 @@ public enum MobBountyCreature
 			"Silverfish"), SKELETON("Skeleton"), SLIME("Slime"), SNOWGOLEM(
 			"SnowGolem"), SPIDER("Spider"), SQUID("Squid"), TAMED_CAT(
 			"TamedCat"), TAMED_WOLF("TamedWolf"), UNKNOWN("Unknown"), VILLAGER(
-			"Villager"), WITCH("Witch"), WOLF("Wolf"), ZOMBIE("Zombie");
+			"Villager"), WITCH("Witch"), WITHER("Wither"), WITHER_SKELETON(
+			"WitherSkeleton"), WOLF("Wolf"), ZOMBIE("Zombie");
 
 	public static MobBountyCreature fromName(String name)
 	{
@@ -55,6 +59,10 @@ public enum MobBountyCreature
 			return EntityType.CHICKEN;
 		else if (creature.equals(PLAYER))
 			return EntityType.PLAYER;
+		else if (creature.equals(BAT))
+			return EntityType.BAT;
+		else if (creature.equals(WITCH))
+			return EntityType.WITCH;
 		else if (creature.equals(COW))
 			return EntityType.COW;
 		else if (creature.equals(MOOSHROOM))
@@ -123,6 +131,12 @@ public enum MobBountyCreature
 			return MobBountyCreature.CHICKEN;
 		else if (entity instanceof Player)
 			return MobBountyCreature.PLAYER;
+		else if (entity instanceof Witch)
+			return MobBountyCreature.WITCH;
+		else if (entity instanceof WitherSkull)
+			return MobBountyCreature.WITHER_SKELETON;
+		else if (entity instanceof Wither)
+			return MobBountyCreature.WITHER;
 		else if (entity instanceof Cow)
 		{
 			if (entity.getType().equals(EntityType.MUSHROOM_COW))

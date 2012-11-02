@@ -1,19 +1,28 @@
 package org.inesgar.MobBountyReloaded;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.inesgar.MobBountyReloaded.utils.MobBountyCreature;
+import org.inesgar.MobBountyReloaded.utils.MobBountyPlayerKillData;
 
 public class MobBountyAPI
 {
 
 	private MobBountyReloaded mbr;
 	private MBI mbi;
+	public static Map<String, MobBountyPlayerKillData> playerData;
 
 	private static final Logger log = Logger.getLogger("Minecraft");
 
+	/**
+	 * Gets the Logger
+	 * 
+	 * @return The Logger for the plugin
+	 */
 	public static Logger getLogger()
 	{
 		return log;
@@ -23,6 +32,7 @@ public class MobBountyAPI
 	{
 		setMobBountyReloaded(plugin);
 		setMBI(new MBI(getMobBountyReloaded()));
+		playerData = new HashMap<String, MobBountyPlayerKillData>();
 	}
 
 	/**
@@ -35,10 +45,40 @@ public class MobBountyAPI
 		return mbr;
 	}
 
+	/**
+	 * Formats and returns a string. No value should ever be null.
+	 * 
+	 * @param string
+	 *            Message to format
+	 * @param playerName
+	 *            Player's name
+	 * @param creatureName
+	 *            Creature's name
+	 * @param worldName
+	 *            World's name
+	 * @param amount
+	 *            Amount
+	 * @param a1
+	 *            First amount
+	 * @param a2
+	 *            Second amount
+	 * @param commandName
+	 *            Command's name
+	 * @param commandHelp
+	 *            Command's help
+	 * @param permission
+	 *            Permission used
+	 * @param environment
+	 *            Environment
+	 * @param time
+	 *            Time
+	 * @return Formatted string
+	 */
 	public String formatString(String string, String playerName,
 			String creatureName, String worldName, double amount, double a1,
 			double a2, String commandName, String commandHelp,
-			String permission, String environment, String time)
+			String permission, String environment, String time,
+			int killCacheAmount)
 	{
 		String message = string;
 		message = message.replace("%P", playerName);
@@ -55,13 +95,45 @@ public class MobBountyAPI
 		message = message.replace("%D", permission);
 		message = message.replace("%E", environment);
 		message = message.replace("%T", time);
+		message = message.replace("%K", getMobBountyReloaded().getEconManager()
+				.format(Math.abs(killCacheAmount)));
 		return message;
 	}
 
+	/**
+	 * Formats and returns a string. No value should ever be null.
+	 * 
+	 * @param string
+	 *            Message to format
+	 * @param playerName
+	 *            Player's name
+	 * @param creatureName
+	 *            Creature's name
+	 * @param worldName
+	 *            World's name
+	 * @param amount
+	 *            Amount
+	 * @param a1
+	 *            First amount
+	 * @param a2
+	 *            Second amount
+	 * @param commandName
+	 *            Command's name
+	 * @param commandHelp
+	 *            Command's help
+	 * @param permission
+	 *            Permission used
+	 * @param environment
+	 *            Environment
+	 * @param time
+	 *            Time
+	 * @return Formatted string
+	 */
 	public String formatString(String string, String playerName,
 			String creatureName, String worldName, String amount, String a1,
 			String a2, String commandName, String commandHelp,
-			String permission, String environment, String time)
+			String permission, String environment, String time,
+			String killCacheAmount)
 	{
 		String message = string;
 		message = message.replace("%P", playerName);
@@ -75,6 +147,7 @@ public class MobBountyAPI
 		message = message.replace("%D", permission);
 		message = message.replace("%E", environment);
 		message = message.replace("%T", environment);
+		message = message.replace("%K", killCacheAmount);
 		return message;
 	}
 
@@ -83,21 +156,57 @@ public class MobBountyAPI
 		this.mbr = mbr;
 	}
 
+	/**
+	 * Gets a creature's value
+	 * 
+	 * @param playerName
+	 *            Killer
+	 * @param creature
+	 *            Kind of creature
+	 * @return Value
+	 */
 	public double getEntityValue(String playerName, MobBountyCreature creature)
 	{
 		return getMBI().getValue(playerName, creature);
 	}
 
+	/**
+	 * Gets a creature's value
+	 * 
+	 * @param player
+	 *            Killer
+	 * @param entity
+	 *            Kind of creature
+	 * @return Value
+	 */
 	public double getEntityValue(Player player, LivingEntity entity)
 	{
 		return getMBI().getValue(player, entity);
 	}
 
+	/**
+	 * Gets a creature's value
+	 * 
+	 * @param player
+	 *            Killer
+	 * @param creature
+	 *            Kind of creature
+	 * @return Value
+	 */
 	public double getEntityValue(Player player, MobBountyCreature creature)
 	{
 		return getMBI().getValue(player, creature);
 	}
 
+	/**
+	 * Makes a transaction to playerName's account of amt
+	 * 
+	 * @param playerName
+	 *            Player's name
+	 * @param amt
+	 *            Amount to transfer
+	 * @return Success
+	 */
 	public boolean makeTransaction(String playerName, double amt)
 	{
 		if (amt == 0.0)
@@ -131,16 +240,34 @@ public class MobBountyAPI
 		log.info("[MobBountyReloaded] " + message);
 	}
 
+	/**
+	 * Gets the MBI instance
+	 * 
+	 * @return The MBI instance
+	 */
 	public MBI getMBI()
 	{
 		return mbi;
 	}
 
+	/**
+	 * Sets the MBI instance
+	 * 
+	 * @param mbi
+	 *            The MBI instance to set
+	 */
 	public void setMBI(MBI mbi)
 	{
 		this.mbi = mbi;
 	}
 
+	/**
+	 * Gets the multiplier for the player's earnings
+	 * 
+	 * @param player
+	 *            The player to return for
+	 * @return The multiplier value
+	 */
 	public double getMult(Player player)
 	{
 		return getMBI().getEnvironmentMult(player)

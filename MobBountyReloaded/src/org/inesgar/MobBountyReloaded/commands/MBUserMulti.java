@@ -60,12 +60,10 @@ public class MBUserMulti implements CommandExecutor
 							"MBUMChange");
 					if (message != null)
 					{
-						message = message.replace("%W", args[0]).replace("%A",
-								amount.toString());
 						message = getPlugin().getAPI().formatString(message,
 								args[0], "", player.getWorld().getName(), "",
 								"", "", "", "", "mbr.admin.command.mbum", "",
-								"");
+								"", "");
 						sender.sendMessage(message);
 					}
 				}
