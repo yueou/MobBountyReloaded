@@ -65,7 +65,8 @@ public class MobBountyConfigs
 					"You may use various symbols in your strings here",
 					"and the plugin will automatically convert them.",
 					"  %P - the player who killed",
-					"  %M - the type of mob killed", "  %A - the reward/fine",
+					"  %M - the type of mob killed",
+					"  %A - the reward/fine/amount",
 					"  %W - the world it occured in",
 					"  %1 - the first number in a reward range",
 					"  %2 - the second number in a reward range",
@@ -85,8 +86,8 @@ public class MobBountyConfigs
 							"&4You have been fined &F%A &4for killing a &F%K &4mobs in &F%T &4seconds.");
 			localeConf.set("en.NoAccess",
 					"&CYou do not have access to that command.");
-			localeConf.set("en.BroadcastStreak",
-					"&F%P &2has a kill streak of &F%A&2!");
+			localeConf.set("en.Killstreak",
+					"&2You earned &F%1&2 for having a killstreak of &F%A&2!");
 			localeConf.set("en.MBReward", "&2%M : &F%A");
 			localeConf.set("en.MBRewardRange", "&2%M : &F%1 - %2");
 			localeConf.set("en.MBFine", "&4%M : &F%A");
@@ -203,7 +204,8 @@ public class MobBountyConfigs
 							"If you'd like to make a creature not give a reward, set its value to '0.0'.",
 							"",
 							"To give a value to a world, give it a format like so:",
-							"worldnamehere:", "  creaturenamehere: valuehere");
+							"worldnamehere:", "  creaturenamehere:",
+							"    value: valueamounthere");
 			rewardConfig.set("Default.Bat.value", new Double(0.0));
 			rewardConfig.set("Default.Blaze.value", new Double(40.0));
 			rewardConfig.set("Default.CaveSpider.value", new Double(28.5));
@@ -256,8 +258,12 @@ public class MobBountyConfigs
 		case KILLSTREAK:
 			CommentedYamlConfiguration killConf = new CommentedYamlConfiguration();
 			getPlugin().getAPI().log("Creating Killstreak.yml");
-			killConf.set("broadcastKillstreak", true);
-			killConf.set("killStreakMultiply", false);
+			killConf.addComment(
+					"KillBonus",
+					"Killstreaks have changed as of v302. Kill bonuses are",
+					"now separate from normal rewards. As such, multiplying is",
+					"no longer an option. You can, however, still specify how much",
+					"each killstreak is worth.");
 			killConf.set("KillBonus.5", new Double(5.0));
 			killConf.set("KillBonus.10", new Double(10.0));
 			String[] allowedCreatures =

@@ -1,5 +1,8 @@
 package org.inesgar.MobBountyReloaded.listeners;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.inesgar.MobBountyReloaded.MobBountyAPI;
 import org.inesgar.MobBountyReloaded.MobBountyReloaded;
+import org.inesgar.MobBountyReloaded.event.MobBountyReloadedKillstreakEvent;
 import org.inesgar.MobBountyReloaded.event.MobBountyReloadedPaymentEvent;
 import org.inesgar.MobBountyReloaded.utils.MobBountyCreature;
 import org.inesgar.MobBountyReloaded.utils.MobBountyPlayerKillData;
@@ -66,6 +70,82 @@ public class MobBountyReloadedEntityListener implements Listener
 		MobBountyReloadedPaymentEvent mbrpe = new MobBountyReloadedPaymentEvent(
 				player.getName(), creature, amount);
 		getMBR().getServer().getPluginManager().callEvent(mbrpe);
+		MobBountyReloadedKillstreakEvent mbrke = new MobBountyReloadedKillstreakEvent(
+				player.getName(), creature);
+		getMBR().getServer().getPluginManager().callEvent(mbrke);
+	}
+
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void highestKillStreakEvent(MobBountyReloadedKillstreakEvent mbrke)
+	{
+		if (mbrke.isCancelled())
+		{
+			return;
+		}
+		List<String> creatureNames = getMBR().getConfigManager()
+				.getPropertyList(MobBountyReloadedConfFile.KILLSTREAK,
+						"allowedCreatures");
+		if (creatureNames == null)
+		{
+			creatureNames = new ArrayList<String>();
+		}
+		if (creatureNames.contains(mbrke.getCreature().getName()))
+		{
+			return;
+		}
+		mbrke.setCancelled(true);
+	}
+
+	@EventHandler(priority = EventPriority.MONITOR)
+	public void monitorKillstreakEvent(MobBountyReloadedKillstreakEvent mbrke)
+	{
+		if (mbrke.isCancelled())
+		{
+			return;
+		}
+		MobBountyPlayerKillData playerData = MobBountyAPI.playerData.get(mbrke
+				.getPlayerName());
+		if (playerData == null)
+		{
+			playerData = new MobBountyPlayerKillData();
+			MobBountyAPI.playerData.put(mbrke.getPlayerName(), playerData);
+		}
+		playerData.killStreak++;
+		String confBonusS = getMBR().getConfigManager().getProperty(
+				MobBountyReloadedConfFile.KILLSTREAK,
+				"KillBonus." + playerData.killStreak);
+		if (confBonusS == null)
+		{
+			return;
+		}
+		double confBonus = 0.0;
+		try
+		{
+			confBonus = Double.parseDouble(confBonusS);
+		}
+		catch (NumberFormatException e)
+		{
+			confBonus = 0.0;
+			getMBR().getConfigManager().setProperty(
+					MobBountyReloadedConfFile.KILLSTREAK,
+					"KillBonus." + playerData.killStreak, "0.0");
+		}
+		if (confBonus == 0.0)
+		{
+			return;
+		}
+		getMBR().getEconManager().payAccount(mbrke.getPlayerName(), confBonus);
+		Player player = getMBR().getServer().getPlayer(mbrke.getPlayerName());
+		String string = getMBR().getLocaleManager().getString("Awarded");
+		if (string == null)
+		{
+			return;
+		}
+		player.sendMessage(getMBR().getAPI().formatString(string,
+				player.getName(), mbrke.getCreature().getName(),
+				player.getWorld().getName(), playerData.killStreak, confBonus,
+				confBonus, "", "", "", "", "", 0, "", ""));
+		MobBountyAPI.playerData.put(mbrke.getPlayerName(), playerData);
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR)
