@@ -32,18 +32,19 @@ public class MBI
 		String wn = player.getWorld().getName();
 		String string = getMBR().getConfigManager().getProperty(
 				MobBountyReloadedConfFile.REWARDS,
-				wn + "." + creature.getName());
+				wn + "." + creature.getName() + ".value");
 		if (string == null)
 		{
 			string = getMBR().getConfigManager().getProperty(
 					MobBountyReloadedConfFile.REWARDS,
-					"Default." + creature.getName());
+					"Default." + creature.getName() + ".value");
 			if (string == null)
 			{
 				string = "0.0";
 				getMBR().getConfigManager().setProperty(
 						MobBountyReloadedConfFile.REWARDS,
-						"Default." + creature.getName(), new Double(0.0));
+						"Default." + creature.getName() + ".value",
+						new Double(0.0));
 			}
 		}
 		double baseReward = 0.0;
@@ -86,18 +87,19 @@ public class MBI
 		String wn = player.getWorld().getName();
 		String string = getMBR().getConfigManager().getProperty(
 				MobBountyReloadedConfFile.REWARDS,
-				wn + "." + creature.getName());
+				wn + "." + creature.getName() + ".value");
 		if (string == null)
 		{
 			string = getMBR().getConfigManager().getProperty(
 					MobBountyReloadedConfFile.REWARDS,
-					"Default." + creature.getName());
+					"Default." + creature.getName() + ".value");
 			if (string == null)
 			{
 				string = "0.0";
 				getMBR().getConfigManager().setProperty(
 						MobBountyReloadedConfFile.REWARDS,
-						"Default." + creature.getName(), new Double(0.0));
+						"Default." + creature.getName() + ".value",
+						new Double(0.0));
 			}
 		}
 		double baseReward = 0.0;
@@ -141,18 +143,19 @@ public class MBI
 		String wn = entity.getWorld().getName();
 		String string = getMBR().getConfigManager().getProperty(
 				MobBountyReloadedConfFile.REWARDS,
-				wn + "." + creature.getName());
+				wn + "." + creature.getName() + ".value");
 		if (string == null)
 		{
 			string = getMBR().getConfigManager().getProperty(
 					MobBountyReloadedConfFile.REWARDS,
-					"Default." + creature.getName());
+					"Default." + creature.getName() + ".value");
 			if (string == null)
 			{
 				string = "0.0";
 				getMBR().getConfigManager().setProperty(
 						MobBountyReloadedConfFile.REWARDS,
-						"Default." + creature.getName(), new Double(0.0));
+						"Default." + creature.getName() + ".value",
+						new Double(0.0));
 			}
 		}
 		double baseReward = 0.0;
@@ -391,7 +394,9 @@ public class MBI
 	{
 		double groupMult = 1.0;
 		if (getMBR().getPermissionManager().getPermissions()
-				.equals(Permission.DEFAULT_PERMISSION))
+				.equals(Permission.DEFAULT_PERMISSION)
+				|| getMBR().getPermissionManager().getPermissions().getName()
+						.equalsIgnoreCase("SuperPerms"))
 		{
 			return groupMult;
 		}

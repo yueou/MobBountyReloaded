@@ -110,7 +110,7 @@ permissions:
     mbr.user.collect.wither:
         description: Allows users to collect rewards/fines for killing withers.
         default: op
-    mbr.user.collect.witherskull:
+    mbr.user.collect.witherskeleton:
         description: Allows users to collect rewards/fines for killing wither skeletons.
         default: op
     mbr.user.collect.wolf:
@@ -156,11 +156,55 @@ permissions:
             mbr.user.collect.unknown: true
             mbr.user.collect.villager: true
             mbr.user.collect.witch: true
+            mbr.user.collect.wither: true
+            mbr.user.collect.witherskeleton: true
             mbr.user.collect.wolf: true
             mbr.user.collect.zombie: true
     mbr.user.command.check:
         description: Allows user to check value of creatures.
         default: op
+    mbr.user.*:
+        description: Gives all user permissions.
+        default: op
+        children:
+            mbr.user.collect.normal: true
+            mbr.user.collect.bat: true
+            mbr.user.collect.blaze: true
+            mbr.user.collect.cavespider: true
+            mbr.user.collect.chicken: true
+            mbr.user.collect.cow: true
+            mbr.user.collect.creeper: true
+            mbr.user.collect.electrifiedcreeper: true
+            mbr.user.collect.enderdragon: true
+            mbr.user.collect.enderman: true
+            mbr.user.collect.ghast: true
+            mbr.user.collect.giant: true
+            mbr.user.collect.irongolem: true
+            mbr.user.collect.magmacube: true
+            mbr.user.collect.monster: true
+            mbr.user.collect.mooshroom: true
+            mbr.user.collect.ocelot: true
+            mbr.user.collect.pig: true
+            mbr.user.collect.pigzombie: true
+            mbr.user.collect.player: true
+            mbr.user.collect.selftamedcat: true
+            mbr.user.collect.selftamedwolf: true
+            mbr.user.collect.sheep: true
+            mbr.user.collect.silverfish: true
+            mbr.user.collect.skeleton: true
+            mbr.user.collect.slime: true
+            mbr.user.collect.snowgolem: true
+            mbr.user.collect.squid: true
+            mbr.user.collect.tamedcat: true
+            mbr.user.collect.tamedwolf: true
+            mbr.user.collect.unknown: true
+            mbr.user.collect.villager: true
+            mbr.user.collect.witch: true
+            mbr.user.collect.wither: true
+            mbr.user.collect.witherskeleton: true
+            mbr.user.collect.wolf: true
+            mbr.user.collect.zombie: true
+            mbr.user.command.check: true
     mbr.admin.command.load:
         description: Allows user to reload configs.
         default: op
@@ -185,6 +229,91 @@ permissions:
     mbr.admin.command.mbtm:
         description: Allows user to change time multipliers.
         default: op
+    mbr.admin.command.mbg:
+        description: Allows user to change general settings.
+        default: op
+    mbr.admin.debug:
+        description: Allows user to receive debug messages.
+        default: op
+    mbr.admin.command.*:
+        description: Gives all user permissions.
+        default: op
+        children:
+            mbr.admin.command.load: true
+            mbr.admin.command.save: true
+            mbr.admin.command.reward: true
+            mbr.admin.command.worldreward: true
+            mbr.admin.command.mbgm: true
+            mbr.admin.command.mbum: true
+            mbr.admin.command.mbem: true
+            mbr.admin.command.mbtm: true
+            mbr.admin.command.mbg: true
+    mbr.admin.*:
+        description: Gives all user permissions.
+        default: op
+        children:
+            mbr.admin.command.load: true
+            mbr.admin.command.save: true
+            mbr.admin.command.reward: true
+            mbr.admin.command.worldreward: true
+            mbr.admin.command.mbgm: true
+            mbr.admin.command.mbum: true
+            mbr.admin.command.mbem: true
+            mbr.admin.command.mbtm: true
+            mbr.admin.command.mbg: true
+            mbr.admin.debug: true
+    mbr.*:
+        description: Gives all user permissions.
+        default: op
+        children:
+            mbr.user.collect.normal: true
+            mbr.user.collect.bat: true
+            mbr.user.collect.blaze: true
+            mbr.user.collect.cavespider: true
+            mbr.user.collect.chicken: true
+            mbr.user.collect.cow: true
+            mbr.user.collect.creeper: true
+            mbr.user.collect.electrifiedcreeper: true
+            mbr.user.collect.enderdragon: true
+            mbr.user.collect.enderman: true
+            mbr.user.collect.ghast: true
+            mbr.user.collect.giant: true
+            mbr.user.collect.irongolem: true
+            mbr.user.collect.magmacube: true
+            mbr.user.collect.monster: true
+            mbr.user.collect.mooshroom: true
+            mbr.user.collect.ocelot: true
+            mbr.user.collect.pig: true
+            mbr.user.collect.pigzombie: true
+            mbr.user.collect.player: true
+            mbr.user.collect.selftamedcat: true
+            mbr.user.collect.selftamedwolf: true
+            mbr.user.collect.sheep: true
+            mbr.user.collect.silverfish: true
+            mbr.user.collect.skeleton: true
+            mbr.user.collect.slime: true
+            mbr.user.collect.snowgolem: true
+            mbr.user.collect.squid: true
+            mbr.user.collect.tamedcat: true
+            mbr.user.collect.tamedwolf: true
+            mbr.user.collect.unknown: true
+            mbr.user.collect.villager: true
+            mbr.user.collect.witch: true
+            mbr.user.collect.wither: true
+            mbr.user.collect.witherskeleton: true
+            mbr.user.collect.wolf: true
+            mbr.user.collect.zombie: true
+            mbr.user.command.check: true
+            mbr.admin.command.load: true
+            mbr.admin.command.save: true
+            mbr.admin.command.reward: true
+            mbr.admin.command.worldreward: true
+            mbr.admin.command.mbgm: true
+            mbr.admin.command.mbum: true
+            mbr.admin.command.mbem: true
+            mbr.admin.command.mbtm: true
+            mbr.admin.command.mbg: true
+            mbr.admin.debug: true
 commands:
     mobbountyload:
         description: Allows user to reload the MBR configs.
@@ -226,3 +355,7 @@ commands:
         description: Allows user to change a time multiplier.
         aliases: [mbtmulti, mbtm, mobbountytm, mbountytmulti, mbountytmulti,mbountytm,mobbem,mobbtmulti]
         usage: /<command> <time> <amount>
+    mobbountygeneral:
+        description: Allows user to change values of creatures.
+        aliases: [mbgeneral, mbg, mobbountyg,mbountygeneral,mbountyg,mobbg,mobbgeneral]
+        usage: /<command> <creature> <value>

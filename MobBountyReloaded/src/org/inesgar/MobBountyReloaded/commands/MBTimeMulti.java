@@ -24,7 +24,7 @@ public class MBTimeMulti implements CommandExecutor
 		{
 			message = getPlugin().getAPI().formatString(message,
 					sender.getName(), "", "", 0.0, 0.0, 0.0, command, "", "",
-					"", "", 0);
+					"", "", 0, "", "");
 			sender.sendMessage(message);
 		}
 
@@ -33,7 +33,7 @@ public class MBTimeMulti implements CommandExecutor
 		{
 			message = getPlugin().getAPI().formatString(message,
 					sender.getName(), "", "", 0.0, 0.0, 0.0, command, "", "",
-					"", "", 0);
+					"", "", 0, "", "");
 			sender.sendMessage(message);
 		}
 	}
@@ -79,7 +79,7 @@ public class MBTimeMulti implements CommandExecutor
 							message = getPlugin().getAPI().formatString(
 									message, sender.getName(), "", "", amount,
 									amount, amount, command.getName(), "", "",
-									"", time.getName(), 0);
+									"", time.getName(), 0, "", "");
 							sender.sendMessage(message);
 						}
 					}

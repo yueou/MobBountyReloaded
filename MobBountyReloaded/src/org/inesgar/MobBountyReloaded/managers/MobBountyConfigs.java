@@ -71,7 +71,8 @@ public class MobBountyConfigs
 					"  %2 - the second number in a reward range",
 					"  %C - command", "  %H - help for command",
 					"  %D - permission", "  %E - environment",
-					"  %K - kill cache amount", "%T - kill cache time");
+					"  %K - kill cache amount", "  %T - kill cache time",
+					"  %S - setting changed", "  %V - value of setting");
 			localeConf.set("en.Awarded",
 					"&2You have been awarded &F%A &2for killing a &F%M&2.");
 			localeConf
@@ -96,14 +97,14 @@ public class MobBountyConfigs
 			localeConf.set("en.MBGUsage", "&CUsage: /%C [property] <amount>");
 			localeConf
 					.set("en.MBGProperty",
-							"&7Property: locale, debug, mobspawnprot, mobspawnprotrad, mobspawnprotrate, spawnmobprotection, deprreturn, deprreturnrate, timeafterlogin, usemobcap, mobcaplimit, mobcapdist");
+							"&7Property: locale, debug, usekillcache, killcachetimelimit");
 			localeConf
 					.set("en.MBRChange",
 							"&2Default reward/fine for mob &F%M &2has been changed to &F%A&2.");
 			localeConf.set("en.MBRUsage", "&CUsage: /%C [mob] <amount>");
 			localeConf
 					.set("en.MBRMobs",
-							"&7Mob: Blaze, CaveSpider, Chicken, Cow, Creeper, ElectrifiedCreeper, Enderdragon, Enderman, Ghast, Giant, IronGolem, MagmaCube, Monster, Mooshroom, Ocelot, Pig, PigZombie, Player, SelfTamedCat, SelfTamedWolf, Sheep, Silverfish, Skeleton, Slime, SnowGolem, Spider, Squid, TamedCat, TamedWolf, Unknown, Villager, Wolf, Zombie");
+							"&7Mob: Bat, Blaze, CaveSpider, Chicken, Cow, Creeper, ElectrifiedCreeper, Enderdragon, Enderman, Ghast, Giant, IronGolem, MagmaCube, Monster, Mooshroom, Ocelot, Pig, PigZombie, Player, SelfTamedCat, SelfTamedWolf, Sheep, Silverfish, Skeleton, Slime, SnowGolem, Spider, Squid, TamedCat, TamedWolf, Unknown, Villager, Witch, Wither, WitherSkeleton, Wolf, Zombie");
 			localeConf
 					.set("en.MBWRChange",
 							"&2Reward for mob &F%M &2in world &F%W &2has been changed to &F%A&2.");
@@ -115,7 +116,7 @@ public class MobBountyConfigs
 			localeConf.set("en.MBWRWorlds", "&7World: %W");
 			localeConf
 					.set("en.MBWRMobs",
-							"&7Mob: Blaze, CaveSpider, Chicken, Cow, Creeper, ElectrifiedCreeper, Enderdragon, Enderman, Ghast, Giant, IronGolem, MagmaCube, Monster, Mooshroom, Ocelot, Pig, PigZombie, SelfTamedCat, SelfTamedWolf, Sheep, Silverfish, Skeleton, Slime, SnowGolem, Spider, Squid, TamedCat, TamedWolf, Villager, Wolf, Zombie");
+							"&7Mob: Bat, Blaze, CaveSpider, Chicken, Cow, Creeper, ElectrifiedCreeper, Enderdragon, Enderman, Ghast, Giant, IronGolem, MagmaCube, Monster, Mooshroom, Ocelot, Pig, PigZombie, SelfTamedCat, SelfTamedWolf, Sheep, Silverfish, Skeleton, Slime, SnowGolem, Spider, Squid, TamedCat, TamedWolf, Villager, Witch, Wither, WitherSkeleton, Wolf, Zombie");
 			localeConf
 					.set("en.MBEMChange",
 							"&2Multiplier for the &F%E &2environment has been changed to &F%A&2.");
@@ -203,43 +204,44 @@ public class MobBountyConfigs
 							"",
 							"To give a value to a world, give it a format like so:",
 							"worldnamehere:", "  creaturenamehere: valuehere");
-			rewardConfig.set("Default.Bat", new Double(0.0));
-			rewardConfig.set("Default.Blaze", new Double(40.0));
-			rewardConfig.set("Default.CaveSpider", new Double(28.5));
-			rewardConfig.set("Default.Chicken", new Double(0.0));
-			rewardConfig.set("Default.Cow", new Double(0.0));
-			rewardConfig.set("Default.Creeper", new Double(57.0));
-			rewardConfig.set("Default.ElectrifiedCreeper", new Double(69.0));
-			rewardConfig.set("Default.Enderdragon", new Double(500.0));
-			rewardConfig.set("Default.Enderman", new Double(60.0));
-			rewardConfig.set("Default.Ghast", new Double(69.0));
-			rewardConfig.set("Default.Giant", new Double(85.0));
-			rewardConfig.set("Default.IronGolem", new Double(50.0));
-			rewardConfig.set("Default.MagmaCube", new Double(0.0));
-			rewardConfig.set("Default.Monster", new Double(85.0));
-			rewardConfig.set("Default.Mooshroom", new Double(0.0));
-			rewardConfig.set("Default.Ocelot", new Double(28.5));
-			rewardConfig.set("Default.Pig", new Double(0.0));
-			rewardConfig.set("Default.PigZombie", new Double(28.5));
-			rewardConfig.set("Default.Player", new Double(50.0));
-			rewardConfig.set("Default.SelfTamedCat", new Double(0.0));
-			rewardConfig.set("Default.SelfTamedWolf", new Double(0.0));
-			rewardConfig.set("Default.Sheep", new Double(0.0));
-			rewardConfig.set("Default.Silverfish", new Double(2.0));
-			rewardConfig.set("Default.Skeleton", new Double(33.0));
-			rewardConfig.set("Default.Slime", new Double(0.0));
-			rewardConfig.set("Default.SnowGolem", new Double(0.0));
-			rewardConfig.set("Default.Spider", new Double(28.5));
-			rewardConfig.set("Default.Squid", new Double(0.0));
-			rewardConfig.set("Default.TamedCat", new Double(21.0));
-			rewardConfig.set("Default.TamedWolf", new Double(21.0));
-			rewardConfig.set("Default.Unknown", new Double(0.0));
-			rewardConfig.set("Default.Villager", new Double(0.0));
-			rewardConfig.set("Default.Witch", new Double(0.0));
-			rewardConfig.set("Default.Wither", new Double(750.0));
-			rewardConfig.set("Default.WitherSkeleton", new Double(57.0));
-			rewardConfig.set("Default.Wolf", new Double(28.5));
-			rewardConfig.set("Default.Zombie", new Double(21.0));
+			rewardConfig.set("Default.Bat.value", new Double(0.0));
+			rewardConfig.set("Default.Blaze.value", new Double(40.0));
+			rewardConfig.set("Default.CaveSpider.value", new Double(28.5));
+			rewardConfig.set("Default.Chicken.value", new Double(0.0));
+			rewardConfig.set("Default.Cow.value", new Double(0.0));
+			rewardConfig.set("Default.Creeper.value", new Double(57.0));
+			rewardConfig.set("Default.ElectrifiedCreeper.value", new Double(
+					69.0));
+			rewardConfig.set("Default.Enderdragon.value", new Double(500.0));
+			rewardConfig.set("Default.Enderman.value", new Double(60.0));
+			rewardConfig.set("Default.Ghast.value", new Double(69.0));
+			rewardConfig.set("Default.Giant.value", new Double(85.0));
+			rewardConfig.set("Default.IronGolem.value", new Double(50.0));
+			rewardConfig.set("Default.MagmaCube.value", new Double(0.0));
+			rewardConfig.set("Default.Monster.value", new Double(85.0));
+			rewardConfig.set("Default.Mooshroom.value", new Double(0.0));
+			rewardConfig.set("Default.Ocelot.value", new Double(28.5));
+			rewardConfig.set("Default.Pig.value", new Double(0.0));
+			rewardConfig.set("Default.PigZombie.value", new Double(28.5));
+			rewardConfig.set("Default.Player.value", new Double(50.0));
+			rewardConfig.set("Default.SelfTamedCat.value", new Double(0.0));
+			rewardConfig.set("Default.SelfTamedWolf.value", new Double(0.0));
+			rewardConfig.set("Default.Sheep.value", new Double(0.0));
+			rewardConfig.set("Default.Silverfish.value", new Double(2.0));
+			rewardConfig.set("Default.Skeleton.value", new Double(33.0));
+			rewardConfig.set("Default.Slime.value", new Double(0.0));
+			rewardConfig.set("Default.SnowGolem.value", new Double(0.0));
+			rewardConfig.set("Default.Spider.value", new Double(28.5));
+			rewardConfig.set("Default.Squid.value", new Double(0.0));
+			rewardConfig.set("Default.TamedCat.value", new Double(21.0));
+			rewardConfig.set("Default.TamedWolf.value", new Double(21.0));
+			rewardConfig.set("Default.Unknown.value", new Double(0.0));
+			rewardConfig.set("Default.Villager.value", new Double(0.0));
+			rewardConfig.set("Default.Witch.value", new Double(0.0));
+			rewardConfig.set("Default.Wither.value", new Double(750.0));
+			rewardConfig.set("Default.WitherSkeleton.value", new Double(57.0));
+			rewardConfig.set("Default.Wolf.value", new Double(28.5));
+			rewardConfig.set("Default.Zombie.value", new Double(21.0));
 			try
 			{
 				rewardConfig.save(file);
@@ -260,13 +262,14 @@ public class MobBountyConfigs
 			killConf.set("KillBonus.10", new Double(10.0));
 			String[] allowedCreatures =
 			{
-					"Blaze", "CaveSpider", "Chicken", "Cow", "Creeper",
+					"Bat", "Blaze", "CaveSpider", "Chicken", "Cow", "Creeper",
 					"ElectrifiedCreeper", "Enderdragon", "Enderman", "Ghast",
 					"Giant", "IronGolem", "MagmaCube", "Monster", "Mooshroom",
 					"Ocelot", "Pig", "PigZombie", "Player", "SelfTamedCat",
 					"SelfTamedWolf", "Sheep", "Silverfish", "Skeleton",
 					"Slime", "SnowGolem", "Spider", "Squid", "TamedCat",
-					"TamedWolf", "Unknown", "Villager", "Wolf", "Zombie"
+					"TamedWolf", "Unknown", "Villager", "Witch", "Wither",
+					"WitherSkeleton", "Wolf", "Zombie"
 			};
 			killConf.set("allowedCreatures", Arrays.asList(allowedCreatures));
 			try

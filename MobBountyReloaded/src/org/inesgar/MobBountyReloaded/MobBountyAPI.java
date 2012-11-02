@@ -72,13 +72,19 @@ public class MobBountyAPI
 	 *            Environment
 	 * @param time
 	 *            Time
+	 * @param killCacheAmount
+	 *            Amount of kills in player's kill cache
+	 * @param setting
+	 *            Setting that was changed
+	 * @param settingValue
+	 *            New value of setting
 	 * @return Formatted string
 	 */
 	public String formatString(String string, String playerName,
 			String creatureName, String worldName, double amount, double a1,
 			double a2, String commandName, String commandHelp,
 			String permission, String environment, String time,
-			int killCacheAmount)
+			int killCacheAmount, String setting, String settingValue)
 	{
 		String message = string;
 		message = message.replace("%P", playerName);
@@ -97,6 +103,8 @@ public class MobBountyAPI
 		message = message.replace("%T", time);
 		message = message.replace("%K", getMobBountyReloaded().getEconManager()
 				.format(Math.abs(killCacheAmount)));
+		message = message.replace("%S", setting);
+		message = message.replace("%V", settingValue);
 		return message;
 	}
 
@@ -127,13 +135,19 @@ public class MobBountyAPI
 	 *            Environment
 	 * @param time
 	 *            Time
+	 * @param killCacheAmount
+	 *            Amount of kills in player's kill cache
+	 * @param setting
+	 *            Setting that was changed
+	 * @param settingValue
+	 *            New value of setting
 	 * @return Formatted string
 	 */
 	public String formatString(String string, String playerName,
 			String creatureName, String worldName, String amount, String a1,
 			String a2, String commandName, String commandHelp,
 			String permission, String environment, String time,
-			String killCacheAmount)
+			String killCacheAmount, String setting, String settingValue)
 	{
 		String message = string;
 		message = message.replace("%P", playerName);
@@ -148,6 +162,8 @@ public class MobBountyAPI
 		message = message.replace("%E", environment);
 		message = message.replace("%T", environment);
 		message = message.replace("%K", killCacheAmount);
+		message = message.replace("%S", setting);
+		message = message.replace("%V", settingValue);
 		return message;
 	}
 

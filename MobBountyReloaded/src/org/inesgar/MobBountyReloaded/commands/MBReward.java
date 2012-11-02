@@ -65,7 +65,8 @@ public class MBReward implements CommandExecutor
 						Double amount = Double.parseDouble(args[1]);
 						getPlugin().getConfigManager().setProperty(
 								MobBountyReloadedConfFile.REWARDS,
-								"Default." + mob.getName(), amount.toString());
+								"Default." + mob.getName() + ".value",
+								amount.toString());
 
 						String message = getPlugin().getLocaleManager()
 								.getString("MBRChange");
@@ -77,7 +78,7 @@ public class MBReward implements CommandExecutor
 											Double.valueOf(args[1]),
 											Double.valueOf(args[1]), "", "",
 											"mbr.admin.command.reward", "", "",
-											0));
+											0, "", ""));
 						}
 					}
 					else if (args[1]
@@ -85,7 +86,7 @@ public class MBReward implements CommandExecutor
 					{
 						getPlugin().getConfigManager().setProperty(
 								MobBountyReloadedConfFile.REWARDS,
-								"Default." + mob.getName(), args[1]);
+								"Default." + mob.getName() + ".value", args[1]);
 
 						String message = getPlugin().getLocaleManager()
 								.getString("MBRChange");
@@ -95,7 +96,7 @@ public class MBReward implements CommandExecutor
 									.formatString(message, "", mob.getName(),
 											"", args[1], args[1], args[1], "",
 											"", "mbr.admin.command.reward", "",
-											"", ""));
+											"", "", "", ""));
 						}
 					}
 					else

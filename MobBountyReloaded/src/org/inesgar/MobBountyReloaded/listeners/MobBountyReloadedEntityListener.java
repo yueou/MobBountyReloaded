@@ -131,7 +131,7 @@ public class MobBountyReloadedEntityListener implements Listener
 				"",
 				"mbr.user.collect."
 						+ mbrpe.getCreature().getName().toLowerCase(), "", "",
-				0));
+				0, "", ""));
 	}
 
 	private void sendFineMessage(MobBountyReloadedPaymentEvent mbrpe,
@@ -154,7 +154,7 @@ public class MobBountyReloadedEntityListener implements Listener
 				"",
 				"mbr.user.collect."
 						+ mbrpe.getCreature().getName().toLowerCase(), "", "",
-				0));
+				0, "", ""));
 	}
 
 	private void handleKillCache(Player killer,
@@ -193,7 +193,7 @@ public class MobBountyReloadedEntityListener implements Listener
 									"",
 									String.valueOf(String.valueOf(Math
 											.round((System.currentTimeMillis() - playerData.cacheTime) / 1000))),
-									playerData.cacheSize);
+									playerData.cacheSize, "", "");
 					killer.sendMessage(message);
 				}
 			}
@@ -219,7 +219,7 @@ public class MobBountyReloadedEntityListener implements Listener
 									"",
 									String.valueOf(String.valueOf(Math
 											.round((System.currentTimeMillis() - playerData.cacheTime) / 1000))),
-									playerData.cacheSize);
+									playerData.cacheSize, "", "");
 					killer.sendMessage(message);
 				}
 			}

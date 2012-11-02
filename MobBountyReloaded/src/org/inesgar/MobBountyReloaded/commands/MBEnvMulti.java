@@ -66,8 +66,11 @@ public class MBEnvMulti implements CommandExecutor
 								.getString("MBEMChange");
 						if (message != null)
 						{
-							message = message.replace("%E", "end").replace(
-									"%A", amount.toString());
+							message = getPlugin().getAPI().formatString(
+									message, player.getName(), "",
+									player.getWorld().getName(), amount,
+									amount, amount, "", "", "", "end", "", 0,
+									"", "");
 							sender.sendMessage(message);
 						}
 					}
@@ -81,8 +84,11 @@ public class MBEnvMulti implements CommandExecutor
 								.getString("MBEMChange");
 						if (message != null)
 						{
-							message = message.replace("%E", "nether").replace(
-									"%A", amount.toString());
+							message = getPlugin().getAPI().formatString(
+									message, player.getName(), "",
+									player.getWorld().getName(), amount,
+									amount, amount, "", "", "", "nether", "",
+									0, "", "");
 							sender.sendMessage(message);
 						}
 					}
@@ -98,8 +104,8 @@ public class MBEnvMulti implements CommandExecutor
 						{
 							message = getPlugin().getAPI().formatString(
 									message, player.getName(), "", args[0],
-									amount, amount, amount, "", "", "", "", "",
-									0);
+									amount, amount, amount, "", "", "",
+									"normal", "", 0, "", "");
 							sender.sendMessage(message);
 						}
 					}

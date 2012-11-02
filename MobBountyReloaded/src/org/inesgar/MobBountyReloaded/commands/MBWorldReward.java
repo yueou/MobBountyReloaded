@@ -39,7 +39,7 @@ public class MBWorldReward implements CommandExecutor
 		{
 			message = getPlugin().getAPI().formatString(message, "", "", "",
 					0.0, 0.0, 0.0, command, "",
-					"mbr.admin.command.worldreward", "", "", 0);
+					"mbr.admin.command.worldreward", "", "", 0, "", "");
 			sender.sendMessage(message);
 		}
 
@@ -61,7 +61,7 @@ public class MBWorldReward implements CommandExecutor
 
 			message = getPlugin().getAPI().formatString(message, "", "",
 					worldsStr, 0.0, 0.0, 0.0, "", "",
-					"mbr.admin.command.worldreward", "", "", 0);
+					"mbr.admin.command.worldreward", "", "", 0, "", "");
 			sender.sendMessage(message);
 		}
 
@@ -93,7 +93,7 @@ public class MBWorldReward implements CommandExecutor
 						Double amount = Double.parseDouble(args[2]);
 						getPlugin().getConfigManager().setProperty(
 								MobBountyReloadedConfFile.REWARDS,
-								args[0] + "." + mob.getName(),
+								args[0] + "." + mob.getName() + ".value",
 								amount.toString());
 
 						String message = getPlugin().getLocaleManager()
@@ -106,7 +106,7 @@ public class MBWorldReward implements CommandExecutor
 											Double.valueOf(args[2]),
 											Double.valueOf(args[2]), "", "",
 											"mbr.admin.command.worldreward",
-											"", "", 0));
+											"", "", 0, "", ""));
 						}
 					}
 					else if (args[2]
@@ -114,7 +114,8 @@ public class MBWorldReward implements CommandExecutor
 					{
 						getPlugin().getConfigManager().setProperty(
 								MobBountyReloadedConfFile.REWARDS,
-								args[0] + "." + mob.getName(), args[2]);
+								args[0] + "." + mob.getName() + ".value",
+								args[2]);
 
 						String message = getPlugin().getLocaleManager()
 								.getString("MBRChange");
@@ -126,7 +127,7 @@ public class MBWorldReward implements CommandExecutor
 											Double.valueOf(args[2]),
 											Double.valueOf(args[2]), "", "",
 											"mbr.admin.command.worldreward",
-											"", "", 0));
+											"", "", 0, "", ""));
 						}
 					}
 					else

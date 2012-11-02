@@ -3,10 +3,12 @@ package org.inesgar.MobBountyReloaded.managers;
 import org.inesgar.MobBountyReloaded.MobBountyReloaded;
 import org.inesgar.MobBountyReloaded.commands.MBCheck;
 import org.inesgar.MobBountyReloaded.commands.MBCmd;
+import org.inesgar.MobBountyReloaded.commands.MBGeneral;
 import org.inesgar.MobBountyReloaded.commands.MBGroupMulti;
 import org.inesgar.MobBountyReloaded.commands.MBLoad;
 import org.inesgar.MobBountyReloaded.commands.MBReward;
 import org.inesgar.MobBountyReloaded.commands.MBSave;
+import org.inesgar.MobBountyReloaded.commands.MBTimeMulti;
 import org.inesgar.MobBountyReloaded.commands.MBUserMulti;
 import org.inesgar.MobBountyReloaded.commands.MBWorldReward;
 
@@ -22,6 +24,8 @@ public class MobBountyCommand
 	private MBWorldReward wrCMD;
 	private MBGroupMulti gmCMD;
 	private MBUserMulti umCMD;
+	private MBTimeMulti tmCMD;
+	private MBGeneral gCMD;
 
 	public MobBountyCommand(MobBountyReloaded instance)
 	{
@@ -34,6 +38,8 @@ public class MobBountyCommand
 		wrCMD = new MBWorldReward(getPlugin());
 		gmCMD = new MBGroupMulti(getPlugin());
 		umCMD = new MBUserMulti(getPlugin());
+		tmCMD = new MBTimeMulti(getPlugin());
+		gCMD = new MBGeneral(getPlugin());
 		getPlugin().getCommand("mobbountyload").setExecutor(loadCMD);
 		getPlugin().getCommand("mobbountysave").setExecutor(saveCMD);
 		getPlugin().getCommand("mobbountycheck").setExecutor(checkCMD);
@@ -42,6 +48,8 @@ public class MobBountyCommand
 		getPlugin().getCommand("mobbountyworldreward").setExecutor(wrCMD);
 		getPlugin().getCommand("mobbountygroupmulti").setExecutor(gmCMD);
 		getPlugin().getCommand("mobbountyusermulti").setExecutor(umCMD);
+		getPlugin().getCommand("mobbountytimemulti").setExecutor(tmCMD);
+		getPlugin().getCommand("mobbountygeneral").setExecutor(gCMD);
 	}
 
 	public MobBountyReloaded getPlugin()
