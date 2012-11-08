@@ -64,6 +64,7 @@
                 <filter token="VERSION" value="${env.BUILD_NUMBER}" />
             </filterset>
         </copy>
+    	<jar basedir="bin" jarfile="dist/${ant.project.name}.jar" defaultexcludes="true" excludes="javadoc/*,docs/*,lib/*"/>
         <jar basedir="bin" jarfile="${ant.project.name}_v${env.BUILD_NUMBER}.jar" defaultexcludes="true" excludes="javadoc/*,docs/*,lib/*"/>
         <jar basedir="." jarfile="${ant.project.name}_v${env.BUILD_NUMBER}_source.jar" defaultexcludes="true" excludes="javadoc/*"/>
         <zip basedir="." destfile="dist/${ant.project.name}_v${env.BUILD_NUMBER}.zip" defaultexcludes="true" includes="jar/${ant.project.name}_v${env.BUILD_NUMBER}.jar">
