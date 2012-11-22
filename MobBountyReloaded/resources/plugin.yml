@@ -3,6 +3,7 @@ main: org.inesgar.MobBountyReloaded.MobBountyReloaded
 version: @VERSION@
 authors: [ToppleTheNun, MCForger]
 description: Simple plugin that pays and/or fines players for killing mobs.
+loadbefore: [MobBountyReloadedExploits]
 
 permissions:
     mbr.user.collect.normal:
@@ -150,6 +151,7 @@ permissions:
             mbr.user.collect.skeleton: true
             mbr.user.collect.slime: true
             mbr.user.collect.snowgolem: true
+            mbr.user.collect.spider: true
             mbr.user.collect.squid: true
             mbr.user.collect.tamedcat: true
             mbr.user.collect.tamedwolf: true
@@ -197,6 +199,7 @@ permissions:
             mbr.user.collect.skeleton: true
             mbr.user.collect.slime: true
             mbr.user.collect.snowgolem: true
+            mbr.user.collect.spider: true
             mbr.user.collect.squid: true
             mbr.user.collect.tamedcat: true
             mbr.user.collect.tamedwolf: true
@@ -296,6 +299,7 @@ permissions:
             mbr.user.collect.skeleton: true
             mbr.user.collect.slime: true
             mbr.user.collect.snowgolem: true
+            mbr.user.collect.spider: true
             mbr.user.collect.squid: true
             mbr.user.collect.tamedcat: true
             mbr.user.collect.tamedwolf: true
