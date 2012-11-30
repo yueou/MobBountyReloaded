@@ -5,40 +5,40 @@ import org.inesgar.MobBountyReloaded.utils.configuration.MobBountyReloadedConfFi
 
 public class MobBountyLocale
 {
-	private final MobBountyReloaded _plugin;
+    private final MobBountyReloaded _plugin;
 
-	public MobBountyLocale(MobBountyReloaded plugin)
-	{
-		_plugin = plugin;
-	}
+    public MobBountyLocale(MobBountyReloaded plugin)
+    {
+        _plugin = plugin;
+    }
 
-	/**
-	 * Gets a string from Locale.yml
-	 * 
-	 * @param String
-	 *            Key to look for
-	 * @return String String requested
-	 */
-	public String getString(String key)
-	{
-		String locale = _plugin.getConfigManager().getProperty(
-				MobBountyReloadedConfFile.GENERAL, "locale");
+    /**
+     * Gets a string from Locale.yml
+     * 
+     * @param String
+     *            Key to look for
+     * @return String String requested
+     */
+    public String getString(String key)
+    {
+        String locale = _plugin.getConfigManager().getProperty(
+                MobBountyReloadedConfFile.GENERAL, "locale");
 
-		if (locale != null)
-			locale = locale.toLowerCase();
-		else
-			locale = "en";
+        if (locale != null)
+            locale = locale.toLowerCase();
+        else
+            locale = "en";
 
-		String value = _plugin.getConfigManager().getProperty(
-				MobBountyReloadedConfFile.LOCALE, locale + "." + key);
+        String value = _plugin.getConfigManager().getProperty(
+                MobBountyReloadedConfFile.LOCALE, locale + "." + key);
 
-		if (value == null)
-			value = _plugin.getConfigManager().getProperty(
-					MobBountyReloadedConfFile.LOCALE, "en." + key);
+        if (value == null)
+            value = _plugin.getConfigManager().getProperty(
+                    MobBountyReloadedConfFile.LOCALE, "en." + key);
 
-		if (value != null)
-			value = value.replace('&', '\u00A7').replace("\u00A7\u00A7", "&");
+        if (value != null)
+            value = value.replace('&', '\u00A7').replace("\u00A7\u00A7", "&");
 
-		return value;
-	}
+        return value;
+    }
 }

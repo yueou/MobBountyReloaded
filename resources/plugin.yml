@@ -3,7 +3,7 @@ main: org.inesgar.MobBountyReloaded.MobBountyReloaded
 version: @VERSION@
 authors: [ToppleTheNun, MCForger]
 description: Simple plugin that pays and/or fines players for killing mobs.
-loadbefore: [MobBountyReloadedExploits]
+loadbefore: [MobBountyReloadedExploits, MobBountyReloadedDrops]
 
 permissions:
     mbr.user.collect.normal:
