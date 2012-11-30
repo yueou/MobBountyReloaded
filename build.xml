@@ -71,6 +71,10 @@
             <fileset dir="." includes="${ant.project.name}_v${env.BUILD_NUMBER}.jar" defaultexcludes="true"/>
             <fileset dir="." includes="SETUP.txt" defaultexcludes="true"/>
         </zip>
+    	<zip basedir="." destfile="dist/${ant.project.name}.zip" defaultexcludes="true" includes="jar/${ant.project.name}_v${env.BUILD_NUMBER}.jar">
+    	            <fileset dir="." includes="${ant.project.name}_v${env.BUILD_NUMBER}.jar" defaultexcludes="true"/>
+    	            <fileset dir="." includes="SETUP.txt" defaultexcludes="true"/>
+    	</zip>
         <copy file="${ant.project.name}_v${env.BUILD_NUMBER}.jar" todir="dist"/>
         <copy file="${ant.project.name}_v${env.BUILD_NUMBER}_source.jar" todir="dist"/>
         <delete file="${ant.project.name}_v${env.BUILD_NUMBER}.jar" />
