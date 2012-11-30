@@ -157,9 +157,9 @@ public class MobBountyReloadedEntityListener implements Listener
                     playerEvent.sendMessage(getPlugin().getAPI().formatString(
                             string, playerEvent.getName(),
                             mbrke.getCreature().getName(),
-                            playerEvent.getWorld().getName(),
-                            playerData.killStreak, confBonus, confBonus, "",
-                            "", "", "", "", 0, "", ""));
+                            playerEvent.getWorld().getName(), confBonus,
+                            confBonus, confBonus, "", "", "", "", "", 0, "",
+                            "", playerData.killStreak));
                 }
                 MobBountyAPI.playerData.put(playerEvent.getName(), playerData);
             }
@@ -199,7 +199,8 @@ public class MobBountyReloadedEntityListener implements Listener
                 "",
                 "mbr.user.collect."
                         + mbrpe.getCreature().getName().toLowerCase(), "", "",
-                0, "", ""));
+                0, "", "",
+                MobBountyAPI.playerData.get(player.getName()).killStreak));
     }
 
     private void sendFineMessage(MobBountyReloadedPaymentEvent mbrpe,
@@ -222,7 +223,8 @@ public class MobBountyReloadedEntityListener implements Listener
                 "",
                 "mbr.user.collect."
                         + mbrpe.getCreature().getName().toLowerCase(), "", "",
-                0, "", ""));
+                0, "", "",
+                MobBountyAPI.playerData.get(player.getName()).killStreak));
     }
 
     private void handleKillCache(Player killer,
@@ -262,7 +264,8 @@ public class MobBountyReloadedEntityListener implements Listener
                                     "",
                                     String.valueOf(String.valueOf(Math
                                             .round((System.currentTimeMillis() - playerData.cacheTime) / 1000))),
-                                    playerData.cacheSize, "", "");
+                                    playerData.cacheSize, "", "",
+                                    playerData.killStreak);
                     killer.sendMessage(message);
                 }
             }
@@ -272,21 +275,23 @@ public class MobBountyReloadedEntityListener implements Listener
                         "CacheFined");
                 if (message != null)
                 {
-                    message = getPlugin().getAPI().formatString(
-                            message,
-                            killer.getName(),
-                            "",
-                            killer.getWorld().getName(),
-                            playerData.cacheEarned,
-                            playerData.cacheEarned,
-                            playerData.cacheEarned,
-                            "",
-                            "",
-                            "",
-                            "",
-                            String.valueOf(String.valueOf(Math
-                                    .round(cTime / 1000))),
-                            playerData.cacheSize, "", "");
+                    message = getPlugin().getAPI()
+                            .formatString(
+                                    message,
+                                    killer.getName(),
+                                    "",
+                                    killer.getWorld().getName(),
+                                    playerData.cacheEarned,
+                                    playerData.cacheEarned,
+                                    playerData.cacheEarned,
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    String.valueOf(String.valueOf(Math
+                                            .round(cTime / 1000))),
+                                    playerData.cacheSize, "", "",
+                                    playerData.killStreak);
                     killer.sendMessage(message);
                 }
             }

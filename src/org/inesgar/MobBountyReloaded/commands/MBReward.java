@@ -79,7 +79,7 @@ public class MBReward implements CommandExecutor
                                             Double.valueOf(args[1]),
                                             Double.valueOf(args[1]), "", "",
                                             "mbr.admin.command.reward", "", "",
-                                            0, "", ""));
+                                            0, "", "", 0));
                         }
                     }
                     else if (args[1]
@@ -97,7 +97,7 @@ public class MBReward implements CommandExecutor
                                     .formatString(message, "", mob.getName(),
                                             "", args[1], args[1], args[1], "",
                                             "", "mbr.admin.command.reward", "",
-                                            "", "", "", ""));
+                                            "", "", "", "", ""));
                         }
                     }
                     else

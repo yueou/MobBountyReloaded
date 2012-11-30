@@ -78,13 +78,16 @@ public class MobBountyAPI
      *            Setting that was changed
      * @param settingValue
      *            New value of setting
+     * @param killStreakAmount
+     *            Amount of killstreak
      * @return Formatted string
      */
     public String formatString(String string, String playerName,
             String creatureName, String worldName, double amount, double a1,
             double a2, String commandName, String commandHelp,
             String permission, String environment, String time,
-            int killCacheAmount, String setting, String settingValue)
+            int killCacheAmount, String setting, String settingValue,
+            int killStreak)
     {
         String message = string;
         message = message.replace("%P", playerName);
@@ -105,6 +108,7 @@ public class MobBountyAPI
                 .format(Math.abs(killCacheAmount)));
         message = message.replace("%S", setting);
         message = message.replace("%V", settingValue);
+        message = message.replace("%KS", String.valueOf(killStreak));
         return message;
     }
 
@@ -147,7 +151,8 @@ public class MobBountyAPI
             String creatureName, String worldName, String amount, String a1,
             String a2, String commandName, String commandHelp,
             String permission, String environment, String time,
-            String killCacheAmount, String setting, String settingValue)
+            String killCacheAmount, String setting, String settingValue,
+            String killStreak)
     {
         String message = string;
         message = message.replace("%P", playerName);
@@ -164,6 +169,7 @@ public class MobBountyAPI
         message = message.replace("%K", killCacheAmount);
         message = message.replace("%S", setting);
         message = message.replace("%V", settingValue);
+        message = message.replace("%KS", killStreak);
         return message;
     }
 

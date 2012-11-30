@@ -73,7 +73,8 @@ public class MobBountyConfigs
                         "  %C - command", "  %H - help for command",
                         "  %D - permission", "  %E - environment",
                         "  %K - kill cache amount", "  %T - kill cache time",
-                        "  %S - setting changed", "  %V - value of setting");
+                        "  %S - setting changed", "  %V - value of setting",
+                        "  %KS - player killstreak value");
                 localeConf.set("en.Awarded",
                         "&2You have been awarded &F%A &2for killing a &F%M&2.");
                 localeConf
@@ -88,7 +89,7 @@ public class MobBountyConfigs
                         "&CYou do not have access to that command.");
                 localeConf
                         .set("en.Killstreak",
-                                "&2You earned &F%1&2 for having a killstreak of &F%A&2!");
+                                "&2You earned &F%A&2 for having a killstreak of &F%KS&2!");
                 localeConf.set("en.MBReward", "&2%M : &F%A");
                 localeConf.set("en.MBRewardRange", "&2%M : &F%1 - %2");
                 localeConf.set("en.MBFine", "&4%M : &F%A");

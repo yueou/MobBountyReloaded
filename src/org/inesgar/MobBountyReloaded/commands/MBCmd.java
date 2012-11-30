@@ -46,21 +46,21 @@ public class MBCmd implements CommandExecutor
         {
             sender.sendMessage(getPlugin().getAPI().formatString(message, "",
                     "", "", 0.0, 0.0, 0.0, "/mobbountycheck",
-                    "Checks the values of mobs", "", "", "", 0, "", ""));
+                    "Checks the values of mobs", "", "", "", 0, "", "", 0));
         }
         if (getPlugin().getPermissionManager().hasPermission(sender,
                 "mbr.admin.command.load"))
         {
             sender.sendMessage(getPlugin().getAPI().formatString(message, "",
                     "", "", 0.0, 0.0, 0.0, "/mobbountyload",
-                    "Reloads the configs", "", "", "", 0, "", ""));
+                    "Reloads the configs", "", "", "", 0, "", "", 0));
         }
         if (getPlugin().getPermissionManager().hasPermission(sender,
                 "mbr.admin.command.save"))
         {
             sender.sendMessage(getPlugin().getAPI().formatString(message, "",
                     "", "", 0.0, 0.0, 0.0, "/mobbountysave",
-                    "Save the configs", "", "", "", 0, "", ""));
+                    "Save the configs", "", "", "", 0, "", "", 0));
         }
         if (sender.hasPermission("mbr.admin.command.reward"))
         {
@@ -68,7 +68,7 @@ public class MBCmd implements CommandExecutor
                     "", "", 0.0, 0.0, 0.0,
                     "/mobbountyreward <creature> <amount>",
                     "Change the <creature>'s value to <amount>", "", "", "", 0,
-                    "", ""));
+                    "", "", 0));
         }
         if (sender.hasPermission("mbr.admin.command.worldreward"))
         {
@@ -76,7 +76,7 @@ public class MBCmd implements CommandExecutor
                     "", "", 0.0, 0.0, 0.0,
                     "/mobbountyworldreward <world> <creature> [amount]",
                     "Change the <creature>'s value to [amount] in <world>", "",
-                    "", "", 0, "", ""));
+                    "", "", 0, "", "", 0));
         }
         if (sender.hasPermission("mbr.admin.command.groupmulti"))
         {
@@ -84,7 +84,7 @@ public class MBCmd implements CommandExecutor
                     "", "", 0.0, 0.0, 0.0,
                     "/mobbountygroupmulti <group> <amount>",
                     "Change <group>'s multiplier to <amount>", "", "", "", 0,
-                    "", ""));
+                    "", "", 0));
         }
         if (sender.hasPermission("mbr.admin.command.usermulti"))
         {
@@ -92,7 +92,7 @@ public class MBCmd implements CommandExecutor
                     "", "", 0.0, 0.0, 0.0,
                     "/mobbountyusermulti <user> <amount>",
                     "Change <user>'s multiplier to <amount>", "", "", "", 0,
-                    "", ""));
+                    "", "", 0));
         }
         if (sender.hasPermission("mbr.admin.command.envmulti"))
         {
@@ -100,7 +100,7 @@ public class MBCmd implements CommandExecutor
                     "", "", 0.0, 0.0, 0.0,
                     "/mobbountyenvmulti <environment> <amount>",
                     "Change <environment>'s multiplier to <amount>", "", "",
-                    "", 0, "", ""));
+                    "", 0, "", "", 0));
         }
         if (sender.hasPermission("mbr.admin.command.timemulti"))
         {
@@ -108,7 +108,7 @@ public class MBCmd implements CommandExecutor
                     "", "", 0.0, 0.0, 0.0,
                     "/mobbountytimemulti <time> <amount>",
                     "Change <time>'s multiplier to <amount>", "", "", "", 0,
-                    "", ""));
+                    "", "", 0));
         }
         sender.sendMessage(ChatColor.DARK_GREEN
                 + "------------------------------------------");

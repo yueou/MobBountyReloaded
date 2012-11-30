@@ -39,7 +39,7 @@ public class MBWorldReward implements CommandExecutor
         {
             message = getPlugin().getAPI().formatString(message, "", "", "",
                     0.0, 0.0, 0.0, command, "",
-                    "mbr.admin.command.worldreward", "", "", 0, "", "");
+                    "mbr.admin.command.worldreward", "", "", 0, "", "", 0);
             sender.sendMessage(message);
         }
 
@@ -61,7 +61,7 @@ public class MBWorldReward implements CommandExecutor
 
             message = getPlugin().getAPI().formatString(message, "", "",
                     worldsStr, 0.0, 0.0, 0.0, "", "",
-                    "mbr.admin.command.worldreward", "", "", 0, "", "");
+                    "mbr.admin.command.worldreward", "", "", 0, "", "", 0);
             sender.sendMessage(message);
         }
 
@@ -107,7 +107,7 @@ public class MBWorldReward implements CommandExecutor
                                             Double.valueOf(args[2]),
                                             Double.valueOf(args[2]), "", "",
                                             "mbr.admin.command.worldreward",
-                                            "", "", 0, "", ""));
+                                            "", "", 0, "", "", 0));
                         }
                     }
                     else if (args[2]
@@ -128,7 +128,7 @@ public class MBWorldReward implements CommandExecutor
                                             Double.valueOf(args[2]),
                                             Double.valueOf(args[2]), "", "",
                                             "mbr.admin.command.worldreward",
-                                            "", "", 0, "", ""));
+                                            "", "", 0, "", "", 0));
                         }
                     }
                     else
