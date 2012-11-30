@@ -108,7 +108,7 @@ public class MobBountyAPI
                 .format(Math.abs(killCacheAmount)));
         message = message.replace("%S", setting);
         message = message.replace("%V", settingValue);
-        message = message.replace("%KS", String.valueOf(killStreak));
+        message = message.replace("%X", String.valueOf(killStreak));
         return message;
     }
 
@@ -169,7 +169,7 @@ public class MobBountyAPI
         message = message.replace("%K", killCacheAmount);
         message = message.replace("%S", setting);
         message = message.replace("%V", settingValue);
-        message = message.replace("%KS", killStreak);
+        message = message.replace("%X", killStreak);
         return message;
     }
 
