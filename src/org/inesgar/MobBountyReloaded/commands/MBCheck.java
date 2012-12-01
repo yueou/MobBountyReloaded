@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.inesgar.MobBountyReloaded.MobBountyReloaded;
 import org.inesgar.MobBountyReloaded.utils.MobBountyCreature;
+import org.inesgar.MobBountyReloaded.utils.MobBountyUtils;
 import org.inesgar.MobBountyReloaded.utils.configuration.MobBountyReloadedConfFile;
 
 public class MBCheck implements CommandExecutor
@@ -69,16 +70,18 @@ public class MBCheck implements CommandExecutor
                         double from = 0;
                         double to = 0;
 
-                        if (Double.valueOf(rewardRange[0]) > Double
-                                .valueOf(rewardRange[1]))
+                        if (MobBountyUtils.getDouble(rewardRange[0], 0.0) > MobBountyUtils
+                                .getDouble(rewardRange[1], 0.0))
                         {
-                            from = Double.valueOf(rewardRange[1]);
-                            to = Double.valueOf(rewardRange[0]);
+                            from = MobBountyUtils
+                                    .getDouble(rewardRange[1], 0.0);
+                            to = MobBountyUtils.getDouble(rewardRange[0], 0.0);
                         }
                         else
                         {
-                            from = Double.valueOf(rewardRange[0]);
-                            to = Double.valueOf(rewardRange[1]);
+                            from = MobBountyUtils
+                                    .getDouble(rewardRange[0], 0.0);
+                            to = MobBountyUtils.getDouble(rewardRange[1], 0.0);
                         }
 
                         if (getPlugin().getEconManager().getEcon() != null)
@@ -123,7 +126,7 @@ public class MBCheck implements CommandExecutor
                     }
                     else
                     {
-                        reward = Double.valueOf(rewardTest);
+                        reward = MobBountyUtils.getDouble(rewardTest, 0.0);
 
                         if (getPlugin().getEconManager().getEcon() != null)
                         {
