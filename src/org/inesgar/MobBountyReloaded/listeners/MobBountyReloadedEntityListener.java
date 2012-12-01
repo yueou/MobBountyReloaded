@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.inesgar.MobBountyReloaded.MobBountyAPI;
 import org.inesgar.MobBountyReloaded.MobBountyReloaded;
+import org.inesgar.MobBountyReloaded.event.MobBountyCreatureDeathEvent;
 import org.inesgar.MobBountyReloaded.event.MobBountyReloadedKillstreakEvent;
 import org.inesgar.MobBountyReloaded.event.MobBountyReloadedPaymentEvent;
 import org.inesgar.MobBountyReloaded.utils.MobBountyCreature;
@@ -49,6 +50,9 @@ public class MobBountyReloadedEntityListener implements Listener
         Player player = event.getEntity().getKiller();
         MobBountyCreature creature = MobBountyCreature.valueOf(
                 event.getEntity(), "");
+        MobBountyCreatureDeathEvent mbcde = new MobBountyCreatureDeathEvent(
+                event.getEntity(), creature, event);
+        getPlugin().getServer().getPluginManager().callEvent(mbcde);
         if (!getPlugin().getPermissionManager().hasPermission(player,
                 "mbr.user.collect.normal"))
         {
