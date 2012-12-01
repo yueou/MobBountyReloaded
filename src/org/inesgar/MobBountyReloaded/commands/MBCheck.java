@@ -49,18 +49,17 @@ public class MBCheck implements CommandExecutor
             {
                 double reward = 0;
 
-                String rewardTest = getPlugin()
-
-                .getConfigManager().getProperty(
+                String rewardTest = getPlugin().getConfigManager().getProperty(
                         MobBountyReloadedConfFile.REWARDS,
-                        "Worlds." + world.getName() + "." + creature.getName());
+                        "Worlds." + world.getName() + "." + creature.getName()
+                                + ".value");
 
                 if (rewardTest == null)
                     rewardTest = getPlugin()
 
                     .getConfigManager().getProperty(
                             MobBountyReloadedConfFile.REWARDS,
-                            "Default." + creature.getName());
+                            "Default." + creature.getName() + ".value");
 
                 if (rewardTest != null)
                 {

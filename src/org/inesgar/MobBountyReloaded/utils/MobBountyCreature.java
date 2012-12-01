@@ -16,6 +16,7 @@ import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.Skeleton.SkeletonType;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.Snowman;
 import org.bukkit.entity.Spider;
@@ -23,7 +24,6 @@ import org.bukkit.entity.Squid;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Witch;
 import org.bukkit.entity.Wither;
-import org.bukkit.entity.WitherSkull;
 import org.bukkit.entity.Wolf;
 import org.bukkit.entity.Zombie;
 
@@ -61,8 +61,6 @@ public enum MobBountyCreature
             return MobBountyCreature.PLAYER;
         else if (entity instanceof Witch)
             return MobBountyCreature.WITCH;
-        else if (entity instanceof WitherSkull)
-            return MobBountyCreature.WITHER_SKELETON;
         else if (entity instanceof Wither)
             return MobBountyCreature.WITHER;
         else if (entity instanceof Cow)
@@ -92,7 +90,12 @@ public enum MobBountyCreature
         else if (entity instanceof Sheep)
             return MobBountyCreature.SHEEP;
         else if (entity instanceof Skeleton)
+        {
+            Skeleton skeleton = (Skeleton) entity;
+            if (skeleton.getSkeletonType() == SkeletonType.WITHER)
+                return MobBountyCreature.WITHER_SKELETON;
             return MobBountyCreature.SKELETON;
+        }
         else if (entity instanceof Slime)
         {
             if (entity.getType().equals(EntityType.MAGMA_CUBE))
