@@ -78,7 +78,7 @@ public class MobBountyAPI
      *            Setting that was changed
      * @param settingValue
      *            New value of setting
-     * @param killStreakAmount
+     * @param killStreak
      *            Amount of killstreak
      * @return Formatted string
      */
