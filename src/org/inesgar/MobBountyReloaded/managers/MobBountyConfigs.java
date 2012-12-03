@@ -304,11 +304,11 @@ public class MobBountyConfigs
     /**
      * Gets a value for path in file
      * 
-     * @param MobBountyReloadedConfFile
+     * @param file
      *            File to search in
-     * @param String
+     * @param path
      *            Path to search for
-     * @return String Value contained by path
+     * @return Value contained by path
      */
     public String getProperty(MobBountyReloadedConfFile file, String path)
     {
@@ -329,11 +329,11 @@ public class MobBountyConfigs
     /**
      * Gets a value for path in file
      * 
-     * @param MobBountyReloadedConfFile
+     * @param file
      *            File to search in
-     * @param String
+     * @param path
      *            Path to search for
-     * @return List<String> Value contained by path
+     * @return Values contained by path
      */
     public List<String> getPropertyList(MobBountyReloadedConfFile file,
             String path)
@@ -386,11 +386,11 @@ public class MobBountyConfigs
     /**
      * Checks if path exists in file
      * 
-     * @param MobBountyReloadedConfFile
+     * @param file
      *            File to search in
-     * @param String
+     * @param path
      *            Path to search for
-     * @return boolean Property exists
+     * @return if property exists
      */
     public boolean propertyExists(MobBountyReloadedConfFile file, String path)
     {
@@ -408,11 +408,11 @@ public class MobBountyConfigs
     /**
      * Sets path to null in file
      * 
-     * @param MobBountyReloadedConfFile
+     * @param file
      *            File to set in
-     * @param String
+     * @param path
      *            Path to set null
-     * @return boolean If completed
+     * @return if completed
      */
     public boolean removeProperty(MobBountyReloadedConfFile file, String path)
     {
@@ -450,12 +450,12 @@ public class MobBountyConfigs
     /**
      * Sets path to value in file
      * 
-     * @param MobBountyReloadedConfFile
+     * @param file
      *            File to set in
-     * @param String
+     * @param path
      *            Path to set
      * @param boolean Value to set
-     * @return boolean If completed
+     * @return if completed
      */
     public boolean setProperty(MobBountyReloadedConfFile file, String path,
             boolean value)
@@ -482,12 +482,12 @@ public class MobBountyConfigs
     /**
      * Sets path to value in file
      * 
-     * @param MobBountyReloadedConfFile
+     * @param file
      *            File to set in
-     * @param String
+     * @param path
      *            Path to set
-     * @param double Value to set
-     * @return boolean If completed
+     * @param value Value to set
+     * @return if completed
      */
     public boolean setProperty(MobBountyReloadedConfFile file, String path,
             Double value)
@@ -514,12 +514,12 @@ public class MobBountyConfigs
     /**
      * Sets path to value in file
      * 
-     * @param MobBountyReloadedConfFile
+     * @param file
      *            File to set in
-     * @param String
+     * @param path
      *            Path to set
-     * @param int Value to set
-     * @return boolean If completed
+     * @param value Value to set
+     * @return if completed
      */
     public boolean setProperty(MobBountyReloadedConfFile file, String path,
             int value)
@@ -545,13 +545,13 @@ public class MobBountyConfigs
     /**
      * Sets path to value in file
      * 
-     * @param MobBountyReloadedConfFile
+     * @param file
      *            File to set in
-     * @param String
+     * @param path
      *            Path to set
-     * @param String
+     * @param value
      *            Value to set
-     * @return boolean If completed
+     * @return if completed
      */
     public boolean setProperty(MobBountyReloadedConfFile file, String path,
             String value)
