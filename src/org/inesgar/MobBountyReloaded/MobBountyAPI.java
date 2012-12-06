@@ -28,21 +28,11 @@ public class MobBountyAPI
         return log;
     }
 
-    public MobBountyAPI(MobBountyReloaded plugin)
+    public MobBountyAPI(final MobBountyReloaded plugin)
     {
         setMobBountyReloaded(plugin);
         setMBI(new MBI(getMobBountyReloaded()));
         playerData = new HashMap<String, MobBountyPlayerKillData>();
-    }
-
-    /**
-     * Gets the copy of MBR.
-     * 
-     * @return The copy of MobBountyReloaded that this API references.
-     */
-    public MobBountyReloaded getMobBountyReloaded()
-    {
-        return mbr;
     }
 
     /**
@@ -82,12 +72,13 @@ public class MobBountyAPI
      *            Amount of killstreak
      * @return Formatted string
      */
-    public String formatString(String string, String playerName,
-            String creatureName, String worldName, double amount, double a1,
-            double a2, String commandName, String commandHelp,
-            String permission, String environment, String time,
-            int killCacheAmount, String setting, String settingValue,
-            int killStreak)
+    public String formatString(final String string, final String playerName,
+            final String creatureName, final String worldName,
+            final double amount, final double a1, final double a2,
+            final String commandName, final String commandHelp,
+            final String permission, final String environment,
+            final String time, final int killCacheAmount, final String setting,
+            final String settingValue, final int killStreak)
     {
         String message = string;
         message = message.replace("%P", playerName);
@@ -145,14 +136,18 @@ public class MobBountyAPI
      *            Setting that was changed
      * @param settingValue
      *            New value of setting
+     * @param killStreak
+     *            value for killstreak amount
      * @return Formatted string
      */
-    public String formatString(String string, String playerName,
-            String creatureName, String worldName, String amount, String a1,
-            String a2, String commandName, String commandHelp,
-            String permission, String environment, String time,
-            String killCacheAmount, String setting, String settingValue,
-            String killStreak)
+    public String formatString(final String string, final String playerName,
+            final String creatureName, final String worldName,
+            final String amount, final String a1, final String a2,
+            final String commandName, final String commandHelp,
+            final String permission, final String environment,
+            final String time, final String killCacheAmount,
+            final String setting, final String settingValue,
+            final String killStreak)
     {
         String message = string;
         message = message.replace("%P", playerName);
@@ -173,25 +168,6 @@ public class MobBountyAPI
         return message;
     }
 
-    private void setMobBountyReloaded(MobBountyReloaded mbr)
-    {
-        this.mbr = mbr;
-    }
-
-    /**
-     * Gets a creature's value
-     * 
-     * @param playerName
-     *            Killer
-     * @param creature
-     *            Kind of creature
-     * @return Value
-     */
-    public double getEntityValue(String playerName, MobBountyCreature creature)
-    {
-        return getMBI().getValue(playerName, creature);
-    }
-
     /**
      * Gets a creature's value
      * 
@@ -201,7 +177,7 @@ public class MobBountyAPI
      *            Kind of creature
      * @return Value
      */
-    public double getEntityValue(Player player, LivingEntity entity)
+    public double getEntityValue(final Player player, final LivingEntity entity)
     {
         return getMBI().getValue(player, entity);
     }
@@ -215,51 +191,25 @@ public class MobBountyAPI
      *            Kind of creature
      * @return Value
      */
-    public double getEntityValue(Player player, MobBountyCreature creature)
+    public double getEntityValue(final Player player,
+            final MobBountyCreature creature)
     {
         return getMBI().getValue(player, creature);
     }
 
     /**
-     * Makes a transaction to playerName's account of amt
+     * Gets a creature's value
      * 
      * @param playerName
-     *            Player's name
-     * @param amt
-     *            Amount to transfer
-     * @return Success
+     *            Killer
+     * @param creature
+     *            Kind of creature
+     * @return Value
      */
-    public boolean makeTransaction(String playerName, double amt)
+    public double getEntityValue(final String playerName,
+            final MobBountyCreature creature)
     {
-        if (amt == 0.0)
-        {
-            return true;
-        }
-        else if (amt > 0.0)
-        {
-            return getMobBountyReloaded().getEconManager().payAccount(
-                    playerName, amt);
-        }
-        else if (amt < 0.0)
-        {
-            return getMobBountyReloaded().getEconManager().fineAccount(
-                    playerName, amt);
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    /**
-     * Prints out a message to the console.
-     * 
-     * @param message
-     *            A message that is logged by the plugin.
-     */
-    public void log(String message)
-    {
-        log.info("[MobBountyReloaded] " + message);
+        return getMBI().getValue(playerName, creature);
     }
 
     /**
@@ -273,14 +223,13 @@ public class MobBountyAPI
     }
 
     /**
-     * Sets the MBI instance
+     * Gets the copy of MBR.
      * 
-     * @param mbi
-     *            The MBI instance to set
+     * @return The copy of MobBountyReloaded that this API references.
      */
-    public void setMBI(MBI mbi)
+    public MobBountyReloaded getMobBountyReloaded()
     {
-        this.mbi = mbi;
+        return mbr;
     }
 
     /**
@@ -290,11 +239,61 @@ public class MobBountyAPI
      *            The player to return for
      * @return The multiplier value
      */
-    public double getMult(Player player)
+    public double getMult(final Player player)
     {
         return getMBI().getEnvironmentMult(player)
                 * getMBI().getTimeMult(player) * getMBI().getWorldMult(player)
                 * getMBI().getFortuneMult(player)
                 * getMBI().getUserMult(player) * getMBI().getGroupMult(player);
+    }
+
+    /**
+     * Prints out a message to the console.
+     * 
+     * @param message
+     *            A message that is logged by the plugin.
+     */
+    public void log(final String message)
+    {
+        log.info("[MobBountyReloaded] " + message);
+    }
+
+    /**
+     * Makes a transaction to playerName's account of amt
+     * 
+     * @param playerName
+     *            Player's name
+     * @param amt
+     *            Amount to transfer
+     * @return Success
+     */
+    public boolean makeTransaction(final String playerName, final double amt)
+    {
+        if (amt == 0.0)
+            return true;
+        else if (amt > 0.0)
+            return getMobBountyReloaded().getEconManager().payAccount(
+                    playerName, amt);
+        else if (amt < 0.0)
+            return getMobBountyReloaded().getEconManager().fineAccount(
+                    playerName, amt);
+        else
+            return false;
+    }
+
+    /**
+     * Sets the MBI instance
+     * 
+     * @param mbi
+     *            The MBI instance to set
+     */
+    public void setMBI(final MBI mbi)
+    {
+        this.mbi = mbi;
+    }
+
+    private void setMobBountyReloaded(final MobBountyReloaded mbr)
+    {
+        this.mbr = mbr;
     }
 }

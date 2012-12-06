@@ -19,16 +19,17 @@ public class MobBountyConfigs
 
     private final MobBountyReloaded _plugin;
 
-    public MobBountyConfigs(MobBountyReloaded plugin)
+    public MobBountyConfigs(final MobBountyReloaded plugin)
     {
         _plugin = plugin;
 
         _configurations = new HashMap<MobBountyReloadedConfFile, YamlConfiguration>();
 
-        this.loadConfig();
+        loadConfig();
     }
 
-    private void createConfig(MobBountyReloadedConfFile config, File file)
+    private void createConfig(final MobBountyReloadedConfFile config,
+            final File file)
     {
         switch (config)
         {
@@ -74,7 +75,7 @@ public class MobBountyConfigs
                         "  %D - permission", "  %E - environment",
                         "  %K - kill cache amount", "  %T - kill cache time",
                         "  %S - setting changed", "  %V - value of setting",
-                        "  %KS - player killstreak value");
+                        "  %X - player killstreak value");
                 localeConf.set("en.Awarded",
                         "&2You have been awarded &F%A &2for killing a &F%M&2.");
                 localeConf
@@ -89,7 +90,7 @@ public class MobBountyConfigs
                         "&CYou do not have access to that command.");
                 localeConf
                         .set("en.Killstreak",
-                                "&2You earned &F%A&2 for having a killstreak of &F%KS&2!");
+                                "&2You earned &F%A&2 for having a killstreak of &F%X&2!");
                 localeConf.set("en.MBReward", "&2%M : &F%A");
                 localeConf.set("en.MBRewardRange", "&2%M : &F%1 - %2");
                 localeConf.set("en.MBFine", "&4%M : &F%A");
@@ -301,6 +302,11 @@ public class MobBountyConfigs
 
     }
 
+    public MobBountyReloaded getPlugin()
+    {
+        return _plugin;
+    }
+
     /**
      * Gets a value for path in file
      * 
@@ -310,7 +316,8 @@ public class MobBountyConfigs
      *            Path to search for
      * @return Value contained by path
      */
-    public String getProperty(MobBountyReloadedConfFile file, String path)
+    public String getProperty(final MobBountyReloadedConfFile file,
+            final String path)
     {
         FileConfiguration conf = _configurations.get(file);
 
@@ -335,8 +342,8 @@ public class MobBountyConfigs
      *            Path to search for
      * @return Values contained by path
      */
-    public List<String> getPropertyList(MobBountyReloadedConfFile file,
-            String path)
+    public List<String> getPropertyList(final MobBountyReloadedConfFile file,
+            final String path)
     {
         FileConfiguration conf = _configurations.get(file);
 
@@ -377,7 +384,7 @@ public class MobBountyConfigs
                 if (!parentFile.exists())
                     parentFile.mkdirs();
 
-                this.createConfig(file, confFile);
+                createConfig(file, confFile);
             }
         }
 
@@ -392,15 +399,14 @@ public class MobBountyConfigs
      *            Path to search for
      * @return if property exists
      */
-    public boolean propertyExists(MobBountyReloadedConfFile file, String path)
+    public boolean propertyExists(final MobBountyReloadedConfFile file,
+            final String path)
     {
         FileConfiguration conf = _configurations.get(file);
 
         if (conf != null)
-        {
             if (conf.contains(path))
                 return true;
-        }
 
         return false;
     }
@@ -414,7 +420,8 @@ public class MobBountyConfigs
      *            Path to set null
      * @return if completed
      */
-    public boolean removeProperty(MobBountyReloadedConfFile file, String path)
+    public boolean removeProperty(final MobBountyReloadedConfFile file,
+            final String path)
     {
         FileConfiguration conf = _configurations.get(file);
 
@@ -434,7 +441,6 @@ public class MobBountyConfigs
     {
         for (MobBountyReloadedConfFile file : MobBountyReloadedConfFile
                 .values())
-        {
             if (_configurations.containsKey(file))
                 try
                 {
@@ -444,7 +450,6 @@ public class MobBountyConfigs
                 {
 
                 }
-        }
     }
 
     /**
@@ -457,8 +462,8 @@ public class MobBountyConfigs
      * @param boolean Value to set
      * @return if completed
      */
-    public boolean setProperty(MobBountyReloadedConfFile file, String path,
-            boolean value)
+    public boolean setProperty(final MobBountyReloadedConfFile file,
+            final String path, final boolean value)
     {
         FileConfiguration conf = _configurations.get(file);
 
@@ -486,11 +491,12 @@ public class MobBountyConfigs
      *            File to set in
      * @param path
      *            Path to set
-     * @param value Value to set
+     * @param value
+     *            Value to set
      * @return if completed
      */
-    public boolean setProperty(MobBountyReloadedConfFile file, String path,
-            Double value)
+    public boolean setProperty(final MobBountyReloadedConfFile file,
+            final String path, final Double value)
     {
         FileConfiguration conf = _configurations.get(file);
 
@@ -518,11 +524,12 @@ public class MobBountyConfigs
      *            File to set in
      * @param path
      *            Path to set
-     * @param value Value to set
+     * @param value
+     *            Value to set
      * @return if completed
      */
-    public boolean setProperty(MobBountyReloadedConfFile file, String path,
-            int value)
+    public boolean setProperty(final MobBountyReloadedConfFile file,
+            final String path, final int value)
     {
         FileConfiguration conf = _configurations.get(file);
 
@@ -553,8 +560,8 @@ public class MobBountyConfigs
      *            Value to set
      * @return if completed
      */
-    public boolean setProperty(MobBountyReloadedConfFile file, String path,
-            String value)
+    public boolean setProperty(final MobBountyReloadedConfFile file,
+            final String path, final String value)
     {
         FileConfiguration conf = _configurations.get(file);
 
@@ -586,8 +593,8 @@ public class MobBountyConfigs
      *            <String> List of values
      * @return boolean If completed
      */
-    public boolean setPropertyList(MobBountyReloadedConfFile file, String path,
-            ArrayList<String> list)
+    public boolean setPropertyList(final MobBountyReloadedConfFile file,
+            final String path, final ArrayList<String> list)
     {
         FileConfiguration conf = _configurations.get(file);
 
@@ -618,8 +625,8 @@ public class MobBountyConfigs
      *            <String> List of values to set
      * @return boolean If completed
      */
-    public boolean setPropertyList(MobBountyReloadedConfFile file, String path,
-            List<String> list)
+    public boolean setPropertyList(final MobBountyReloadedConfFile file,
+            final String path, final List<String> list)
     {
         FileConfiguration conf = _configurations.get(file);
 
@@ -637,10 +644,5 @@ public class MobBountyConfigs
         }
 
         return false;
-    }
-
-    public MobBountyReloaded getPlugin()
-    {
-        return _plugin;
     }
 }
