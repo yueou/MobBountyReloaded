@@ -16,7 +16,6 @@ import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Skeleton;
-import org.bukkit.entity.Skeleton.SkeletonType;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.Snowman;
 import org.bukkit.entity.Spider;
@@ -39,10 +38,10 @@ public enum MobBountyCreature
             "Silverfish"), SKELETON("Skeleton"), SLIME("Slime"), SNOWGOLEM(
             "SnowGolem"), SPIDER("Spider"), SQUID("Squid"), TAMED_CAT(
             "TamedCat"), TAMED_WOLF("TamedWolf"), UNKNOWN("Unknown"), VILLAGER(
-            "Villager"), WITCH("Witch"), WITHER("Wither"), WITHER_SKELETON(
-            "WitherSkeleton"), WOLF("Wolf"), ZOMBIE("Zombie");
+            "Villager"), WITCH("Witch"), WITHER("Wither"), WOLF("Wolf"), ZOMBIE(
+            "Zombie");
 
-    public static MobBountyCreature fromName(String name)
+    public static MobBountyCreature fromName(final String name)
     {
         for (MobBountyCreature id : MobBountyCreature.values())
         {
@@ -53,7 +52,8 @@ public enum MobBountyCreature
         return null;
     }
 
-    public static MobBountyCreature valueOf(Entity entity, String playerName)
+    public static MobBountyCreature valueOf(final Entity entity,
+            final String playerName)
     {
         if (entity instanceof Chicken)
             return MobBountyCreature.CHICKEN;
@@ -90,12 +90,7 @@ public enum MobBountyCreature
         else if (entity instanceof Sheep)
             return MobBountyCreature.SHEEP;
         else if (entity instanceof Skeleton)
-        {
-            Skeleton skeleton = (Skeleton) entity;
-            if (skeleton.getSkeletonType() == SkeletonType.WITHER)
-                return MobBountyCreature.WITHER_SKELETON;
             return MobBountyCreature.SKELETON;
-        }
         else if (entity instanceof Slime)
         {
             if (entity.getType().equals(EntityType.MAGMA_CUBE))
@@ -113,7 +108,7 @@ public enum MobBountyCreature
             Ocelot ocelot = (Ocelot) entity;
             if (!ocelot.isTamed())
                 return MobBountyCreature.OCELOT;
-            else if (ocelot.getOwner() instanceof Player
+            else if ((ocelot.getOwner() instanceof Player)
                     && ((Player) ocelot.getOwner()).getName().equalsIgnoreCase(
                             playerName))
                 return MobBountyCreature.SELF_TAMED_CAT;
@@ -127,7 +122,7 @@ public enum MobBountyCreature
             Wolf wolf = (Wolf) entity;
             if (!wolf.isTamed())
                 return MobBountyCreature.WOLF;
-            else if (wolf.getOwner() instanceof Player
+            else if ((wolf.getOwner() instanceof Player)
                     && ((Player) wolf.getOwner()).getName().equalsIgnoreCase(
                             playerName))
                 return MobBountyCreature.SELF_TAMED_WOLF;

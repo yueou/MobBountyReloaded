@@ -109,7 +109,7 @@ public class MobBountyConfigs
                 localeConf.set("en.MBRUsage", "&CUsage: /%C [mob] <amount>");
                 localeConf
                         .set("en.MBRMobs",
-                                "&7Mob: Bat, Blaze, CaveSpider, Chicken, Cow, Creeper, ElectrifiedCreeper, Enderdragon, Enderman, Ghast, Giant, IronGolem, MagmaCube, Monster, Mooshroom, Ocelot, Pig, PigZombie, Player, SelfTamedCat, SelfTamedWolf, Sheep, Silverfish, Skeleton, Slime, SnowGolem, Spider, Squid, TamedCat, TamedWolf, Unknown, Villager, Witch, Wither, WitherSkeleton, Wolf, Zombie");
+                                "&7Mob: Bat, Blaze, CaveSpider, Chicken, Cow, Creeper, ElectrifiedCreeper, Enderdragon, Enderman, Ghast, Giant, IronGolem, MagmaCube, Monster, Mooshroom, Ocelot, Pig, PigZombie, Player, SelfTamedCat, SelfTamedWolf, Sheep, Silverfish, Skeleton, Slime, SnowGolem, Spider, Squid, TamedCat, TamedWolf, Unknown, Villager, Witch, Wither, Wolf, Zombie");
                 localeConf
                         .set("en.MBWRChange",
                                 "&2Reward for mob &F%M &2in world &F%W &2has been changed to &F%A&2.");
@@ -121,7 +121,7 @@ public class MobBountyConfigs
                 localeConf.set("en.MBWRWorlds", "&7World: %W");
                 localeConf
                         .set("en.MBWRMobs",
-                                "&7Mob: Bat, Blaze, CaveSpider, Chicken, Cow, Creeper, ElectrifiedCreeper, Enderdragon, Enderman, Ghast, Giant, IronGolem, MagmaCube, Monster, Mooshroom, Ocelot, Pig, PigZombie, SelfTamedCat, SelfTamedWolf, Sheep, Silverfish, Skeleton, Slime, SnowGolem, Spider, Squid, TamedCat, TamedWolf, Villager, Witch, Wither, WitherSkeleton, Wolf, Zombie");
+                                "&7Mob: Bat, Blaze, CaveSpider, Chicken, Cow, Creeper, ElectrifiedCreeper, Enderdragon, Enderman, Ghast, Giant, IronGolem, MagmaCube, Monster, Mooshroom, Ocelot, Pig, PigZombie, Player, SelfTamedCat, SelfTamedWolf, Sheep, Silverfish, Skeleton, Slime, SnowGolem, Spider, Squid, TamedCat, TamedWolf, Unknown, Villager, Witch, Wither, Wolf, Zombie");
                 localeConf
                         .set("en.MBEMChange",
                                 "&2Multiplier for the &F%E &2environment has been changed to &F%A&2.");
@@ -251,8 +251,6 @@ public class MobBountyConfigs
                 rewardConfig.set("Default.Villager.value", new Double(0.0));
                 rewardConfig.set("Default.Witch.value", new Double(0.0));
                 rewardConfig.set("Default.Wither.value", new Double(750.0));
-                rewardConfig.set("Default.WitherSkeleton.value", new Double(
-                        57.0));
                 rewardConfig.set("Default.Wolf.value", new Double(28.5));
                 rewardConfig.set("Default.Zombie.value", new Double(21.0));
                 try
@@ -277,15 +275,15 @@ public class MobBountyConfigs
                         "each killstreak is worth.");
                 killConf.set("KillBonus.5", new Double(5.0));
                 killConf.set("KillBonus.10", new Double(10.0));
-                String[] allowedCreatures =
-                { "Bat", "Blaze", "CaveSpider", "Chicken", "Cow", "Creeper",
-                        "ElectrifiedCreeper", "Enderdragon", "Enderman",
-                        "Ghast", "Giant", "IronGolem", "MagmaCube", "Monster",
-                        "Mooshroom", "Ocelot", "Pig", "PigZombie", "Player",
-                        "SelfTamedCat", "SelfTamedWolf", "Sheep", "Silverfish",
-                        "Skeleton", "Slime", "SnowGolem", "Spider", "Squid",
-                        "TamedCat", "TamedWolf", "Unknown", "Villager",
-                        "Witch", "Wither", "WitherSkeleton", "Wolf", "Zombie" };
+                String[] allowedCreatures = { "Bat", "Blaze", "CaveSpider",
+                        "Chicken", "Cow", "Creeper", "ElectrifiedCreeper",
+                        "Enderdragon", "Enderman", "Ghast", "Giant",
+                        "IronGolem", "MagmaCube", "Monster", "Mooshroom",
+                        "Ocelot", "Pig", "PigZombie", "Player", "SelfTamedCat",
+                        "SelfTamedWolf", "Sheep", "Silverfish", "Skeleton",
+                        "Slime", "SnowGolem", "Spider", "Squid", "TamedCat",
+                        "TamedWolf", "Unknown", "Villager", "Witch", "Wither",
+                        "Wolf", "Zombie" };
                 killConf.set("allowedCreatures",
                         Arrays.asList(allowedCreatures));
                 try
@@ -371,7 +369,9 @@ public class MobBountyConfigs
             if (confFile.exists())
             {
                 if (_configurations.containsKey(file))
+                {
                     _configurations.remove(file);
+                }
 
                 YamlConfiguration conf = YamlConfiguration
                         .loadConfiguration(confFile);
@@ -382,7 +382,9 @@ public class MobBountyConfigs
                 File parentFile = confFile.getParentFile();
 
                 if (!parentFile.exists())
+                {
                     parentFile.mkdirs();
+                }
 
                 createConfig(file, confFile);
             }
@@ -442,6 +444,7 @@ public class MobBountyConfigs
         for (MobBountyReloadedConfFile file : MobBountyReloadedConfFile
                 .values())
             if (_configurations.containsKey(file))
+            {
                 try
                 {
                     _configurations.get(file).save(new File(file.getPath()));
@@ -450,6 +453,7 @@ public class MobBountyConfigs
                 {
 
                 }
+            }
     }
 
     /**
