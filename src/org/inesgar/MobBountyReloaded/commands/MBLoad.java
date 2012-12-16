@@ -10,14 +10,19 @@ public class MBLoad implements CommandExecutor
 
     private MobBountyReloaded plugin;
 
-    public MBLoad(MobBountyReloaded plugin)
+    public MBLoad(final MobBountyReloaded plugin)
     {
         setPlugin(plugin);
     }
 
+    public MobBountyReloaded getPlugin()
+    {
+        return plugin;
+    }
+
     @Override
-    public boolean onCommand(CommandSender sender, Command command,
-            String cmdLbl, String[] args)
+    public boolean onCommand(final CommandSender sender, final Command command,
+            final String cmdLbl, final String[] args)
     {
         String message;
         if (!getPlugin().getPermissionManager().hasPermission(sender,
@@ -45,12 +50,7 @@ public class MBLoad implements CommandExecutor
         return true;
     }
 
-    public MobBountyReloaded getPlugin()
-    {
-        return plugin;
-    }
-
-    public void setPlugin(MobBountyReloaded plugin)
+    public void setPlugin(final MobBountyReloaded plugin)
     {
         this.plugin = plugin;
     }
