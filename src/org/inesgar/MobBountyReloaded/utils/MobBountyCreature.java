@@ -153,6 +153,75 @@ public enum MobBountyCreature
         return MobBountyCreature.UNKNOWN;
     }
 
+    public static MobBountyCreature valueOf(final EntityType entity)
+    {
+        switch (entity)
+        {
+            case BAT:
+                return MobBountyCreature.BAT;
+            case BLAZE:
+                return MobBountyCreature.BLAZE;
+            case CAVE_SPIDER:
+                return MobBountyCreature.CAVESPIDER;
+            case CHICKEN:
+                return MobBountyCreature.CHICKEN;
+            case COW:
+                return MobBountyCreature.COW;
+            case CREEPER:
+                return MobBountyCreature.CREEPER;
+            case ENDERMAN:
+                return MobBountyCreature.ENDERMAN;
+            case ENDER_DRAGON:
+                return MobBountyCreature.ENDERDRAGON;
+            case GHAST:
+                return MobBountyCreature.GHAST;
+            case GIANT:
+                return MobBountyCreature.GIANT;
+            case IRON_GOLEM:
+                return MobBountyCreature.IRONGOLEM;
+            case MAGMA_CUBE:
+                return MobBountyCreature.MAGMACUBE;
+            case MUSHROOM_COW:
+                return MobBountyCreature.MOOSHROOM;
+            case OCELOT:
+                return MobBountyCreature.OCELOT;
+            case PIG:
+                return MobBountyCreature.PIG;
+            case PIG_ZOMBIE:
+                return MobBountyCreature.PIG_ZOMBIE;
+            case PLAYER:
+                return MobBountyCreature.PLAYER;
+            case SHEEP:
+                return MobBountyCreature.SHEEP;
+            case SILVERFISH:
+                return MobBountyCreature.SILVERFISH;
+            case SKELETON:
+                return MobBountyCreature.SKELETON;
+            case SLIME:
+                return MobBountyCreature.SLIME;
+            case SNOWMAN:
+                return MobBountyCreature.SNOWGOLEM;
+            case SPIDER:
+                return MobBountyCreature.SPIDER;
+            case SQUID:
+                return MobBountyCreature.SQUID;
+            case UNKNOWN:
+                return MobBountyCreature.UNKNOWN;
+            case VILLAGER:
+                return MobBountyCreature.VILLAGER;
+            case WITCH:
+                return MobBountyCreature.WITCH;
+            case WITHER:
+                return MobBountyCreature.WITHER;
+            case WOLF:
+                return MobBountyCreature.WOLF;
+            case ZOMBIE:
+                return MobBountyCreature.ZOMBIE;
+            default:
+                return MobBountyCreature.UNKNOWN;
+        }
+    }
+
     private final String _name;
 
     private MobBountyCreature(final String name)
