@@ -1,5 +1,6 @@
 package org.inesgar.MobBountyReloaded.utils;
 
+import org.bukkit.entity.Bat;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Creeper;
@@ -57,6 +58,8 @@ public enum MobBountyCreature
     {
         if (entity instanceof Chicken)
             return MobBountyCreature.CHICKEN;
+        else if (entity instanceof Bat)
+            return MobBountyCreature.BAT;
         else if (entity instanceof Player)
             return MobBountyCreature.PLAYER;
         else if (entity instanceof Witch)
