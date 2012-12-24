@@ -95,8 +95,8 @@ public class MobBountyAPI
         message = message.replace("%D", permission);
         message = message.replace("%E", environment);
         message = message.replace("%T", time);
-        message = message.replace("%K", getMobBountyReloaded().getEconManager()
-                .format(Math.abs(killCacheAmount)));
+        message = message.replace("%K",
+                String.valueOf(Math.abs(killCacheAmount)));
         message = message.replace("%S", setting);
         message = message.replace("%V", settingValue);
         message = message.replace("%X", String.valueOf(killStreak));

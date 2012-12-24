@@ -80,12 +80,12 @@ public class MobBountyConfigs
                         "&2You have been awarded &F%A &2for killing a &F%M&2.");
                 localeConf
                         .set("en.CacheAwarded",
-                                "&2You have been awarded &F%A &2for killing a &F%K &2mobs in &F%T &2seconds.");
+                                "&2You have been awarded &F%A &2for killing &F%K &2mobs in &F%T &2seconds.");
                 localeConf.set("en.Fined",
                         "&4You have been fined &F%A &4for killing a &F%M&4.");
                 localeConf
                         .set("en.CacheFined",
-                                "&4You have been fined &F%A &4for killing a &F%K &4mobs in &F%T &4seconds.");
+                                "&4You have been fined &F%A &4for killing &F%K &4mobs in &F%T &4seconds.");
                 localeConf.set("en.NoAccess",
                         "&CYou do not have access to that command.");
                 localeConf
