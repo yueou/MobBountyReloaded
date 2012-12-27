@@ -11,6 +11,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import com.conventnunnery.MobBountyReloaded.MobBountyReloaded;
+import com.conventnunnery.MobBountyReloaded.utils.MobBountyCreature;
 import com.conventnunnery.MobBountyReloaded.utils.configuration.CommentedYamlConfiguration;
 import com.conventnunnery.MobBountyReloaded.utils.configuration.MobBountyReloadedConfFile;
 
@@ -108,9 +109,11 @@ public class MobBountyConfigs
                         .set("en.MBRChange",
                                 "&2Default reward/fine for mob &F%M &2has been changed to &F%A&2.");
                 localeConf.set("en.MBRUsage", "&CUsage: /%C [mob] <amount>");
-                localeConf
-                        .set("en.MBRMobs",
-                                "&7Mob: Bat, Blaze, CaveSpider, Chicken, Cow, Creeper, ElectrifiedCreeper, Enderdragon, Enderman, Ghast, Giant, IronGolem, MagmaCube, Monster, Mooshroom, Ocelot, Pig, PigZombie, Player, SelfTamedCat, SelfTamedWolf, Sheep, Silverfish, Skeleton, Slime, SnowGolem, Spider, Squid, TamedCat, TamedWolf, Unknown, Villager, Witch, Wither, Wolf, Zombie");
+                List<String> mobs = new ArrayList<String>();
+                for (MobBountyCreature creature : MobBountyCreature.values())
+                    mobs.add(creature.getName());
+                localeConf.set("en.MBRMobs", "&7Mob: "
+                        + mobs.toString().replace("[", "").replace("]", ""));
                 localeConf
                         .set("en.MBWRChange",
                                 "&2Reward for mob &F%M &2in world &F%W &2has been changed to &F%A&2.");
@@ -120,9 +123,8 @@ public class MobBountyConfigs
                 localeConf.set("en.MBWRUsage",
                         "&CUsage: /%C [world] [mob] <amount>");
                 localeConf.set("en.MBWRWorlds", "&7World: %W");
-                localeConf
-                        .set("en.MBWRMobs",
-                                "&7Mob: Bat, Blaze, CaveSpider, Chicken, Cow, Creeper, ElectrifiedCreeper, Enderdragon, Enderman, Ghast, Giant, IronGolem, MagmaCube, Monster, Mooshroom, Ocelot, Pig, PigZombie, Player, SelfTamedCat, SelfTamedWolf, Sheep, Silverfish, Skeleton, Slime, SnowGolem, Spider, Squid, TamedCat, TamedWolf, Unknown, Villager, Witch, Wither, Wolf, Zombie");
+                localeConf.set("en.MBWRMobs", "&7Mob: "
+                        + mobs.toString().replace("[", "").replace("]", ""));
                 localeConf
                         .set("en.MBEMChange",
                                 "&2Multiplier for the &F%E &2environment has been changed to &F%A&2.");
@@ -172,22 +174,34 @@ public class MobBountyConfigs
             case MULTIPLIERS:
                 CommentedYamlConfiguration multiplierConfig = new CommentedYamlConfiguration();
                 getPlugin().getAPI().log("Creating Multipliers.yml");
-                multiplierConfig.addComment("Environment", "These multipliers are used for determining", "rewards based on world type.");
+                multiplierConfig.addComment("Environment",
+                        "These multipliers are used for determining",
+                        "rewards based on world type.");
                 multiplierConfig.set("Environment.Normal", new Double(1.0));
                 multiplierConfig.set("Environment.Nether", new Double(1.0));
                 multiplierConfig.set("Environment.End", new Double(1.0));
-                multiplierConfig.addComment("Time", "These multipliers are used for determining", "rewards based on the time in the world.");
+                multiplierConfig.addComment("Time",
+                        "These multipliers are used for determining",
+                        "rewards based on the time in the world.");
                 multiplierConfig.set("Time.Day", new Double(1.0));
                 multiplierConfig.set("Time.Sunset", new Double(1.0));
                 multiplierConfig.set("Time.Night", new Double(1.0));
                 multiplierConfig.set("Time.Sunrise", new Double(1.0));
-                multiplierConfig.addComment("Group", "These multipliers are used for determining", "rewards for a group.");
+                multiplierConfig.addComment("Group",
+                        "These multipliers are used for determining",
+                        "rewards for a group.");
                 multiplierConfig.set("Group.Default", new Double(1.0));
-                multiplierConfig.addComment("User", "These multipliers are used for determining", "rewards for a user.");
+                multiplierConfig.addComment("User",
+                        "These multipliers are used for determining",
+                        "rewards for a user.");
                 multiplierConfig.set("User.Default", new Double(1.0));
-                multiplierConfig.addComment("World", "These multipliers are used for determining", "rewards for a world.");
+                multiplierConfig.addComment("World",
+                        "These multipliers are used for determining",
+                        "rewards for a world.");
                 multiplierConfig.set("World.world", new Double(1.0));
-                multiplierConfig.addComment("fortuneToolsMultiplier", "This multiplier is used for determining", "rewards when using fortune tools.");
+                multiplierConfig.addComment("fortuneToolsMultiplier",
+                        "This multiplier is used for determining",
+                        "rewards when using fortune tools.");
                 multiplierConfig.set("fortuneToolsMultiplier", new Double(1.0));
                 try
                 {
@@ -215,6 +229,7 @@ public class MobBountyConfigs
                                 "worldnamehere:", "  creaturenamehere:",
                                 "    value: valueamounthere");
                 rewardConfig.set("Default.Bat.value", new Double(0.0));
+                rewardConfig.set("Default.BabyZombie.value", new Double(10.5));
                 rewardConfig.set("Default.Blaze.value", new Double(40.0));
                 rewardConfig.set("Default.CaveSpider.value", new Double(28.5));
                 rewardConfig.set("Default.Chicken.value", new Double(0.0));
@@ -251,6 +266,8 @@ public class MobBountyConfigs
                 rewardConfig.set("Default.Villager.value", new Double(0.0));
                 rewardConfig.set("Default.Witch.value", new Double(0.0));
                 rewardConfig.set("Default.Wither.value", new Double(750.0));
+                rewardConfig.set("Default.WitherSkeleton.value", new Double(
+                        45.0));
                 rewardConfig.set("Default.Wolf.value", new Double(28.5));
                 rewardConfig.set("Default.Zombie.value", new Double(21.0));
                 try

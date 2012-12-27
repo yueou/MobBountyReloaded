@@ -17,6 +17,7 @@ import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.entity.Skeleton;
+import org.bukkit.entity.Skeleton.SkeletonType;
 import org.bukkit.entity.Slime;
 import org.bukkit.entity.Snowman;
 import org.bukkit.entity.Spider;
@@ -29,8 +30,8 @@ import org.bukkit.entity.Zombie;
 
 public enum MobBountyCreature
 {
-    BAT("Bat"), BLAZE("Blaze"), CAVESPIDER("CaveSpider"), CHICKEN("Chicken"), COW(
-            "Cow"), CREEPER("Creeper"), ELECTRIFIED_CREEPER(
+    BAT("Bat"), BABY_ZOMBIE("BabyZombie"), BLAZE("Blaze"), CAVESPIDER(
+            "CaveSpider"), CHICKEN("Chicken"), COW("Cow"), CREEPER("Creeper"), ELECTRIFIED_CREEPER(
             "ElectrifiedCreeper"), ENDERDRAGON("Enderdragon"), ENDERMAN(
             "Enderman"), GHAST("Ghast"), GIANT("Giant"), IRONGOLEM("IronGolem"), MAGMACUBE(
             "MagmaCube"), MONSTER("Monster"), MOOSHROOM("Mooshroom"), OCELOT(
@@ -39,8 +40,8 @@ public enum MobBountyCreature
             "Silverfish"), SKELETON("Skeleton"), SLIME("Slime"), SNOWGOLEM(
             "SnowGolem"), SPIDER("Spider"), SQUID("Squid"), TAMED_CAT(
             "TamedCat"), TAMED_WOLF("TamedWolf"), UNKNOWN("Unknown"), VILLAGER(
-            "Villager"), WITCH("Witch"), WITHER("Wither"), WOLF("Wolf"), ZOMBIE(
-            "Zombie");
+            "Villager"), WITCH("Witch"), WITHER("Wither"), WITHER_SKELETON(
+            "WitherSkeleton"), WOLF("Wolf"), ZOMBIE("Zombie");
 
     public static MobBountyCreature fromName(final String name)
     {
@@ -93,7 +94,13 @@ public enum MobBountyCreature
         else if (entity instanceof Sheep)
             return MobBountyCreature.SHEEP;
         else if (entity instanceof Skeleton)
+        {
+            Skeleton skeleton = (Skeleton) entity;
+            if (skeleton.getSkeletonType().equals(SkeletonType.WITHER)
+                    || skeleton.getSkeletonType().getId() == 1)
+                return MobBountyCreature.WITHER_SKELETON;
             return MobBountyCreature.SKELETON;
+        }
         else if (entity instanceof Slime)
         {
             if (entity.getType().equals(EntityType.MAGMA_CUBE))
@@ -133,7 +140,12 @@ public enum MobBountyCreature
                 return MobBountyCreature.TAMED_WOLF;
         }
         else if (entity instanceof Zombie)
+        {
+            Zombie zombie = (Zombie) entity;
+            if (zombie.isBaby())
+                return MobBountyCreature.BABY_ZOMBIE;
             return MobBountyCreature.ZOMBIE;
+        }
         else if (entity instanceof Monster)
         {
             if (entity.getType().equals(EntityType.SILVERFISH))
