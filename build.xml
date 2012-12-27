@@ -24,7 +24,7 @@
 	
 	<target name="document" depends="compile" description="Create JavaDocs">
 	    <delete dir="javadoc" includes="**/*" failonerror="false" />
-	        <javadoc packagenames="org.inesgar.*"
+	        <javadoc packagenames="com.conventnunner.*"
 	                        sourcepath="src"
 	                        destdir="javadoc"
 	                        access="public"
