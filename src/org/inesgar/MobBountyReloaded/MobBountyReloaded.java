@@ -1,5 +1,7 @@
 package org.inesgar.MobBountyReloaded;
 
+import java.io.IOException;
+
 import org.bukkit.plugin.java.JavaPlugin;
 import org.inesgar.MobBountyReloaded.listeners.MobBountyReloadedEntityListener;
 import org.inesgar.MobBountyReloaded.managers.MobBountyCommand;
@@ -7,6 +9,7 @@ import org.inesgar.MobBountyReloaded.managers.MobBountyConfigs;
 import org.inesgar.MobBountyReloaded.managers.MobBountyEconomy;
 import org.inesgar.MobBountyReloaded.managers.MobBountyLocale;
 import org.inesgar.MobBountyReloaded.managers.MobBountyPermission;
+import org.mcstats.BukkitMetricsLite;
 
 public class MobBountyReloaded extends JavaPlugin
 {
@@ -79,6 +82,7 @@ public class MobBountyReloaded extends JavaPlugin
         setLocaleManager(new MobBountyLocale(getInstance()));
         setCommandManager(new MobBountyCommand(getInstance()));
         getAPI().log("Enabled.");
+        startStatistics();
     }
 
     public void setAPI(final MobBountyAPI api)
@@ -109,6 +113,18 @@ public class MobBountyReloaded extends JavaPlugin
     public void setPermissionManager(final MobBountyPermission permissionManager)
     {
         this.permissionManager = permissionManager;
+    }
+
+    private void startStatistics()
+    {
+        try
+        {
+            BukkitMetricsLite metrics = new BukkitMetricsLite(this);
+            metrics.start();
+        }
+        catch (IOException e)
+        {
+        }
     }
 
 }
